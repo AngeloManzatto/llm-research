@@ -1,0 +1,19 @@
+name: llm
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - spyder
+  - matplotlib
+  - tqdm
+  - regex
+  - datasets=3.6.0
+  - pyarrow=19.0.0
+  - libarrow=19.0.0
+  - loguru
+  - langdetect
+  - ftfy
+  - sacremoses
+  - pyphen
+  - streamlit
+prefix: /home/angelo/miniconda3/envs/llm
