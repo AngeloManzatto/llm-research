@@ -279,31 +279,7 @@ def train_tokenizer_state(
 def get_special_tokens():
     return [
         # Core
-        "<PAD>", "<UNK>", "<BOS>", "<EOS>", "<MASK>",
-        # Digits
-        *[f"<num_{i}>" for i in range(10)], "<num_sep>", "<num_end>",
-        # Time/Date
-        "<year>", "<month>", "<day>", "<hour>", "<minute>", "<second>",
-        "<weekday>", "<timestamp>",
-        # Markdown
-        "<section>", "<end_section>", "<title>", "<subtitle>", "<bullet>",
-        # Language
-        "<pt>", "<en>", "<es>", "<fr>", "<de>", "<it>", "<zh>", "<ar>", "<ru>", "<hi>",
-        # Chat
-        "<user>", "<assistant>", "<system>", "<sep>", "<start>", "<end>",
-        # Code/Math
-        "<code>", "<end_code>", "<func>", "<var>", "<def>", "<return>",
-        "<if>", "<else>", "<for>", "<while>", "<import>", "<class>",
-        "<math>", "<sum>", "<prod>", "<frac>", "<int>", "<log>", "<sqrt>",
-        # HTML
-        "<br>", "<p>", "<ul>", "<li>", "<table>", "<tr>", "<td>",
-        "<h1>", "<h2>", "<div>", "<span>", "</p>", "</ul>", "</table>",
-        # Style/Control
-        "<style_formal>", "<style_informal>",
-        "<length_short>", "<length_medium>", "<length_long>",
-        "<sentiment_positive>", "<sentiment_negative>", "<sentiment_neutral>",
-        # Currency/Units
-        "<usd>", "<eur>", "<brl>", "<kg>", "<cm>", "<m>", "<km>", "<liters>", "<percent>",
+        "<PAD>", "<SEQ>", "<BOS>", "<EOS>", "<MASK>", 
         # Extra
         *[f"<extra_{i}>" for i in range(100)]
     ]
@@ -622,7 +598,7 @@ def get_bpe_subtokens(token, vocab):
     # Return the list of segmented subtokens.
     return subtokens
 
-def bpe_encoding(text, pattern, vocab, unk_token="<UNK>", cache=None):
+def bpe_encoding(text, pattern, vocab, cache=None):
     """
     Encodes a text string into a list of BPE subtokens.
 
@@ -637,31 +613,27 @@ def bpe_encoding(text, pattern, vocab, unk_token="<UNK>", cache=None):
         List[str]: The full list of BPE subtokens.
     """
     segmented = []
-    
     tokens = pre_tokenizer(text, pattern)
-    
+
     for token in tokens:
-        
-        # Check if already the token was already in cache so we don't was time processing
         if cache is not None:
-            
             subtokens = get_from_cache(token, cache)
-
             if subtokens:
-               
                 segmented.extend(subtokens)
-
                 continue
-        
+
         subtokens = get_bpe_subtokens(token, vocab)
 
-        if len(subtokens) == 0:  # Check if the subtokens list is empty
-            segmented.extend([unk_token])
-        else:
-            segmented.extend(subtokens)
-            
-            if cache is not None:
-                put_into_cache(token, subtokens, cache)
+        if not subtokens:
+            raise ValueError(
+                "BPE segmentation failed (unexpected with byte vocab). "
+                f"Token='{token[:80]}' len={len(token)}"
+            )
+
+        segmented.extend(subtokens)
+
+        if cache is not None:
+            put_into_cache(token, subtokens, cache)
 
     return segmented
 
@@ -683,21 +655,27 @@ def bpe_decoding(tokens):
     
     return text
 
-def text_to_indices(text, pattern, vocab, unk_token="<UNK>", cache=None):
+def text_to_indices(text, pattern, vocab, cache=None):
     """
     Converts a string into token indices based on the vocabulary.
 
     Returns:
         List[int]: List of integer indices for each token.
     """
-    tokens = bpe_encoding(text, pattern, vocab, unk_token, cache)
-    
+    tokens = bpe_encoding(text, pattern, vocab, cache=cache)
+
     token_to_index = {word: idx for idx, word in enumerate(vocab)}
-    
-    indices = [token_to_index.get(token, unk_token) for token in tokens]
-    
+
+    indices = []
+    for token in tokens:
+        try:
+            indices.append(token_to_index[token])
+        except KeyError as e:
+            # This should never happen if vocab is consistent.
+            raise KeyError(f"Token not in vocab (unexpected): {token!r}") from e
+
     return indices
-    
+
 def indices_to_text(indices, vocab):
     """
     Converts a list of token indices back to the original string.
@@ -718,7 +696,7 @@ def indices_to_text(indices, vocab):
 ###############################################################################
 
 class BBPETokenizer:
-    def __init__(self, vocab, pattern, unk_token="<UNK>", cache_size=100000):
+    def __init__(self, vocab, pattern, cache_size=100000):
         """
         Tokenizer for Byte-BPE with caching and utility methods.
 
@@ -730,11 +708,9 @@ class BBPETokenizer:
         """
         self.vocab = vocab
         self.pattern = pattern
-        self.unk_token = unk_token
         self.cache = initialize_cache(max_size=cache_size)
-
-        self.token_to_index = {word: idx for idx, word in enumerate(vocab)}
-        self.index_to_token = {idx: word for idx, word in enumerate(vocab)}
+        self.token_to_index = {word: idx for idx, word in enumerate(self.vocab)}
+        self.index_to_token = {idx: word for idx, word in enumerate(self.vocab)}
 
     def encode(self, text):
         """Return list of tokens from input text."""
@@ -742,7 +718,6 @@ class BBPETokenizer:
             text=text,
             pattern=self.pattern,
             vocab=self.vocab,
-            unk_token=self.unk_token,
             cache=self.cache
         )
 
@@ -753,8 +728,7 @@ class BBPETokenizer:
     def text_to_indices(self, text):
         """Convert text to list of token IDs."""
         tokens = self.encode(text)
-        unk_index = self.token_to_index.get(self.unk_token, -1)
-        return [self.token_to_index.get(token, unk_index) for token in tokens]
+        return [self.token_to_index[t] for t in tokens]
 
     def indices_to_text(self, indices):
         """Convert list of token IDs back to string."""
@@ -797,32 +771,19 @@ class BBPETokenizer:
             pickle.dump({
                 "vocab": self.vocab,
                 "pattern": self.pattern,
-                "unk_token": self.unk_token,
-                "token_to_index": self.token_to_index,
-                "index_to_token": self.index_to_token,
-                "cache": self.cache  # optionally save cache too
+                # don't store cache unless you really want it
             }, f)
-
+    
     @classmethod
     def load(cls, filepath):
         with open(filepath, "rb") as f:
             state = pickle.load(f)
-
-        obj = cls(
+    
+        return cls(
             vocab=state["vocab"],
             pattern=state["pattern"],
-            unk_token=state["unk_token"]
         )
-        obj.token_to_index = state["token_to_index"]
-        obj.index_to_token = state["index_to_token"]
-        obj.cache = state.get("cache", initialize_cache())
-        return obj
-    
-    @classmethod
-    def from_file(cls, path):
-        with open(path, "rb") as f:
-            return pickle.load(f)
-        
+
 ###############################################################################
 # Test 
 ###############################################################################
@@ -860,11 +821,11 @@ def test_roundtrip_text(tokenizer, text):
     assert isinstance(result, str)
     print("✅ Roundtrip integrity passed.")
     
-def test_unknown_token_handling(tokenizer):
-    fake_token = "易✨<RARE_TOKEN_12345>"
-    indices = tokenizer.text_to_indices(fake_token)
-    assert all(isinstance(i, int) for i in indices)
-    print(f"✅ Unknown token fallback passed → Indices: {indices}")
+def test_no_oov_tokens(tokenizer):
+    text = "易✨<RARE_TOKEN_12345> こんにちは世界"
+    tokens = tokenizer.encode(text)
+    assert all(t in tokenizer.token_to_index for t in tokens)
+    print("✅ No OOV tokens produced (byte-BPE invariant).")
     
 def test_save_reload(tokenizer, path="test_tokenizer/bbpe_tokenizer.pkl"):
     tokenizer.save(path)
@@ -878,7 +839,7 @@ def run_all_tokenizer_tests(tokenizer):
     test_tokenizer_encode_decode(tokenizer)
     test_tokenizer_indices(tokenizer)
     test_roundtrip(tokenizer)
-    test_unknown_token_handling(tokenizer)
+    test_no_oov_tokens(tokenizer)
     print("\n All tokenizer tests passed.")
     
 def test_training():

@@ -1,0 +1,15 @@
+{
+   "transformer":{
+      "vocab_size":null,
+      "d_model":768,
+      "n_layers":8,
+      "n_heads":8,
+      "ffn_dim_multiplier":1.5,
+      "seq_len":1024,
+      "norm_eps":1e-5,
+      "use_cache":false
+   },
+   "tokenizer":{
+      "checkpoint":"artifacts/tokenizers/tokenizer_bbpe32k_v1/bbpe_tokenizer_32000.pkl"
+   }
+}

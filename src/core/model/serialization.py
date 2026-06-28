@@ -77,22 +77,9 @@ def lr_is_finite(optimizer: tf.keras.optimizers.Optimizer) -> bool:
     return bool(tf.reduce_all(tf.math.is_finite(tf.cast(lr_t, tf.float32))).numpy())
 
 ###############################################################################
-# Hashing utils (for gold-model hygiene)
-###############################################################################
-def sha256_file(path: Path) -> str:
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(8192), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-def sha256_dict(d: Dict[str, Any]) -> str:
-    payload = json.dumps(d, sort_keys=True).encode("utf-8")
-    return hashlib.sha256(payload).hexdigest()
-
-###############################################################################
 # Checkpoint manager wrapper
 ###############################################################################
+
 class TransformerCheckpointManager:
     """
     Thin wrapper around tf.train.CheckpointManager with:
@@ -107,8 +94,6 @@ class TransformerCheckpointManager:
         optimizer: tf.keras.optimizers.Optimizer,
         step_var: tf.Variable,
         checkpoint_dir: Path,
-        model_config: TransformerConfig,
-        tokenizer_checkpoint: Optional[Path] = None,
         base_model_id: Optional[str] = None,
         max_to_keep: int = 3,
     ):
@@ -130,15 +115,7 @@ class TransformerCheckpointManager:
         )
 
         # ---- immutable identity info ----
-        self.model_config_dict = model_config.to_dict()
-        self.model_config_hash = sha256_dict(self.model_config_dict)
-
-        self.tokenizer_hash = (
-            sha256_file(tokenizer_checkpoint)
-            if tokenizer_checkpoint is not None
-            else None
-        )
-
+        self.model_config_dict = model.get_config()
         self.base_model_id = base_model_id
 
         self.manifest_path = checkpoint_dir / "checkpoint_manifest.json"
@@ -203,15 +180,33 @@ class TransformerCheckpointManager:
     # ------------------------------------------------------------------
     def _write_manifest(self, checkpoint_path: str) -> None:
         manifest = {
+            "base_model_id": self.base_model_id,
             "checkpoint_path": checkpoint_path,
             "step": int(self.step_var.numpy()),
-            "model_config_hash": self.model_config_hash,
-            "model_config": self.model_config_dict,
-            "tokenizer_content_hash": self.tokenizer_hash,
-            "base_model_id": self.base_model_id,
+            "model_config": self.model_config_dict
         }
 
         self.manifest_path.write_text(
             json.dumps(manifest, indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
+        
+###############################################################################
+# Restore model from checkpoint
+###############################################################################
+
+def restore_model_from_checkpoint(model, checkpoint_dir):
+    latest = tf.train.latest_checkpoint(str(checkpoint_dir))
+
+    if latest is None:
+        raise FileNotFoundError(
+            f"No checkpoint found in {checkpoint_dir}"
+        )
+
+    tf.train.Checkpoint(model=model)\
+        .restore(latest)\
+        .expect_partial()
+
+    print(f"✓ Restored model from: {latest}")
+
+    return latest

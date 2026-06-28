@@ -17,7 +17,7 @@ import tensorflow as tf
 from src.core.model.schedules import WarmupCosine 
 
 ###############################################################################
-# Unified Config
+# Optimizer Config
 ###############################################################################
 
 OptimizerName = Literal["adam", "adamw", "sgd", "rmsprop"]
