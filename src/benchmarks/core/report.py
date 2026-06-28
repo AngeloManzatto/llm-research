@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 from collections import defaultdict
 
-from src.tasks.sft.conversation.evaluator import EvaluationResult
+from src.benchmarks.core.evaluator import EvaluationResult
 
 ###############################################################################
 # Evaluation Summary

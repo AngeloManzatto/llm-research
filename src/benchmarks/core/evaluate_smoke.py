@@ -16,12 +16,11 @@ import tensorflow as tf
 
 from src.core.loader import load_model_and_tokenizer
 from src.core.model.serialization import restore_model_from_checkpoint
-from src.core.model.generation import greedy_decode
 
-from src.tasks.sft.conversation.benchmark import Benchmark
-from src.tasks.sft.conversation.evaluator import evaluate_example
-from src.tasks.sft.conversation.report import EvaluationSummary, ReportWriter
-
+from src.benchmarks.core.benchmark import Benchmark
+from src.benchmarks.core.evaluator import evaluate_example
+from src.benchmarks.core.report import EvaluationSummary, ReportWriter
+from src.tasks.sft.conversation.generator import TextGenerator
 
 ###############################################################################
 # GPU Strategy
@@ -74,14 +73,12 @@ print(100 * "-")
 print(f"Model: {base_model_id}\n")
 model.summary()
 
-
 ###############################################################################
 # Restore Model
 ###############################################################################
 
 checkpoint_dir = Path("runs") / "ntp" / base_model_id / "checkpoints"
 checkpoint_path = restore_model_from_checkpoint(model, checkpoint_dir)
-
 
 ###############################################################################
 # Benchmark
@@ -92,7 +89,6 @@ MANIFEST_FILE = BENCHMARK_DIR / "benchmark.json"
 
 benchmark = Benchmark.from_manifest(MANIFEST_FILE)
 manifest = benchmark.summary()
-
 
 ###############################################################################
 # Run Metadata
@@ -107,6 +103,15 @@ run_metadata = {
     "decode": benchmark.default_decode,
 }
 
+###############################################################################
+# Text generator
+###############################################################################
+
+text_generator = TextGenerator(
+    model=model,
+    tokenizer=tokenizer,
+    decode_config=benchmark.default_decode,
+)
 
 ###############################################################################
 # Result Directory
@@ -138,13 +143,8 @@ def main():
 
     for example in benchmark:
         
-        full_text = greedy_decode(
-            model=model,
-            prompt=example.prompt,
-            tokenizer=tokenizer,
-            max_length=benchmark.default_decode["max_length"],
-        )
-
+        full_text = text_generator.generate(example.prompt)
+        
         result = evaluate_example(
             example=example,
             full_text=full_text,

@@ -13,11 +13,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from src.tasks.sft.conversation.benchmark import BenchmarkExample
-from src.tasks.sft.conversation.metrics import (
-    score_contains,
-    compute_metrics,
-)
+from src.benchmarks.core.benchmark import BenchmarkExample
+from src.benchmarks.metrics.text import build_metric
 
 ###############################################################################
 # Evaluation Result
@@ -69,15 +66,15 @@ def evaluate_example(
 ) -> EvaluationResult:
     answer = extract_completion(full_text, example.prompt)
 
-    if scoring_metric == "contains_expected":
-        passed = score_contains(answer, example.expected_any)
-    else:
-        raise ValueError(f"Unsupported scoring metric: {scoring_metric}")
+    scoring = build_metric(scoring_metric)
+    score_result = scoring.evaluate(answer=answer, example=example)
+    passed = bool(score_result.value)
 
-    metrics = compute_metrics(
-        answer=answer,
-        metric_names=diagnostic_metrics,
-    )
+    metrics = {}
+    for metric_id in diagnostic_metrics:
+        metric = build_metric(metric_id)
+        metric_result = metric.evaluate(answer=answer, example=example)
+        metrics[metric_result.metric_id] = metric_result.value
 
     return EvaluationResult(
         id=example.id,
