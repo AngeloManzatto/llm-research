@@ -36,5 +36,5 @@ class Metric(ABC):
     output_type: type = object
 
     @abstractmethod
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         pass

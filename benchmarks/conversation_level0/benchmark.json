@@ -7,8 +7,12 @@
     "data/core_0001.jsonl"
   ],
   "default_decode": {
-    "method": "greedy",
-    "max_length": 64
+    "strategy": "greedy",
+    "max_length": 64,
+    "stop_tokens": [
+        "END_OF_TURN",
+        "END_OF_CONVERSATION"
+    ]
   },
   "scoring_metric": "contains_expected",
   "diagnostic_metrics": [
@@ -16,6 +20,7 @@
     "repetition",
     "role_leakage",
     "word_count",
-    "too_long"
+    "too_long",
+    "expected_stop_token"
   ]
 }

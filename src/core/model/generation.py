@@ -16,64 +16,63 @@ import tensorflow as tf
 ###############################################################################    
 '''
 
-def greedy_decode(model, 
-                  prompt, 
-                  tokenizer, 
-                  max_length=128, 
-                  pad_token_id=0, 
-                  eos_token="<EOS>"):
+def greedy_decode(
+    model,
+    prompt,
+    tokenizer,
+    max_length=128,
+    stop_tokens=None,
+    pad_token_id=0,
+    verbose=True,
+):
     """
-    Greedy decoding for next token prediction using the Transformer model.
+    Greedy decoding for next-token prediction.
 
-    Args:
-        model (tf.keras.Model): Trained Transformer model.
-        prompt (str): The initial text prompt for generation.
-        tokenizer (BBPETokenizer): Tokenizer for encoding and decoding.
-        max_length (int): Maximum number of tokens to generate.
-        pad_token_id (int): ID of the padding token.
-        eos_token (str): End-of-sequence token.
-
-    Returns:
-        str: Generated text continuation.
+    Supports multiple stop tokens, such as:
+        ["<EOS>", "<SPECIAL-0>", "<SPECIAL-1>"]
     """
-    
-    # ============================
+
+    if stop_tokens is None:
+        stop_tokens = ["<EOS>"]
+
+    stop_token_ids = {
+        tokenizer.token_to_index[tok]
+        for tok in stop_tokens
+        if tok in tokenizer.token_to_index
+    }
+
     # Encode the initial prompt
-    # ============================
     input_ids = tokenizer.text_to_indices(prompt)
-
-    # Convert to tensor
     input_ids = tf.constant([input_ids], dtype=tf.int32)
 
-    print(f"Starting with input: {prompt}")
-    
+    if verbose:
+        print(f"Starting with input: {prompt}")
+
     for _ in range(max_length):
-        # ============================
+
         # Predict Next Token
-        # ============================
         logits = model(input_ids)
-        
+
         # Get the last token prediction
         next_token_id = tf.argmax(logits[:, -1, :], axis=-1)
         next_token_id = tf.cast(next_token_id, tf.int32)
 
-        # ============================
         # Append to Sequence
-        # ============================
-        input_ids = tf.concat([input_ids, tf.expand_dims(next_token_id, axis=-1)], axis=-1)
+        token_id_int = int(next_token_id.numpy()[0])
 
-        # ============================
-        # Check for <EOS>
-        # ============================
-        if tf.reduce_any(next_token_id == tokenizer.token_to_index.get(eos_token, pad_token_id)):
-            print("<EOS> token generated, stopping inference.")
+        input_ids = tf.concat(
+            [input_ids, tf.expand_dims(next_token_id, axis=-1)],
+            axis=-1,
+        )
+
+        # Check for end of sequence tokens
+        if token_id_int in stop_token_ids:
+            if verbose:
+                print(f"Stop token generated: {token_id_int}")
             break
-
-    # ============================
-    # Decode the Generated Text
-    # ============================
-    text = tokenizer.indices_to_text(input_ids.numpy()[0])
     
+    # Decode the Generated Text
+    text = tokenizer.indices_to_text(input_ids.numpy()[0])
     return text
 
 '''

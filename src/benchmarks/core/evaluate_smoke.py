@@ -20,7 +20,7 @@ from src.core.model.serialization import restore_model_from_checkpoint
 from src.benchmarks.core.benchmark import Benchmark
 from src.benchmarks.core.evaluator import evaluate_example
 from src.benchmarks.core.report import EvaluationSummary, ReportWriter
-from src.tasks.sft.conversation.generator import TextGenerator
+from src.benchmarks.core.generator import TextGenerator
 
 ###############################################################################
 # GPU Strategy
@@ -31,7 +31,6 @@ num_gpus = strategy.num_replicas_in_sync
 
 print(100 * "-")
 print(f"Number of devices (GPUs): {num_gpus}")
-
 
 ###############################################################################
 # Model / Tokenizer

@@ -26,6 +26,7 @@ class BenchmarkExample:
     language: str
     prompt: str
     expected_any: list[str]
+    expected_stop_token: str | None = None
     scoring: str = "contains"
 
     @classmethod
@@ -47,6 +48,11 @@ class BenchmarkExample:
             language=str(data["language"]),
             prompt=str(data["prompt"]),
             expected_any=[str(x) for x in data["expected_any"]],
+            expected_stop_token=(
+                str(data["expected_stop_token"])
+                if data.get("expected_stop_token") is not None
+                else None
+            ),
             scoring=str(data.get("scoring", "contains")),
         )
 

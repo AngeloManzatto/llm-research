@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from src.benchmarks.core.benchmark import BenchmarkExample
+from src.benchmarks.core.normalizer import normalize_answer
 from src.benchmarks.metrics.text import build_metric
 
 ###############################################################################
@@ -28,6 +29,7 @@ class EvaluationResult:
     prompt: str
     expected_any: list[str]
     full_text: str
+    raw_answer: str
     answer: str
     passed: bool
     metrics: dict[str, Any]
@@ -41,6 +43,7 @@ class EvaluationResult:
             "prompt": self.prompt,
             "expected_any": self.expected_any,
             "full_text": self.full_text,
+            "raw_answer": self.raw_answer,
             "answer": self.answer,
             "passed": self.passed,
             **self.metrics,
@@ -64,7 +67,14 @@ def evaluate_example(
     scoring_metric: str,
     diagnostic_metrics: list[str],
 ) -> EvaluationResult:
-    answer = extract_completion(full_text, example.prompt)
+
+    raw_answer = extract_completion(full_text, example.prompt)
+
+    answer = normalize_answer(
+        raw_answer,
+        strip_stop_tokens=True,
+        normalize_whitespace=True,
+    )
 
     scoring = build_metric(scoring_metric)
     score_result = scoring.evaluate(answer=answer, example=example)
@@ -73,7 +83,11 @@ def evaluate_example(
     metrics = {}
     for metric_id in diagnostic_metrics:
         metric = build_metric(metric_id)
-        metric_result = metric.evaluate(answer=answer, example=example)
+        metric_result = metric.evaluate(
+            answer=answer,
+            raw_answer=raw_answer,
+            example=example,
+        )
         metrics[metric_result.metric_id] = metric_result.value
 
     return EvaluationResult(
@@ -83,6 +97,7 @@ def evaluate_example(
         prompt=example.prompt,
         expected_any=example.expected_any,
         full_text=full_text,
+        raw_answer=raw_answer,
         answer=answer,
         passed=passed,
         metrics=metrics,

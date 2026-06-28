@@ -14,6 +14,7 @@ import re
 from typing import Any
 
 from src.benchmarks.core.metric import Metric, MetricResult
+from src.benchmarks.core.special_tokens import TOKEN_BY_NAME
 
 ###############################################################################
 # Contains Expected
@@ -24,7 +25,7 @@ class ContainsExpectedMetric(Metric):
     description = "Returns True if the answer contains any expected string."
     output_type = bool
 
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         if example is None:
             raise ValueError("ContainsExpectedMetric requires an example.")
 
@@ -51,7 +52,7 @@ class WikiTalkArtifactMetric(Metric):
         r"please do not modify it",
     ]
 
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         value = any(re.search(p, answer, flags=re.IGNORECASE) for p in self.patterns)
         return MetricResult(self.id, value, self.version)
 
@@ -64,7 +65,7 @@ class RepetitionMetric(Metric):
     description = "Detects repeated sentence-like chunks."
     output_type = bool
 
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         chunks = [c.strip().lower() for c in re.split(r"[.\n]", answer) if c.strip()]
         value = len(chunks) != len(set(chunks))
         return MetricResult(self.id, value, self.version)
@@ -78,7 +79,7 @@ class RoleLeakageMetric(Metric):
     description = "Detects leaked User:/Assistant: role markers in generated answer."
     output_type = bool
 
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         value = "User:" in answer or answer.count("Assistant:") > 0
         return MetricResult(self.id, value, self.version)
 
@@ -91,7 +92,7 @@ class WordCountMetric(Metric):
     description = "Counts whitespace-separated words."
     output_type = int
 
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         return MetricResult(self.id, len(answer.split()), self.version)
 
 ###############################################################################
@@ -106,8 +107,31 @@ class TooLongMetric(Metric):
     def __init__(self, max_words: int = 40):
         self.max_words = max_words
 
-    def evaluate(self, *, answer: str, example: Any | None = None) -> MetricResult:
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         value = len(answer.split()) > self.max_words
+        return MetricResult(self.id, value, self.version)
+
+###############################################################################
+# Expected Stop Token
+###############################################################################
+
+class ExpectedStopTokenMetric(Metric):
+    id = "expected_stop_token"
+    description = "Checks whether the raw answer contains the expected special stop token."
+    output_type = bool
+
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
+        if example is None:
+            raise ValueError("ExpectedStopTokenMetric requires an example.")
+
+        expected_name = getattr(example, "expected_stop_token", None)
+
+        if expected_name is None:
+            return MetricResult(self.id, False, self.version)
+
+        expected_token = TOKEN_BY_NAME[expected_name].token
+        value = raw_answer is not None and expected_token in raw_answer
+
         return MetricResult(self.id, value, self.version)
 
 ###############################################################################
@@ -121,8 +145,8 @@ METRIC_REGISTRY = {
     "role_leakage": RoleLeakageMetric,
     "word_count": WordCountMetric,
     "too_long": TooLongMetric,
+    "expected_stop_token" : ExpectedStopTokenMetric
 }
-
 
 def build_metric(metric_id: str) -> Metric:
     if metric_id not in METRIC_REGISTRY:
