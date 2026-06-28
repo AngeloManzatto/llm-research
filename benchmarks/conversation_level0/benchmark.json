@@ -1,0 +1,18 @@
+{
+  "benchmark_id": "conversation_level0",
+  "version": "0.1.0",
+  "description": "Deterministic Level 0 conversation benchmark for pretrained NTP models.",
+  "data_files": ["data/smoke_test.jsonl"],
+  "default_decode": {
+    "method": "greedy",
+    "max_length": 64
+  },
+  "scoring_metric": "contains_expected",
+  "diagnostic_metrics": [
+    "wiki_talk_artifact",
+    "repetition",
+    "role_leakage",
+    "word_count",
+    "too_long"
+  ]
+}
