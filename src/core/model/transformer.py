@@ -158,7 +158,10 @@ def attn_block(q, k, v, head_dim, mask):
         scores = scores + mask
 
     P = tf.nn.softmax(scores, axis=-1)
-    
+
+    # Guard: rows where all keys were masked produce NaN after softmax.
+    P = tf.where(tf.math.is_nan(P), tf.zeros_like(P), P)
+
     out = tf.matmul(P, Vt)                                    # [B,H,T,D]
     
     return out
@@ -437,7 +440,7 @@ class Transformer(tf.keras.Model):
         # RoPE cache (TF complex)
         self.freq_complex = precompute_theta_pos_freqs(self.d_model // self.n_heads, self.seq_len * 2)
         
-    def call(self, x, start_pos=0, training=False):
+    def call(self, x, start_pos=0, attn_mask=None, training=False):
         """
         Causal + pad-safe masking.
         - Keys: pad + causal are masked as before.
@@ -456,8 +459,8 @@ class Transformer(tf.keras.Model):
         else:
             freq_complex = self.freq_complex[:T]
             
-        # 3) Simple causal mask (broadcastable to [B, n_heads, T, T])
-        attn_mask = causal_mask(T, dtype=h.dtype)
+        # 3) Use provided mask (packed training) or build standard causal mask
+        attn_mask = attn_mask if attn_mask is not None else causal_mask(T, dtype=h.dtype)
 
         # 3) Execute forward pass
         for block in self.blocks:

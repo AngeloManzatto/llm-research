@@ -10,12 +10,14 @@ Created on Sun Jun 28 08:11:28 2026
 
 from __future__ import annotations
 
+import re
+
 from dataclasses import dataclass
 from typing import Any
 
-from src.benchmarks.core.benchmark import BenchmarkExample
-from src.benchmarks.core.normalizer import normalize_answer
-from src.benchmarks.metrics.text import build_metric
+from src.tasks.sft.conversation.core.special_tokens import STOP_TOKENS
+from src.tasks.sft.conversation.benchmark.metric import build_metric
+from src.tasks.sft.conversation.benchmark.benchmark import BenchmarkExample
 
 ###############################################################################
 # Evaluation Result
@@ -26,9 +28,8 @@ class EvaluationResult:
     id: str
     category: str
     language: str
-    prompt: str
+    messages: list[dict[str, str]]
     expected_any: list[str]
-    full_text: str
     raw_answer: str
     answer: str
     passed: bool
@@ -40,9 +41,8 @@ class EvaluationResult:
             "id": self.id,
             "category": self.category,
             "language": self.language,
-            "prompt": self.prompt,
+            "messages": self.messages,
             "expected_any": self.expected_any,
-            "full_text": self.full_text,
             "raw_answer": self.raw_answer,
             "answer": self.answer,
             "passed": self.passed,
@@ -51,52 +51,59 @@ class EvaluationResult:
         }
 
 ###############################################################################
-# Evaluation example
+# Normalize answer
 ###############################################################################
 
-def extract_completion(full_text: str, prompt: str) -> str:
-    if full_text.startswith(prompt):
-        return full_text[len(prompt):].strip()
-    return full_text.strip()
+def strip_special_stop_tokens(text: str) -> str:
+    for tok in STOP_TOKENS:
+        text = text.replace(tok, "")
+    return text
+
+def normalize_answer(
+    answer: str,
+    *,
+    strip_stop_tokens: bool = True,
+    normalize_whitespace: bool = True,
+) -> str:
+    if strip_stop_tokens:
+        answer = strip_special_stop_tokens(answer)
+
+    if normalize_whitespace:
+        answer = re.sub(r"\s+", " ", answer).strip()
+
+    return answer
+
+###############################################################################
+# Evaluate example
+###############################################################################
 
 def evaluate_example(
     *,
     example: BenchmarkExample,
-    full_text: str,
+    generated: str,
     decode: dict[str, Any],
     scoring_metric: str,
     diagnostic_metrics: list[str],
 ) -> EvaluationResult:
+    # greedy_decode returns only the generated portion (no prompt prefix to strip)
+    raw_answer = generated.strip()
+    answer     = normalize_answer(raw_answer, strip_stop_tokens=True, normalize_whitespace=True)
 
-    raw_answer = extract_completion(full_text, example.prompt)
+    passed = bool(build_metric(scoring_metric).evaluate(answer=answer, example=example).value)
 
-    answer = normalize_answer(
-        raw_answer,
-        strip_stop_tokens=True,
-        normalize_whitespace=True,
-    )
-
-    scoring = build_metric(scoring_metric)
-    score_result = scoring.evaluate(answer=answer, example=example)
-    passed = bool(score_result.value)
-
-    metrics = {}
-    for metric_id in diagnostic_metrics:
-        metric = build_metric(metric_id)
-        metric_result = metric.evaluate(
-            answer=answer,
-            raw_answer=raw_answer,
-            example=example,
-        )
-        metrics[metric_result.metric_id] = metric_result.value
+    metrics = {
+        metric_id: build_metric(metric_id).evaluate(
+            answer=answer, raw_answer=raw_answer, example=example,
+        ).value
+        for metric_id in diagnostic_metrics
+    }
 
     return EvaluationResult(
         id=example.id,
         category=example.category,
         language=example.language,
-        prompt=example.prompt,
+        messages=example.messages,
         expected_any=example.expected_any,
-        full_text=full_text,
         raw_answer=raw_answer,
         answer=answer,
         passed=passed,

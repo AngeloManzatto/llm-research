@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "description": "Deterministic Level 0 conversation benchmark for pretrained NTP models.",
   "data_files": [
-    "data/smoke_test.jsonl",
-    "data/core_0001.jsonl"
+    "level0/data/openai/openai_core_0001.jsonl"
   ],
   "default_decode": {
     "strategy": "greedy",
@@ -18,7 +17,6 @@
   "diagnostic_metrics": [
     "wiki_talk_artifact",
     "repetition",
-    "role_leakage",
     "word_count",
     "too_long",
     "expected_stop_token"

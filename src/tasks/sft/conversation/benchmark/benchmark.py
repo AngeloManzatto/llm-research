@@ -26,12 +26,15 @@ class BenchmarkExample:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "BenchmarkExample":
+        
+        # Required fields on each example
         required = ["id", "category", "language", "messages", "expected_any"]
 
         missing = [k for k in required if k not in data]
         if missing:
             raise ValueError(f"Benchmark example missing fields: {missing}")
-
+        
+        # Messages using CHatML format
         messages = data["messages"]
         if not isinstance(messages, list) or not messages:
             raise TypeError(f"Example {data.get('id', '?')} messages must be a non-empty list")
@@ -40,9 +43,12 @@ class BenchmarkExample:
                 raise ValueError(f"Example {data.get('id', '?')} each message must have 'role' and 'content'")
             if m["role"] not in ("user", "assistant", "system"):
                 raise ValueError(f"Example {data.get('id', '?')} unknown role: {m['role']!r}")
+                
+        # Assert that USER finished conversation 
         if messages[-1]["role"] != "user":
             raise ValueError(f"Example {data.get('id', '?')} last message must be from 'user'")
-
+        
+        # Need an expected assertion to validate against something
         if not isinstance(data["expected_any"], list):
             raise TypeError(f"Example {data.get('id', '?')} expected_any must be a list")
 

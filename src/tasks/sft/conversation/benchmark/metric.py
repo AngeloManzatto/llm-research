@@ -1,5 +1,5 @@
 """
-Created on Sun Jun 28 10:35:58 2026
+Created on Sun Jun 28 10:34:27 2026
 
 @author: Angelo Antonio Manzatto
 """
@@ -11,10 +11,34 @@ Created on Sun Jun 28 10:35:58 2026
 from __future__ import annotations
 
 import re
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from typing import Any
 
-from src.benchmarks.core.metric import Metric, MetricResult
-from src.benchmarks.core.special_tokens import TOKEN_BY_NAME
+###############################################################################
+# Metric Result
+###############################################################################
+
+@dataclass(frozen=True)
+class MetricResult:
+    metric_id: str
+    value: Any
+    version: str
+
+###############################################################################
+# Metric Base
+###############################################################################
+
+class Metric(ABC):
+    id: str
+    version: str = "1.0"
+    description: str = ""
+    deterministic: bool = True
+    output_type: type = object
+
+    @abstractmethod
+    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
+        pass
 
 ###############################################################################
 # Contains Expected
@@ -28,14 +52,12 @@ class ContainsExpectedMetric(Metric):
     def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         if example is None:
             raise ValueError("ContainsExpectedMetric requires an example.")
-
         answer_lower = answer.lower()
         value = any(exp.lower() in answer_lower for exp in example.expected_any)
-
         return MetricResult(self.id, value, self.version)
 
 ###############################################################################
-# Wiki Talsk Artifact
+# Wiki Talk Artifact
 ###############################################################################
 
 class WikiTalkArtifactMetric(Metric):
@@ -68,19 +90,6 @@ class RepetitionMetric(Metric):
     def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
         chunks = [c.strip().lower() for c in re.split(r"[.\n]", answer) if c.strip()]
         value = len(chunks) != len(set(chunks))
-        return MetricResult(self.id, value, self.version)
-
-###############################################################################
-# Role Leakage
-###############################################################################
-
-class RoleLeakageMetric(Metric):
-    id = "role_leakage"
-    description = "Detects leaked User:/Assistant: role markers in generated answer."
-    output_type = bool
-
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        value = "User:" in answer or answer.count("Assistant:") > 0
         return MetricResult(self.id, value, self.version)
 
 ###############################################################################
@@ -117,7 +126,12 @@ class TooLongMetric(Metric):
 
 class ExpectedStopTokenMetric(Metric):
     id = "expected_stop_token"
-    description = "Checks whether the raw answer contains the expected special stop token."
+    description = (
+        "Checks whether the raw answer ends with the expected stop token. "
+        "Requires raw_answer (pre-normalization) since normalizer strips stop tokens. "
+        "NOTE: raw_answer must preserve the literal stop token string (e.g. '<EOS>') "
+        "as emitted by the tokenizer's decode path for special token IDs."
+    )
     output_type = bool
 
     def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
@@ -129,26 +143,31 @@ class ExpectedStopTokenMetric(Metric):
         if expected_name is None:
             return MetricResult(self.id, False, self.version)
 
+        from src.benchmarks.core.special_tokens import TOKEN_BY_NAME
         expected_token = TOKEN_BY_NAME[expected_name].token
-        value = raw_answer is not None and expected_token in raw_answer
+
+        # Check raw_answer (stop tokens are stripped from normalized answer).
+        # Use endswith rather than `in` to ensure the stop token closes the turn
+        # rather than appearing spuriously mid-completion.
+        target = raw_answer if raw_answer is not None else answer
+        value = target.rstrip().endswith(expected_token)
 
         return MetricResult(self.id, value, self.version)
 
 ###############################################################################
-# Metric registry
+# Metric Registry
 ###############################################################################
 
-METRIC_REGISTRY = {
-    "contains_expected": ContainsExpectedMetric,
+METRIC_REGISTRY: dict[str, type[Metric]] = {
+    "contains_expected":  ContainsExpectedMetric,
     "wiki_talk_artifact": WikiTalkArtifactMetric,
-    "repetition": RepetitionMetric,
-    "role_leakage": RoleLeakageMetric,
-    "word_count": WordCountMetric,
-    "too_long": TooLongMetric,
-    "expected_stop_token" : ExpectedStopTokenMetric
+    "repetition":         RepetitionMetric,
+    "word_count":         WordCountMetric,
+    "too_long":           TooLongMetric,
+    "expected_stop_token": ExpectedStopTokenMetric,
 }
 
 def build_metric(metric_id: str) -> Metric:
     if metric_id not in METRIC_REGISTRY:
-        raise KeyError(f"Unknown metric: {metric_id}")
+        raise KeyError(f"Unknown metric: '{metric_id}'. Available: {sorted(METRIC_REGISTRY)}")
     return METRIC_REGISTRY[metric_id]()

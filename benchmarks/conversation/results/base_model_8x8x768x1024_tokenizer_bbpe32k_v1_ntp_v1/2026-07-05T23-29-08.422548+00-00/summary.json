@@ -1,0 +1,156 @@
+{
+   "benchmark_id": "conversation_level0",
+   "benchmark_version": "0.1.0",
+   "model_id": "base_model_8x8x768x1024_tokenizer_bbpe32k_v1_ntp_v1",
+   "checkpoint_path": "runs/ntp/base_model_8x8x768x1024_tokenizer_bbpe32k_v1_ntp_v1/checkpoints/ckpt-1017525",
+   "timestamp_utc": "2026-07-05T23:29:08.422548+00:00",
+   "decode": {
+      "strategy": "greedy",
+      "max_length": 64,
+      "stop_tokens": [
+         "END_OF_TURN",
+         "END_OF_CONVERSATION"
+      ]
+   },
+   "total": 600,
+   "passed": 71,
+   "pass_rate": 0.1183,
+   "wiki_talk_artifact": 1,
+   "repetition": 63,
+   "too_long": 96,
+   "expected_stop_token": 429,
+   "by_category_language": {
+      "turn_taking": {
+         "en": {
+            "total": 50,
+            "passed": 4,
+            "wiki_talk_artifact": 0,
+            "repetition": 0,
+            "too_long": 1,
+            "expected_stop_token": 46,
+            "pass_rate": 0.08,
+            "avg_word_count": 4.8
+         },
+         "pt": {
+            "total": 50,
+            "passed": 2,
+            "wiki_talk_artifact": 0,
+            "repetition": 8,
+            "too_long": 25,
+            "expected_stop_token": 20,
+            "pass_rate": 0.04,
+            "avg_word_count": 30.88
+         }
+      },
+      "knowledge_completion": {
+         "en": {
+            "total": 50,
+            "passed": 1,
+            "wiki_talk_artifact": 0,
+            "repetition": 0,
+            "too_long": 0,
+            "expected_stop_token": 45,
+            "pass_rate": 0.02,
+            "avg_word_count": 4.12
+         },
+         "pt": {
+            "total": 50,
+            "passed": 4,
+            "wiki_talk_artifact": 0,
+            "repetition": 5,
+            "too_long": 20,
+            "expected_stop_token": 23,
+            "pass_rate": 0.08,
+            "avg_word_count": 27.42
+         }
+      },
+      "local_context": {
+         "en": {
+            "total": 50,
+            "passed": 0,
+            "wiki_talk_artifact": 0,
+            "repetition": 2,
+            "too_long": 0,
+            "expected_stop_token": 34,
+            "pass_rate": 0.0,
+            "avg_word_count": 14.66
+         },
+         "pt": {
+            "total": 50,
+            "passed": 2,
+            "wiki_talk_artifact": 0,
+            "repetition": 0,
+            "too_long": 5,
+            "expected_stop_token": 40,
+            "pass_rate": 0.04,
+            "avg_word_count": 23.24
+         }
+      },
+      "correction": {
+         "en": {
+            "total": 50,
+            "passed": 10,
+            "wiki_talk_artifact": 0,
+            "repetition": 6,
+            "too_long": 0,
+            "expected_stop_token": 44,
+            "pass_rate": 0.2,
+            "avg_word_count": 17.34
+         },
+         "pt": {
+            "total": 50,
+            "passed": 16,
+            "wiki_talk_artifact": 0,
+            "repetition": 13,
+            "too_long": 1,
+            "expected_stop_token": 47,
+            "pass_rate": 0.32,
+            "avg_word_count": 17.92
+         }
+      },
+      "instruction_following": {
+         "en": {
+            "total": 50,
+            "passed": 3,
+            "wiki_talk_artifact": 1,
+            "repetition": 0,
+            "too_long": 1,
+            "expected_stop_token": 44,
+            "pass_rate": 0.06,
+            "avg_word_count": 3.46
+         },
+         "pt": {
+            "total": 50,
+            "passed": 10,
+            "wiki_talk_artifact": 0,
+            "repetition": 5,
+            "too_long": 14,
+            "expected_stop_token": 24,
+            "pass_rate": 0.2,
+            "avg_word_count": 22.84
+         }
+      },
+      "uncertainty": {
+         "en": {
+            "total": 50,
+            "passed": 2,
+            "wiki_talk_artifact": 0,
+            "repetition": 1,
+            "too_long": 1,
+            "expected_stop_token": 45,
+            "pass_rate": 0.04,
+            "avg_word_count": 3.34
+         },
+         "pt": {
+            "total": 50,
+            "passed": 17,
+            "wiki_talk_artifact": 0,
+            "repetition": 23,
+            "too_long": 28,
+            "expected_stop_token": 17,
+            "pass_rate": 0.34,
+            "avg_word_count": 33.96
+         }
+      }
+   }
+}
