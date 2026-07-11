@@ -226,10 +226,6 @@ def make_packed_batch(
         batch_seg_ids.append(packed["segment_ids"])
         n_packed_list.append(packed["n_packed"])
  
-        # Build block-diagonal causal mask for this sequence
-        mask = packed_causal_mask(packed["segment_ids"])  # [1,1,T,T]
-        batch_masks.append(mask)
- 
         if cursor >= len(examples):
             # Ran out of examples — pad remaining batch elements
             empty = {
@@ -245,7 +241,6 @@ def make_packed_batch(
                 batch_attn_masks.append(empty["attention_mask"])
                 batch_seg_ids.append(empty["segment_ids"])
                 n_packed_list.append(0)
-                batch_masks.append(packed_causal_mask(empty["segment_ids"]))
             break
  
     return {
@@ -253,6 +248,5 @@ def make_packed_batch(
         "labels":          tf.constant(np.stack(batch_labels),      dtype=tf.int32),
         "attention_mask":  tf.constant(np.stack(batch_attn_masks),  dtype=tf.int32),
         "segment_ids":     tf.constant(np.stack(batch_seg_ids),     dtype=tf.int32),
-        "masks":           tf.concat(batch_masks, axis=0),          # [B,1,T,T]
         "n_packed_per_seq": n_packed_list,
     }

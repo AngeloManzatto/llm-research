@@ -135,12 +135,23 @@ def make_train_step(
 # Benchmark hook
 ###############################################################################
  
-def run_benchmark(model, tokenizer, step: int, benchmark_dir: Path) -> dict:
+def run_benchmark(
+    model,
+    tokenizer,
+    step: int,
+    benchmark_dir: Path,
+    batch_size: int = 32,   # number of examples to generate in parallel
+) -> dict:
     """
-    Run conversation_level0 benchmark and return a summary dict.
-    Uses the updated EvaluationSummary with category×language breakdown.
+    Run conversation_level0 benchmark with batched generation.
+    Generates `batch_size` examples simultaneously — much faster than
+    sequential generation on a GPU.
     """
-    
+    from src.tasks.sft.conversation.benchmark.benchmark import Benchmark
+    from src.tasks.sft.conversation.benchmark.evaluator import evaluate_example
+    from src.tasks.sft.conversation.benchmark.generator import TextGenerator
+    from src.tasks.sft.conversation.benchmark.report import EvaluationSummary
+ 
     if not model_all_finite(model):
         print(f"⚠ Skipping benchmark at step {step} — model weights contain NaN/Inf")
         return {"step": step, "skipped": True, "reason": "nan_weights"}
@@ -149,23 +160,32 @@ def run_benchmark(model, tokenizer, step: int, benchmark_dir: Path) -> dict:
     gen = TextGenerator(model=model, tokenizer=tokenizer,
                         decode_config=bm.default_decode)
  
-    run_meta = {"benchmark_id": bm.benchmark_id, "benchmark_version": bm.version,
-                "step": step}
+    run_meta = {"benchmark_id": bm.benchmark_id,
+                "benchmark_version": bm.version, "step": step}
     summary  = EvaluationSummary(run_metadata=run_meta)
  
-    for example in bm:
-        result = evaluate_example(
-            example=example,
-            generated=gen.generate(example.messages),
-            decode=bm.default_decode,
-            scoring_metric=bm.scoring_metric,
-            diagnostic_metrics=bm.diagnostic_metrics,
-        )
-        summary.update(result)
+    # Collect all examples then process in batches
+    examples = list(bm)
+ 
+    for i in range(0, len(examples), batch_size):
+        chunk    = examples[i:i + batch_size]
+        messages = [ex.messages for ex in chunk]
+ 
+        # One batched forward pass loop for the whole chunk
+        completions = gen.generate_batch(messages)
+ 
+        for example, generated in zip(chunk, completions):
+            result = evaluate_example(
+                example=example,
+                generated=generated,
+                decode=bm.default_decode,
+                scoring_metric=bm.scoring_metric,
+                diagnostic_metrics=bm.diagnostic_metrics,
+            )
+            summary.update(result)
  
     summary.print_table()
     return summary.to_dict()
- 
  
 ###############################################################################
 # Training logger
@@ -194,6 +214,7 @@ def train(
     cfg: dict,
     run_dir: Path,
     benchmark_dir: Path,
+    run_baseline_benchmark: bool = True
 ):
     """
     Full Stage 0 SFT training loop.
@@ -243,8 +264,15 @@ def train(
         return float(lr_schedule(step - WARMUP_STEPS))
  
     # --- Compiled train step ---
-    train_step = make_train_step(model, optimizer, strategy, IGNORE_ID)
- 
+    train_step = make_train_step(
+        model=model,
+        optimizer=optimizer,
+        strategy=strategy,
+        global_batch_size=BATCH_SIZE,   # ← new required argument
+        grad_clip_norm=1.0,
+        ignore_id=IGNORE_ID,
+    )
+     
     # --- Checkpointing ---
     ckpt_dir = run_dir / "checkpoints"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
@@ -264,10 +292,11 @@ def train(
     print("=" * 100)
  
     # Baseline benchmark
-    print("\nBaseline benchmark (step 0)...")
-    bm = run_benchmark(model, tokenizer, step=0, benchmark_dir=benchmark_dir)
-    benchmark_history.append(bm)
-    logger.log({**bm, "type": "benchmark"})
+    if run_baseline_benchmark:
+        print("\nBaseline benchmark (step 0)...")
+        bm = run_benchmark(model, tokenizer, step=0, benchmark_dir=benchmark_dir)
+        benchmark_history.append(bm)
+        logger.log({**bm, "type": "benchmark"})
  
     for epoch in range(1, EPOCHS + 1):
         epoch_start  = time.time()
@@ -276,20 +305,22 @@ def train(
         # Shuffle + pack for this epoch
         shuffled = [token_dicts[i]
                     for i in np.random.default_rng(epoch).permutation(len(token_dicts))]
-        batches  = []
-        cursor   = 0
-        while cursor < len(shuffled):
-            batch    = make_packed_batch(shuffled[cursor:], SEQ_LEN, BATCH_SIZE,
-                                         shuffle=False, pad_id=PAD_ID, ignore_id=IGNORE_ID)
-            consumed = sum(batch["n_packed_per_seq"])
-            if consumed == 0:
-                break
-            batches.append(batch)
-            cursor += consumed
- 
-        print(f"\nEpoch {epoch}/{EPOCHS} — {len(batches)} steps")
- 
-        for batch in batches:
+   
+        # Generatorr:
+        def epoch_batches(shuffled):
+            cursor = 0
+            while cursor < len(shuffled):
+                batch = make_packed_batch(shuffled[cursor:], SEQ_LEN, BATCH_SIZE,
+                                          shuffle=False, pad_id=PAD_ID, ignore_id=IGNORE_ID)
+                consumed = sum(batch["n_packed_per_seq"])
+                if consumed == 0:
+                    break
+                cursor += consumed
+                yield batch
+        
+        print(f"\nEpoch {epoch}/{EPOCHS}")
+         
+        for batch in epoch_batches(shuffled):
             global_step += 1
             optimizer.learning_rate.assign(get_lr(global_step))
  

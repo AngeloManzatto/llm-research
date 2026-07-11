@@ -110,4 +110,5 @@ train(
     },
     run_dir=Path("runs") / "sft" / SFT_MODEL_ID,
     benchmark_dir=BENCHMARK_DIR,
+    run_baseline_benchmark=False
 )
