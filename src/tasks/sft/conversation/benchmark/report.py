@@ -4,7 +4,9 @@ Created on Sun Jun 28 08:44:40 2026
 @author: Angelo Antonio Manzatto
 """
 
-from __future__ import annotations
+###############################################################################
+# Libraries
+###############################################################################
 
 import json
 from collections import defaultdict
@@ -12,13 +14,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-
 ###############################################################################
 # Evaluation Summary
 ###############################################################################
 
 def _cell() -> dict:
-    return {"total": 0, "passed": 0, "word_count_sum": 0}
+    return {"total": 0, "passed": 0}
 
 
 @dataclass
@@ -27,7 +28,9 @@ class EvaluationSummary:
     total:  int = 0
     passed: int = 0
 
-    # Aggregate boolean diagnostic counts (e.g. wiki_talk_artifact, repetition)
+    # metric_id -> pass count, pooled across every example in every category
+    # (per Completion Criteria v1.1 §1 — expected_stop_token/repetition are
+    # computed for all categories, not just turn_taking's own rows).
     diagnostics: dict[str, int] = field(default_factory=dict)
 
     # category × language breakdown
@@ -46,25 +49,23 @@ class EvaluationSummary:
         cell["total"]  += 1
         cell["passed"] += int(result.passed)
 
-        for name, value in result.metrics.items():
-            if isinstance(value, bool):
-                # Global diagnostic count
-                self.diagnostics.setdefault(name, 0)
-                self.diagnostics[name] += int(value)
-                # Per-cell diagnostic count
-                cell.setdefault(name, 0)
-                cell[name] += int(value)
-            elif isinstance(value, int):
-                # Accumulate numeric metrics (e.g. word_count) for averaging
-                key = f"{name}_sum"
-                cell[key] = cell.get(key, 0) + value
+        # result.metrics: dict[str, MetricResult]. Every metric's `passed`
+        # (always "True = desired behavior", per metric.py's convention)
+        # is tallied both globally and per category/language cell.
+        # `.details` isn't aggregated here — it's preserved per-row in
+        # results.jsonl already; nothing has needed a run-level aggregate
+        # of it yet.
+        for name, metric_result in result.metrics.items():
+            self.diagnostics.setdefault(name, 0)
+            self.diagnostics[name] += int(metric_result.passed)
+            cell.setdefault(name, 0)
+            cell[name] += int(metric_result.passed)
 
     @property
     def pass_rate(self) -> float:
         return self.passed / self.total if self.total else 0.0
 
     def to_dict(self) -> dict[str, Any]:
-        # Compute per-cell derived stats before serialising
         breakdown = {}
         for cat, langs in self.by_category_language.items():
             breakdown[cat] = {}
@@ -73,20 +74,14 @@ class EvaluationSummary:
                 c["pass_rate"] = round(
                     c["passed"] / c["total"] if c["total"] else 0.0, 4
                 )
-                # Convert word_count_sum → avg_word_count if present
-                if "word_count_sum" in c:
-                    c["avg_word_count"] = round(
-                        c["word_count_sum"] / c["total"] if c["total"] else 0.0, 2
-                    )
-                    del c["word_count_sum"]
                 breakdown[cat][lang] = c
 
         return {
             **self.run_metadata,
-            "total":      self.total,
-            "passed":     self.passed,
-            "pass_rate":  round(self.pass_rate, 4),
-            **self.diagnostics,
+            "total":       self.total,
+            "passed":      self.passed,
+            "pass_rate":   round(self.pass_rate, 4),
+            "diagnostics": dict(self.diagnostics),
             "by_category_language": breakdown,
         }
 
@@ -94,17 +89,12 @@ class EvaluationSummary:
     def from_file(cls, summary_path: Path) -> "EvaluationSummary":
         """Reload a previously saved summary.json for comparison."""
         data = json.loads(Path(summary_path).read_text(encoding="utf-8"))
-        # Reconstruct metadata (everything except the known aggregate keys)
-        known = {"total", "passed", "pass_rate", "by_category_language"}
-        diagnostic_keys = {
-            "wiki_talk_artifact", "repetition", "too_long", "expected_stop_token"
-        }
-        metadata = {k: v for k, v in data.items()
-                    if k not in known and k not in diagnostic_keys}
+        known = {"total", "passed", "pass_rate", "diagnostics", "by_category_language"}
+        metadata = {k: v for k, v in data.items() if k not in known}
         summary = cls(run_metadata=metadata)
         summary.total       = data.get("total", 0)
         summary.passed      = data.get("passed", 0)
-        summary.diagnostics = {k: data[k] for k in diagnostic_keys if k in data}
+        summary.diagnostics = dict(data.get("diagnostics", {}))
         return summary
 
     def compare(self, other: "EvaluationSummary") -> dict[str, Any]:
@@ -134,12 +124,12 @@ class EvaluationSummary:
         return result
 
     def print_table(self) -> None:
-        """Print a human-readable summary table to stdout."""
+        """Print a human-readable summary table, including each category's
+        own metric pass counts (Completion Criteria v1.1 §1 cross-tab)."""
         d = self.to_dict()
         cats  = sorted(self.by_category_language)
         langs = sorted({l for c in self.by_category_language.values() for l in c})
 
-        # Header
         col = 24
         header = f"{'Category':<{col}}" + "".join(f"  {l.upper():>8}" for l in langs) + f"  {'TOTAL':>8}"
         print("\n" + "=" * len(header))
@@ -147,8 +137,11 @@ class EvaluationSummary:
               f"model={d.get('model_id','?')}")
         print(f"Overall: {self.passed}/{self.total} passed ({self.pass_rate:.1%})")
         if self.diagnostics:
-            diag_str = "  ".join(f"{k}={v}" for k, v in self.diagnostics.items())
-            print(f"Diagnostics: {diag_str}")
+            diag_str = "  ".join(
+                f"{name}={count}/{self.total} ({count/self.total:.1%})"
+                for name, count in self.diagnostics.items()
+            )
+            print(f"Diagnostics (pooled, all categories): {diag_str}")
         print("=" * len(header))
         print(header)
         print("-" * len(header))
@@ -166,6 +159,23 @@ class EvaluationSummary:
             cat_pct = cat_passed / cat_total if cat_total else 0.0
             row += f"  {cat_passed:>4}/{cat_total:<3} ({cat_pct:>5.1%})"
             print(row)
+
+            # Per-category metric breakdown — only metrics that actually
+            # ran for this category (e.g. constraint_satisfied never runs
+            # for turn_taking rows, so it shouldn't appear as a misleading
+            # "0 passes" line there).
+            metric_names_in_cat: set[str] = set()
+            totals: dict[str, int] = {}
+            for lang in langs:
+                cell = self.by_category_language[cat].get(lang, _cell())
+                for k, v in cell.items():
+                    if k in ("total", "passed"):
+                        continue
+                    metric_names_in_cat.add(k)
+                    totals[k] = totals.get(k, 0) + v
+            if metric_names_in_cat:
+                detail = "  ".join(f"{k}={totals[k]}/{cat_total}" for k in sorted(metric_names_in_cat))
+                print(f"{'':<{col}}  └─ {detail}")
 
         print("=" * len(header))
 

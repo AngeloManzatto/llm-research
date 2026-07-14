@@ -4,7 +4,9 @@ Created on Sat Jun 27 23:55:17 2026
 @author: Angelo Antonio Manzatto
 """
 
-from __future__ import annotations
+###############################################################################
+# Libraries
+###############################################################################
 
 import json
 from dataclasses import dataclass
@@ -23,6 +25,13 @@ class BenchmarkExample:
     messages: list[dict[str, str]]   # [{"role": "user"|"assistant"|"system", "content": "..."}]
     expected_any: list[str]
     expected_stop_token: str | None = None
+    # Generic bucket for category-specific ground truth used by metrics
+    # beyond expected_any/expected_stop_token (stated_value, corrected_value,
+    # constraint_type, constraint_value, refusal_patterns, ...). Deliberately
+    # untyped rather than one dataclass field per metric — each category
+    # only populates the handful of keys its own metrics need, and adding a
+    # new metric never requires touching this dataclass again.
+    meta: dict[str, Any] | None = None
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "BenchmarkExample":
@@ -52,6 +61,9 @@ class BenchmarkExample:
         if not isinstance(data["expected_any"], list):
             raise TypeError(f"Example {data.get('id', '?')} expected_any must be a list")
 
+        known = {"id", "category", "language", "messages", "expected_any", "expected_stop_token"}
+        meta = {k: v for k, v in data.items() if k not in known}
+
         return cls(
             id=str(data["id"]),
             category=str(data["category"]),
@@ -63,6 +75,7 @@ class BenchmarkExample:
                 if data.get("expected_stop_token") is not None
                 else None
             ),
+            meta=meta,
         )
 
 ###############################################################################
@@ -77,9 +90,15 @@ class Benchmark:
     root_dir: Path
     data_files: list[Path]
     default_decode: dict[str, Any]
-    scoring_metric: str
-    diagnostic_metrics: list[str]
     examples: list[BenchmarkExample]
+    # Which metric scores `passed` for each category. This is the single
+    # source of truth — there is no separate global "scoring_metric" field
+    # to keep in sync with it.
+    category_scoring_metric: dict[str, str]
+    # Metrics computed for every example regardless of category (e.g.
+    # expected_stop_token, repetition — pooled across all categories per
+    # Completion Criteria v1.1 §1).
+    always_computed: list[str]
 
     @classmethod
     def from_manifest(cls, manifest_path: Path) -> "Benchmark":
@@ -91,7 +110,7 @@ class Benchmark:
 
         required = [
             "benchmark_id", "version", "description", "data_files",
-            "default_decode", "scoring_metric", "diagnostic_metrics",
+            "default_decode", "category_scoring_metric", "always_computed",
         ]
         missing = [k for k in required if k not in manifest]
         if missing:
@@ -114,6 +133,18 @@ class Benchmark:
                         raise ValueError(f"Invalid JSON in {path} line {line_no}: {e}") from e
                     examples.append(BenchmarkExample.from_dict(data))
 
+        # category_scoring_metric may be a single string (applied to every
+        # category found in the data — the common case, avoids repeating
+        # the same metric name per category) or a full per-category dict.
+        raw_scoring = manifest["category_scoring_metric"]
+        if isinstance(raw_scoring, str):
+            categories = {ex.category for ex in examples}
+            category_scoring_metric = {cat: raw_scoring for cat in categories}
+        else:
+            category_scoring_metric = {str(k): str(v) for k, v in raw_scoring.items()}
+
+        always_computed = [str(m) for m in manifest["always_computed"]]
+
         return cls(
             benchmark_id=str(manifest["benchmark_id"]),
             version=str(manifest["version"]),
@@ -121,9 +152,9 @@ class Benchmark:
             root_dir=root_dir,
             data_files=data_files,
             default_decode=dict(manifest["default_decode"]),
-            scoring_metric=str(manifest["scoring_metric"]),
-            diagnostic_metrics=[str(m) for m in manifest["diagnostic_metrics"]],
             examples=examples,
+            category_scoring_metric=category_scoring_metric,
+            always_computed=always_computed,
         )
 
     def __len__(self) -> int:
@@ -145,6 +176,6 @@ class Benchmark:
             "categories": self.categories,
             "data_files": [str(p) for p in self.data_files],
             "default_decode": self.default_decode,
-            "scoring_metric": self.scoring_metric,
-            "diagnostic_metrics": self.diagnostic_metrics,
+            "category_scoring_metric": self.category_scoring_metric,
+            "always_computed": self.always_computed,
         }

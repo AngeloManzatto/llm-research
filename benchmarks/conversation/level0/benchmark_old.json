@@ -1,9 +1,9 @@
 {
   "benchmark_id": "conversation_level0",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "description": "Deterministic Level 0 conversation benchmark for pretrained NTP models.",
   "data_files": [
-    "data/claude/claude_core_0001.jsonl"
+    "data/openai/openai_core_0001.jsonl"
   ],
   "default_decode": {
     "strategy": "greedy",
@@ -12,9 +12,12 @@
         "END_OF_TURN"
     ]
   },
-  "category_scoring_metric": "contains_expected",
-  "always_computed": [
-    "expected_stop_token",
-    "repetition"
+  "scoring_metric": "contains_expected",
+  "diagnostic_metrics": [
+    "wiki_talk_artifact",
+    "repetition",
+    "word_count",
+    "too_long",
+    "expected_stop_token"
   ]
 }

@@ -42,12 +42,12 @@ FORBIDDEN_STRINGS = [
 
 # Per-category message count constraints (min, max inclusive)
 CATEGORY_MSG_CONSTRAINTS: dict[str, tuple[int, int]] = {
-    "turn_taking":           (1, 1),
-    "knowledge_completion":  (1, 1),
-    "local_context":         (3, 7),
-    "correction":            (3, 7),
-    "instruction_following": (1, 5),
-    "uncertainty":           (1, 3),
+    "turn_taking":           (2, 2),
+    "knowledge_completion":  (2, 2),
+    "local_context":         (4, 8),
+    "correction":            (4, 8),
+    "instruction_following": (2, 6),
+    "uncertainty":           (2, 4),
 }
 
 ###############################################################################
@@ -121,9 +121,10 @@ def validate_example(example: dict[str, Any], line_no: int) -> list[str]:
     if roles[0] != "user":
         errors.append(f"first message must be 'user'; got {roles[0]!r}")
 
-    # Last message must be user (assistant turn is what the model generates)
-    if roles[-1] != "user":
-        errors.append(f"last message must be 'user'; got {roles[-1]!r}")
+    # Last message must be assistant (this is the training target — the
+    # model's actual answer to the final question, not the question itself)
+    if roles[-1] != "assistant":
+        errors.append(f"last message must be 'assistant'; got {roles[-1]!r}")
 
     # Roles must strictly alternate
     for i in range(1, len(roles)):

@@ -8,12 +8,9 @@ Created on Sun Jun 28 10:34:27 2026
 # Libraries
 ###############################################################################
 
-from __future__ import annotations
-
 import re
-from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import Any
+from dataclasses import dataclass, field
+from typing import Callable
 
 ###############################################################################
 # Metric Result
@@ -21,153 +18,189 @@ from typing import Any
 
 @dataclass(frozen=True)
 class MetricResult:
-    metric_id: str
-    value: Any
-    version: str
-
-###############################################################################
-# Metric Base
-###############################################################################
-
-class Metric(ABC):
-    id: str
-    version: str = "1.0"
-    description: str = ""
-    deterministic: bool = True
-    output_type: type = object
-
-    @abstractmethod
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        pass
-
-###############################################################################
-# Contains Expected
-###############################################################################
-
-class ContainsExpectedMetric(Metric):
-    id = "contains_expected"
-    description = "Returns True if the answer contains any expected string."
-    output_type = bool
-
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        if example is None:
-            raise ValueError("ContainsExpectedMetric requires an example.")
-        answer_lower = answer.lower()
-        value = any(exp.lower() in answer_lower for exp in example.expected_any)
-        return MetricResult(self.id, value, self.version)
-
-###############################################################################
-# Wiki Talk Artifact
-###############################################################################
-
-class WikiTalkArtifactMetric(Metric):
-    id = "wiki_talk_artifact"
-    description = "Detects Wikipedia talk-page artifacts."
-    output_type = bool
-
-    patterns = [
-        r"\(talk\)",
-        r"\bUTC\b",
-        r"unsigned comment",
-        r"talk page",
-        r"deletion review",
-        r"please do not modify it",
-    ]
-
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        value = any(re.search(p, answer, flags=re.IGNORECASE) for p in self.patterns)
-        return MetricResult(self.id, value, self.version)
-
-###############################################################################
-# Repetition
-###############################################################################
-
-class RepetitionMetric(Metric):
-    id = "repetition"
-    description = "Detects repeated sentence-like chunks."
-    output_type = bool
-
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        chunks = [c.strip().lower() for c in re.split(r"[.\n]", answer) if c.strip()]
-        value = len(chunks) != len(set(chunks))
-        return MetricResult(self.id, value, self.version)
-
-###############################################################################
-# Word Count
-###############################################################################
-
-class WordCountMetric(Metric):
-    id = "word_count"
-    description = "Counts whitespace-separated words."
-    output_type = int
-
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        return MetricResult(self.id, len(answer.split()), self.version)
-
-###############################################################################
-# Too Long
-###############################################################################
-
-class TooLongMetric(Metric):
-    id = "too_long"
-    description = "Returns True if answer exceeds maximum word count."
-    output_type = bool
-
-    def __init__(self, max_words: int = 40):
-        self.max_words = max_words
-
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        value = len(answer.split()) > self.max_words
-        return MetricResult(self.id, value, self.version)
+    passed: bool
+    details: dict = field(default_factory=dict)
 
 ###############################################################################
 # Expected Stop Token
 ###############################################################################
 
-class ExpectedStopTokenMetric(Metric):
-    id = "expected_stop_token"
-    description = (
-        "Checks whether the raw answer ends with the expected stop token. "
-        "Requires raw_answer (pre-normalization) since normalizer strips stop tokens. "
-        "NOTE: raw_answer must preserve the literal stop token string (e.g. '<EOS>') "
-        "as emitted by the tokenizer's decode path for special token IDs."
-    )
-    output_type = bool
+def expected_stop_token(raw_answer: str, **kwargs) -> MetricResult:
+    """
+    Pass if `raw_answer` ends with the expected stop token (e.g. "<EOS>").
 
-    def evaluate(self, *, answer: str, raw_answer: str | None = None, example: Any | None = None) -> MetricResult:
-        if example is None:
-            raise ValueError("ExpectedStopTokenMetric requires an example.")
+    `raw_answer` must be the pre-normalization text — whatever normalizes
+    the answer for display/scoring strips stop tokens out, so checking the
+    normalized text would always fail here.
+    """
+    expected_token = kwargs["expected_token"]
+    passed = raw_answer.rstrip().endswith(expected_token)
+    return MetricResult(passed=passed, details={"expected_token": expected_token})
 
-        expected_name = getattr(example, "expected_stop_token", None)
-
-        if expected_name is None:
-            return MetricResult(self.id, False, self.version)
-
-        from src.benchmarks.core.special_tokens import TOKEN_BY_NAME
-        expected_token = TOKEN_BY_NAME[expected_name].token
-
-        # Check raw_answer (stop tokens are stripped from normalized answer).
-        # Use endswith rather than `in` to ensure the stop token closes the turn
-        # rather than appearing spuriously mid-completion.
-        target = raw_answer if raw_answer is not None else answer
-        value = target.rstrip().endswith(expected_token)
-
-        return MetricResult(self.id, value, self.version)
+expected_stop_token.requires = ("expected_token",)
 
 ###############################################################################
-# Metric Registry
+# Repetition
 ###############################################################################
 
-METRIC_REGISTRY: dict[str, type[Metric]] = {
-    "contains_expected":  ContainsExpectedMetric,
-    "wiki_talk_artifact": WikiTalkArtifactMetric,
-    "repetition":         RepetitionMetric,
-    "word_count":         WordCountMetric,
-    "too_long":           TooLongMetric,
-    "expected_stop_token": ExpectedStopTokenMetric,
+def _tokenize_for_repetition(text: str) -> list[str]:
+    """Tokenize while preserving contractions ("don't"); punctuation ignored."""
+    return re.findall(r"\b[\w]+(?:['’][\w]+)?\b", text.lower())
+
+
+def _detect_consecutive_repetition(text: str) -> dict:
+    """
+    Detect a word or phrase repeating consecutively, searching longest
+    phrases first so the reported match is the most descriptive one
+    (e.g. a whole repeated clause, not a fragment of it).
+
+    Threshold is graduated by phrase length, not a single fixed number:
+
+      - 1-2 word phrases need 3+ consecutive repeats to flag. A uniform
+        threshold of 2 here flags ordinary English doubling as a bug —
+        tested directly: "no no thanks", "very very good", and
+        "I think I think that is right" all false-positive under a
+        flat min_repetitions=2.
+      - 3+ word phrases flag on 2 consecutive repeats, since a multi-word
+        clause repeating even once more is already a strong degeneration
+        signal (e.g. "I know about I know about").
+
+    No cap on phrase length. A fixed max_ngram_size (tested at both 4 and
+    8) misses any repeated clause longer than that cap regardless of
+    repeat count — confirmed against a real failure case, "the woman saw
+    it coming the woman saw it coming" (5 words), and against a
+    constructed 9-word clause, both invisible to a capped search. This
+    searches every phrase length up to half the token count.
+
+    Returns a dict: {"repeated": bool, "phrase": str, "repetitions": int,
+    "ngram_size": int}. phrase/repetitions/ngram_size are empty/0 when
+    no repetition is found.
+    """
+    tokens = _tokenize_for_repetition(text)
+    if not tokens:
+        return {"repeated": False, "phrase": "", "repetitions": 0, "ngram_size": 0}
+
+    max_ngram_size = len(tokens) // 2
+
+    for ngram_size in range(max_ngram_size, 0, -1):
+        min_repetitions = 3 if ngram_size <= 2 else 2
+        for start in range(len(tokens) - ngram_size * min_repetitions + 1):
+            phrase = tokens[start : start + ngram_size]
+            repetitions = 1
+            cursor = start + ngram_size
+            while (
+                cursor + ngram_size <= len(tokens)
+                and tokens[cursor : cursor + ngram_size] == phrase
+            ):
+                repetitions += 1
+                cursor += ngram_size
+
+            if repetitions >= min_repetitions:
+                return {
+                    "repeated": True,
+                    "phrase": " ".join(phrase),
+                    "repetitions": repetitions,
+                    "ngram_size": ngram_size,
+                }
+
+    return {"repeated": False, "phrase": "", "repetitions": 0, "ngram_size": 0}
+
+
+def repetition(raw_answer: str, **kwargs) -> MetricResult:
+    """
+    passed=True means NO degenerate repetition was found — kept consistent
+    with every other metric's "True = desired behavior" convention, unlike
+    an earlier version of this metric where True meant a defect was found.
+    """
+    detail = _detect_consecutive_repetition(raw_answer)
+    repeated = detail.pop("repeated")
+    return MetricResult(passed=not repeated, details=detail if repeated else {})
+
+repetition.requires = ()
+
+###############################################################################
+# Contains Expected
+###############################################################################
+
+def contains_expected(raw_answer: str, **kwargs) -> MetricResult:
+    """
+    True if raw_answer contains any one of the candidate strings in
+    `expected_any` (case-insensitive substring match). `details` records
+    which candidate actually matched, for diagnostics.
+    """
+    expected_any = kwargs["expected_any"]
+    answer_lower = raw_answer.lower()
+    matched = next((exp for exp in expected_any if exp.lower() in answer_lower), None)
+    return MetricResult(passed=matched is not None, details={"matched": matched} if matched else {})
+
+contains_expected.requires = ("expected_any",)
+
+###############################################################################
+# Constraint Satisfied
+###############################################################################
+
+def _strip_trailing_tags(text: str) -> str:
+    """Strip trailing special-token-like tags (e.g. '<EOS>') before a
+    constraint check, since raw_answer includes them but an exact-match or
+    casing check would otherwise be silently corrupted by that suffix."""
+    return re.sub(r"(<[^>\s]+>\s*)+$", "", text).strip()
+
+
+def constraint_satisfied(raw_answer: str, **kwargs) -> MetricResult:
+    """
+    Checks the four constraint types actually used in the generated
+    instruction_following data — not a speculative larger set:
+
+      - "one_word": exactly one word.
+      - "yes_no": answer is exactly yes/no (en or pt).
+      - "uppercase": every alphabetic character is uppercase.
+      - "exact_match": answer equals constraint_value exactly (used for
+        both word-echo and count-sequence constraints — both are really
+        the same check, "must equal this given string", so kept as one
+        type rather than two).
+
+    constraint_value is required only for "exact_match"; other types
+    don't take one.
+    """
+    constraint_type = kwargs["constraint_type"]
+    text = _strip_trailing_tags(raw_answer).rstrip(".!? ")
+
+    if constraint_type == "one_word":
+        passed = len(text.split()) == 1
+    elif constraint_type == "yes_no":
+        passed = text.lower() in ("yes", "no", "sim", "nao", "não")
+    elif constraint_type == "uppercase":
+        letters = [c for c in text if c.isalpha()]
+        passed = bool(letters) and all(c.isupper() for c in letters)
+    elif constraint_type == "exact_match":
+        constraint_value = kwargs["constraint_value"]
+        passed = text == str(constraint_value).rstrip(".!? ")
+    else:
+        raise ValueError(f"Unknown constraint_type: {constraint_type!r}")
+
+    return MetricResult(passed=passed, details={"constraint_type": constraint_type})
+
+constraint_satisfied.requires = ("constraint_type",)
+
+###############################################################################
+# Registry
+###############################################################################
+
+METRICS: dict[str, Callable[..., MetricResult]] = {
+    "expected_stop_token": expected_stop_token,
+    "repetition":          repetition,
+    "contains_expected":   contains_expected,
+    "constraint_satisfied": constraint_satisfied,
 }
 
-def build_metric(metric_id: str) -> Metric:
-    if metric_id not in METRIC_REGISTRY:
-        raise KeyError(f"Unknown metric: '{metric_id}'. Available: {sorted(METRIC_REGISTRY)}")
-    return METRIC_REGISTRY[metric_id]()
+def run_metric(metric_id: str, raw_answer: str, **kwargs) -> MetricResult:
+    if metric_id not in METRICS:
+        raise KeyError(f"Unknown metric: '{metric_id}'. Available: {sorted(METRICS)}")
+
+    fn = METRICS[metric_id]
+    missing = [k for k in getattr(fn, "requires", ()) if k not in kwargs]
+    if missing:
+        raise ValueError(f"'{metric_id}' missing required fields: {missing}")
+
+    return fn(raw_answer, **kwargs)
+ 

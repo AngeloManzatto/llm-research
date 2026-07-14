@@ -12,6 +12,8 @@ from pathlib import Path
 import tensorflow as tf
  
 from src.core.loader import load_model_and_tokenizer
+from src.core.model.serialization import restore_model_from_checkpoint, model_all_finite
+
 from src.tasks.sft.conversation.training.data_loader import load_dataset
 from src.tasks.sft.conversation.training.data_tokenizer import (
     resolve_token_ids,
@@ -25,7 +27,7 @@ from src.tasks.sft.conversation.training.train_utils import train
  
 BATCH_SIZE       = 1
 EPOCHS           = 4
-LEARNING_RATE    = 1e-4      # reduced from 3e-4 after NaN at step 800
+LEARNING_RATE    = 3e-4      # reduced from 3e-4 after NaN at step 800
 WARMUP_STEPS     = 100
 CHECKPOINT_EVERY = 250
 
@@ -51,13 +53,13 @@ with strategy.scope():
     tokenizer = artifacts.tokenizer
     cfg       = artifacts.transformer_cfg
     
-base_model_id = (
+BASE_MODEL_ID = (
     f"base_model_{cfg.n_layers}x{cfg.n_heads}x{cfg.d_model}x{cfg.seq_len}"
     f"_{Path(artifacts.tokenizer_checkpoint).parent.name}_ntp_v1"
 )
-SFT_MODEL_ID = base_model_id.replace("_ntp_v1", "_sft_stage0_v1")
+SFT_MODEL_ID = BASE_MODEL_ID.replace("_ntp_v1", "_sft_stage0_v1")
  
-print(f"Model: {base_model_id}")
+print(f"Model: {BASE_MODEL_ID}")
 model.summary()
 
 ###############################################################################
@@ -66,6 +68,17 @@ model.summary()
  
 with strategy.scope():
     optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE, clipnorm=1.0)
+    
+###############################################################################
+# Checkpoint setup
+###############################################################################
+ 
+checkpoint_dir = Path("runs") / "ntp" / BASE_MODEL_ID / "checkpoints"
+
+restore_model_from_checkpoint(model, checkpoint_dir)
+
+# Always verify after restoring
+assert model_all_finite(model), "Checkpoint is corrupted — choose a different one"
  
 ###############################################################################
 # Special token IDs
@@ -110,5 +123,5 @@ train(
     },
     run_dir=Path("runs") / "sft" / SFT_MODEL_ID,
     benchmark_dir=BENCHMARK_DIR,
-    run_baseline_benchmark=False
+    run_baseline_benchmark=True
 )

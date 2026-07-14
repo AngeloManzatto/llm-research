@@ -66,7 +66,7 @@ checkpoint_path = restore_model_from_checkpoint(
 # Benchmark
 ###############################################################################
 
-benchmark_path = Path("benchmarks") / "conversation"
+benchmark_path = Path("benchmarks") / "conversation" / "level0"
 benchmark      = Benchmark.from_manifest(benchmark_path / "benchmark.json")
 
 run_metadata = {
@@ -101,12 +101,12 @@ for example in benchmark:
     generated = text_generator.generate(example.messages)
     
     result = evaluate_example(
+        benchmark=benchmark,
         example=example,
         generated=generated,
         decode=benchmark.default_decode,
-        scoring_metric=benchmark.scoring_metric,
-        diagnostic_metrics=benchmark.diagnostic_metrics,
     )
+    
     summary.update(result)
     writer.write_result(result)
     print(f"[{result.id}] passed={result.passed} | answer={result.answer!r}")

@@ -9,6 +9,7 @@ Created on Sat Jul 11 09:40:07 2026
 
 import json
 import time
+from collections import deque
 from pathlib import Path
  
 import numpy as np
@@ -26,6 +27,57 @@ from src.tasks.sft.conversation.training.data_packing import (
     packed_causal_mask,
 )
  
+###############################################################################
+# Training instability detection
+#
+# The old guard only checked np.isnan(loss_val) or np.isinf(loss_val).
+# That is necessary but not sufficient: a real collapse was traced to loss
+# going 0.04 -> 9.27 -> 6.69 across three steps — all finite values, none
+# of which ever tripped that check. The model trained straight through the
+# spike, got checkpointed in its already-collapsed state, and never
+# recovered (degenerated to emitting the stop token immediately on every
+# input). This widens detection to catch that shape of failure too.
+###############################################################################
+
+class InstabilityDetector:
+    """
+    Tracks a rolling window of recent losses and flags a step as unstable
+    if:
+      - loss is nan/inf (the original check), OR
+      - loss is finite but far above the recent trailing average (a
+        spike) — catches the collapse shape above, which the original
+        check structurally cannot see since 9.27 and 6.69 are both
+        ordinary finite floats.
+
+    Spike detection only activates once enough history exists
+    (`min_history` steps) — early training loss is naturally volatile,
+    and comparing against a near-empty window would false-trigger on
+    normal warmup behavior.
+    """
+
+    def __init__(self, window: int = 50, spike_multiplier: float = 5.0, min_history: int = 10):
+        self.recent = deque(maxlen=window)
+        self.spike_multiplier = spike_multiplier
+        self.min_history = min_history
+
+    def check(self, loss_val: float) -> str | None:
+        """Returns a reason string if unstable, else None. Does not record
+        the loss — call record() separately once you've decided whether
+        this step's result should be kept."""
+        if np.isnan(loss_val) or np.isinf(loss_val):
+            return "nan_or_inf"
+        if len(self.recent) >= self.min_history:
+            trailing_mean = float(np.mean(self.recent))
+            if trailing_mean > 0 and loss_val > self.spike_multiplier * trailing_mean:
+                return "loss_spike"
+        return None
+
+    def record(self, loss_val: float) -> None:
+        self.recent.append(loss_val)
+
+    def reset(self) -> None:
+        self.recent.clear()
+
 ###############################################################################
 # Loss
 ###############################################################################
@@ -140,51 +192,67 @@ def run_benchmark(
     tokenizer,
     step: int,
     benchmark_dir: Path,
-    batch_size: int = 32,   # number of examples to generate in parallel
+    result_dir: Path = None,
+    batch_size: int = 32,
 ) -> dict:
     """
     Run conversation_level0 benchmark with batched generation.
-    Generates `batch_size` examples simultaneously — much faster than
-    sequential generation on a GPU.
+
+    Saves per-example results and summary to:
+        {result_dir}/step_{step:06d}/results.jsonl
+        {result_dir}/step_{step:06d}/summary.json
+
+    If result_dir is None, results are printed but not saved to disk.
     """
-    from src.tasks.sft.conversation.benchmark.benchmark import Benchmark
-    from src.tasks.sft.conversation.benchmark.evaluator import evaluate_example
-    from src.tasks.sft.conversation.benchmark.generator import TextGenerator
-    from src.tasks.sft.conversation.benchmark.report import EvaluationSummary
- 
     if not model_all_finite(model):
         print(f"⚠ Skipping benchmark at step {step} — model weights contain NaN/Inf")
         return {"step": step, "skipped": True, "reason": "nan_weights"}
- 
+
     bm  = Benchmark.from_manifest(benchmark_dir / "benchmark.json")
     gen = TextGenerator(model=model, tokenizer=tokenizer,
                         decode_config=bm.default_decode)
- 
+
     run_meta = {"benchmark_id": bm.benchmark_id,
                 "benchmark_version": bm.version, "step": step}
     summary  = EvaluationSummary(run_metadata=run_meta)
- 
-    # Collect all examples then process in batches
-    examples = list(bm)
- 
-    for i in range(0, len(examples), batch_size):
-        chunk    = examples[i:i + batch_size]
-        messages = [ex.messages for ex in chunk]
- 
-        # One batched forward pass loop for the whole chunk
-        completions = gen.generate_batch(messages)
- 
-        for example, generated in zip(chunk, completions):
+    results  = []   # collect for disk write
+
+    examples_all = list(bm)
+
+    for i in range(0, len(examples_all), batch_size):
+        examples    = examples_all[i:i + batch_size]
+        completions = gen.generate_batch([ex.messages for ex in examples])
+
+        for example, generated in zip(examples, completions):
             result = evaluate_example(
+                benchmark=bm,
                 example=example,
                 generated=generated,
                 decode=bm.default_decode,
-                scoring_metric=bm.scoring_metric,
-                diagnostic_metrics=bm.diagnostic_metrics,
             )
             summary.update(result)
- 
+            results.append(result)
+
     summary.print_table()
+
+    # Persist to disk if result_dir provided
+    if result_dir is not None:
+        step_dir = Path(result_dir) / f"step_{step:06d}"
+        step_dir.mkdir(parents=True, exist_ok=True)
+
+        # Per-example results
+        with (step_dir / "results.jsonl").open("w", encoding="utf-8") as f:
+            for r in results:
+                f.write(json.dumps(r.to_dict(), ensure_ascii=False) + "\n")
+
+        # Summary
+        (step_dir / "summary.json").write_text(
+            json.dumps(summary.to_dict(), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+        print(f"  → benchmark results saved: {step_dir}")
+
     return summary.to_dict()
  
 ###############################################################################
@@ -241,7 +309,8 @@ def train(
     PAD_ID           = cfg["PAD_ID"]
     IGNORE_ID        = cfg["IGNORE_ID"]
     SFT_MODEL_ID     = cfg["SFT_MODEL_ID"]
- 
+    RESULT_DIR       = run_dir / "benchmark_results"
+    
     # --- Steps estimate ---
     _dry          = make_packed_batch(token_dicts, SEQ_LEN, BATCH_SIZE, shuffle=True, seed=0)
     avg_packed    = sum(_dry["n_packed_per_seq"]) / BATCH_SIZE
@@ -285,6 +354,8 @@ def train(
     # --- State ---
     global_step       = 0
     benchmark_history = []
+    instability        = InstabilityDetector(window=50, spike_multiplier=5.0, min_history=10)
+    FINITE_CHECK_EVERY = 25  # periodic weight-finiteness check, independent of loss value
  
     print("=" * 100)
     print(f"Stage 0 SFT — {SFT_MODEL_ID}")
@@ -294,7 +365,7 @@ def train(
     # Baseline benchmark
     if run_baseline_benchmark:
         print("\nBaseline benchmark (step 0)...")
-        bm = run_benchmark(model, tokenizer, step=0, benchmark_dir=benchmark_dir)
+        bm = run_benchmark(model, tokenizer, step=0, benchmark_dir=benchmark_dir, result_dir=RESULT_DIR)
         benchmark_history.append(bm)
         logger.log({**bm, "type": "benchmark"})
  
@@ -329,12 +400,51 @@ def train(
                            batch["segment_ids"]).numpy()
             )
  
-            # NaN guard — stop immediately rather than corrupt weights further
-            if np.isnan(loss_val) or np.isinf(loss_val):
-                print(f"\n⚠ NaN/Inf loss at step {global_step} — stopping.")
-                print("Restore from last checkpoint and reduce LEARNING_RATE.")
-                return
- 
+            # Instability check — widened per the InstabilityDetector docstring:
+            # catches both literal nan/inf AND large-but-finite loss spikes,
+            # which is what actually caused the real collapse this guard
+            # failed to catch previously.
+            reason = instability.check(loss_val)
+
+            # Independent second check: weights can go non-finite without
+            # that step's scalar loss reading as nan/inf/spike (e.g. a bad
+            # value lands in a parameter that doesn't dominate this batch's
+            # loss). Checked periodically rather than every step since
+            # model_all_finite() walks every variable.
+            if reason is None and global_step % FINITE_CHECK_EVERY == 0:
+                if not model_all_finite(model):
+                    reason = "nonfinite_weights"
+
+            if reason is not None:
+                print(f"\n⚠ Training instability at step {global_step} ({reason}); loss={loss_val:.4f}")
+                latest = ckpt_mgr.latest_checkpoint
+                if latest:
+                    print(f"  Restoring from: {latest}")
+                    ckpt.restore(latest)
+                    # Roll back global_step to where the checkpoint was saved
+                    global_step = int(optimizer.iterations.numpy())
+                    # Rebuild train_step to clear any corrupted TF graph state
+                    train_step = make_train_step(
+                        model=model,
+                        optimizer=optimizer,
+                        strategy=strategy,
+                        global_batch_size=BATCH_SIZE,
+                        grad_clip_norm=1.0,
+                        ignore_id=IGNORE_ID,
+                    )
+                    # Clear the rolling loss window — it describes the
+                    # collapsed run, not the restored checkpoint's state.
+                    instability.reset()
+                    print(f"  Resumed from step {global_step} — skipping rest of epoch {epoch}")
+                    logger.log({"type": "instability_recovery", "epoch": epoch,
+                                "reason": reason, "loss_at_detection": round(loss_val, 6),
+                                "detected_step": global_step, "restored_from": latest})
+                else:
+                    print("  No checkpoint to restore from — stopping.")
+                    return
+                break  # break out of epoch_batches, continue to next epoch
+
+            instability.record(loss_val)
             epoch_losses.append(loss_val)
             logger.log({"type": "step", "epoch": epoch, "step": global_step,
                         "loss": round(loss_val, 6),
@@ -348,9 +458,10 @@ def train(
             if global_step % CHECKPOINT_EVERY == 0:
                 ckpt_path = ckpt_mgr.save()
                 print(f"\n  → checkpoint: {ckpt_path}")
-                bm = run_benchmark(model, tokenizer, global_step, benchmark_dir)
-                benchmark_history.append(bm)
-                logger.log({**bm, "type": "benchmark"})
+                if run_baseline_benchmark:
+                    bm = run_benchmark(model, tokenizer, global_step, benchmark_dir, result_dir=RESULT_DIR)
+                    benchmark_history.append(bm)
+                    logger.log({**bm, "type": "benchmark"})
  
         epoch_loss = float(np.mean(epoch_losses))
         elapsed    = time.time() - epoch_start

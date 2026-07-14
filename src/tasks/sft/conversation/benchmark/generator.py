@@ -13,6 +13,12 @@ import numpy as np
 import tensorflow as tf
 
 from src.tasks.sft.conversation.core.special_tokens import TOKEN_BY_NAME
+from src.core.model.generation import (
+    greedy_decode,
+    top_k_decode,
+    nucleus_decode,
+    beam_search_decode,
+)
 
 ###############################################################################
 # Role → special token name mapping
@@ -56,10 +62,7 @@ class TextGenerator:
 
             ids.append(role_id)
             ids.extend(text_ids)
-            if is_last:
-                ids.append(self._asst_id)   # generation trigger
-            else:
-                ids.append(self._eos_id)    # close completed turn
+            ids.append(self._asst_id if is_last else self._eos_id)
 
         return ids
 
@@ -69,67 +72,117 @@ class TextGenerator:
 
     def generate_batch(self, batch_messages: list[list[dict[str, str]]]) -> list[str]:
         """
-        Generate completions for a batch of message lists in a single
-        batched forward pass loop — much faster than calling generate()
-        in a Python loop.
+        Generate completions for a batch of message lists.
 
-        All prompt sequences are left-padded to the length of the longest
-        one in the batch. Completed sequences (those that have emitted EOS)
-        are masked out of subsequent forward passes.
+        Strategy is read from decode_config["strategy"]:
+            "greedy"      — batched, deterministic (default, best for benchmark)
+            "top_k"       — batched, stochastic (best for qualitative inspection)
+            "nucleus"     — batched, stochastic (best for qualitative inspection)
+            "beam_search" — per-example (not batchable), deterministic
 
-        Returns a list of decoded completion strings, one per input.
+        greedy / top_k / nucleus run a single batched forward-pass loop.
+        beam_search falls back to sequential per-example calls since beam
+        candidates cannot be batched without significant complexity.
         """
+        strategy   = self.decode_config.get("strategy", "greedy")
         max_length = int(self.decode_config.get("max_length", 20))
-        PAD_ID     = self._pad_id
-        EOS_ID     = self._eos_id
+        stop_ids   = {self._eos_id}
 
-        # Build per-example prompt ID sequences
-        all_ids = [self.messages_to_ids(msgs) for msgs in batch_messages]
-        B        = len(all_ids)
-        # Left-pad all sequences to the same length
+        # --- beam search: sequential, one example at a time ---
+        if strategy == "beam_search":
+            beam_width = int(self.decode_config.get("beam_width", 3))
+            return [
+                beam_search_decode(
+                    self.model, self.tokenizer,
+                    input_ids=self.messages_to_ids(msgs),
+                    stop_token_ids=stop_ids,
+                    beam_width=beam_width,
+                    max_length=max_length,
+                )
+                for msgs in batch_messages
+            ]
+
+        # --- batched strategies: greedy, top_k, nucleus ---
+        PAD_ID = self._pad_id
+        EOS_ID = self._eos_id
+
+        all_ids        = [self.messages_to_ids(msgs) for msgs in batch_messages]
+        B              = len(all_ids)
         max_prompt_len = max(len(ids) for ids in all_ids)
+
+        # Left-pad all prompts to the same length
         padded = np.full((B, max_prompt_len), PAD_ID, dtype=np.int32)
         for i, ids in enumerate(all_ids):
-            padded[i, max_prompt_len - len(ids):] = ids  # left-pad
+            padded[i, max_prompt_len - len(ids):] = ids
 
-        prompt_len = max_prompt_len
-
-        # Running sequences on GPU — shape [B, current_len]
         sequences = tf.constant(padded, dtype=tf.int32)
-
-        # Track which sequences are still generating
-        # [B] bool: True = still active (hasn't emitted EOS yet)
-        active = tf.ones([B], dtype=tf.bool)
-
-        # Store only the generated portion (after the prompt)
+        active    = np.ones(B, dtype=bool)
         generated = [[] for _ in range(B)]
 
+        # Strategy-specific config
+        k = int(self.decode_config.get("k", 5))
+        p = float(self.decode_config.get("p", 0.9))
+
         for _ in range(max_length):
-            if not tf.reduce_any(active).numpy():
-                break   # all sequences done
+            if not active.any():
+                break
 
-            logits   = self.model(sequences, training=False)  # [B, T, vocab]
-            next_ids = tf.argmax(logits[:, -1, :], axis=-1,
-                                 output_type=tf.int32)         # [B]
+            logits = self.model(sequences, training=False)  # [B, T, vocab]
+            last   = logits[:, -1, :]                       # [B, vocab]
 
-            next_ids_np = next_ids.numpy()
-            active_np   = active.numpy()
+            # --- select next token per strategy ---
+            if strategy == "greedy":
+                next_ids_np = tf.argmax(last, axis=-1,
+                                        output_type=tf.int32).numpy()
 
+            elif strategy == "top_k":
+                top_probs, top_indices = tf.math.top_k(last, k=k)
+                sampled     = tf.random.categorical(
+                    tf.math.log(tf.nn.softmax(top_probs)), num_samples=1
+                )                                           # [B, 1]
+                next_ids_np = tf.gather(
+                    top_indices, sampled, batch_dims=1
+                ).numpy().squeeze(-1).astype(np.int32)
+
+            elif strategy == "nucleus":
+                # Per-example nucleus sampling (vectorised across batch)
+                sorted_logits  = tf.sort(last, direction="DESCENDING")
+                sorted_indices = tf.argsort(last, direction="DESCENDING")
+                probs          = tf.nn.softmax(sorted_logits)
+                cumulative     = tf.cumsum(probs, axis=-1)
+                # Shift so the token that pushes us past p is included
+                shifted        = tf.concat(
+                    [tf.zeros_like(cumulative[:, :1]), cumulative[:, :-1]], axis=-1
+                )
+                nucleus_mask   = shifted < p
+                neg_inf        = tf.fill(tf.shape(sorted_logits), float("-inf"))
+                masked_logits  = tf.where(nucleus_mask, sorted_logits, neg_inf)
+                sampled        = tf.random.categorical(
+                    tf.cast(masked_logits, tf.float32), num_samples=1
+                )                                           # [B, 1]
+                next_ids_np    = tf.gather(
+                    sorted_indices, sampled, batch_dims=1
+                ).numpy().squeeze(-1).astype(np.int32)
+
+            else:
+                raise ValueError(
+                    f"Unknown strategy {strategy!r}. "
+                    "Choose: 'greedy', 'top_k', 'nucleus', 'beam_search'."
+                )
+
+            # --- update generated tokens and active flags ---
             for i in range(B):
-                if active_np[i]:
+                if active[i]:
                     token = int(next_ids_np[i])
                     generated[i].append(token)
                     if token == EOS_ID:
-                        active_np[i] = False
+                        active[i] = False
 
-            active = tf.constant(active_np)
-
-            # Append next tokens (use PAD for finished sequences)
-            emit = np.where(active_np, next_ids_np, PAD_ID)
+            # Append next token (PAD for finished sequences)
+            emit      = np.where(active, next_ids_np, PAD_ID)
             sequences = tf.concat(
                 [sequences, tf.constant(emit[:, None], dtype=tf.int32)],
                 axis=1,
             )
 
-        # Decode each generated sequence
         return [self.tokenizer.indices_to_text(g) for g in generated]
