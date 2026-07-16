@@ -32,7 +32,7 @@ WARMUP_STEPS     = 100
 CHECKPOINT_EVERY = 250
 
 ARTIFACT_CFG  = Path("configs")    / "artifacts" / "base_model_8x8x768x1024_tokenizer_bbpe32k.json"
-DATASET_DIR   = Path("data")       / "sft" / "conversation" / "level0" / "raw"
+DATASET_DIR   = Path("data")       / "sft" / "conversation" / "level0" 
 BENCHMARK_DIR = Path("benchmarks") / "conversation" / "level0"
 
 ###############################################################################
