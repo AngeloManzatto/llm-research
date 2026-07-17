@@ -8,6 +8,7 @@ Created on Fri Jul 10 07:58:22 2026
 # Libraries
 ###############################################################################
 
+import os
 from pathlib import Path
 import tensorflow as tf
  
@@ -20,12 +21,32 @@ from src.tasks.sft.conversation.training.data_tokenizer import (
     messages_to_tokens,
 )
 from src.tasks.sft.conversation.training.train_utils import train
+
+from tensorflow.keras import mixed_precision
+mixed_precision.set_global_policy("mixed_bfloat16")
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
+###############################################################################
+# GPU Strategy
+###############################################################################
+
+strategy = tf.distribute.MirroredStrategy()
+num_gpus = strategy.num_replicas_in_sync
+
+print(100*"-")
+print(f"Number of devices (GPUs): {num_gpus}")
  
 ###############################################################################
 # Training configuration
 ###############################################################################
- 
-BATCH_SIZE       = 1
+
+global_batch_size = num_gpus * 12
+per_replica_batch_size = global_batch_size // num_gpus
+
+assert global_batch_size % num_gpus == 0
+
+BATCH_SIZE       = global_batch_size
 EPOCHS           = 4
 LEARNING_RATE    = 3e-4      # reduced from 3e-4 after NaN at step 800
 WARMUP_STEPS     = 100

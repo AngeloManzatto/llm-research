@@ -152,6 +152,53 @@ def packed_causal_mask(
     return mask
 
 ###############################################################################
+# Block-diagonal causal mask (TF-native — safe for use inside traced /
+# distributed train steps)
+###############################################################################
+
+def packed_causal_mask_tf(segment_ids: tf.Tensor, dtype: tf.DType = tf.float32) -> tf.Tensor:
+    """
+    Pure-TensorFlow equivalent of packed_causal_mask() above, operating
+    directly on a batched tf.Tensor rather than a single numpy array.
+
+    Use this one (not packed_causal_mask) anywhere the mask is built
+    inside a @tf.function step that runs under strategy.run() with more
+    than one replica. The original packed_causal_mask is numpy-based and
+    was previously called via tf.py_function from inside a traced train
+    step — tf.py_function drops out of the graph into an eager Python
+    callback, which is NOT reliably supported across multiple replicas
+    under MirroredStrategy and caused a real "cond/Placeholder ...
+    EagerPyFunc" crash under multi-GPU training that never reproduced on
+    a single-device run (one replica means nothing for the callback to
+    desynchronize against).
+
+    Verified bit-identical to packed_causal_mask() across packed/single-
+    example/all-PAD/many-tiny-example segment_ids patterns.
+
+    segment_ids : int32 tensor [B, T], -1 for PAD.
+    Returns     : dtype tensor [B, 1, T, T], additive mask
+                  (0.0 = attention allowed, -1e9 = blocked).
+    """
+    segment_ids = tf.cast(segment_ids, tf.int32)
+    T = tf.shape(segment_ids)[1]
+
+    seg_i = segment_ids[:, :, None]   # [B, T, 1]  query positions
+    seg_j = segment_ids[:, None, :]   # [B, 1, T]  key positions
+
+    pos   = tf.range(T)
+    pos_i = pos[:, None]              # [T, 1]
+    pos_j = pos[None, :]              # [1, T]
+
+    causal   = pos_j <= pos_i                    # [T, T]
+    same_seg = tf.equal(seg_i, seg_j)             # [B, T, T]
+    not_pad  = tf.not_equal(seg_j, -1)            # [B, 1, T]
+
+    allowed = tf.logical_and(tf.logical_and(causal[tf.newaxis, :, :], same_seg), not_pad)
+
+    mask = tf.where(allowed, tf.constant(0.0, dtype=dtype), tf.constant(-1e9, dtype=dtype))
+    return mask[:, tf.newaxis, :, :]  # [B, 1, T, T]
+
+###############################################################################
 # Batch packer: turn a list of examples into a batch of packed sequences
 ###############################################################################
  
@@ -205,7 +252,6 @@ def make_packed_batch(
     batch_labels     = []
     batch_attn_masks = []
     batch_seg_ids    = []
-    batch_masks      = []
     n_packed_list    = []
  
     cursor = 0

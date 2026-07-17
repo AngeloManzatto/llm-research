@@ -24,7 +24,7 @@ from src.tasks.sft.conversation.benchmark.report import EvaluationSummary
 
 from src.tasks.sft.conversation.training.data_packing import (
     make_packed_batch,
-    packed_causal_mask,
+    packed_causal_mask_tf,
 )
  
 ###############################################################################
@@ -147,16 +147,20 @@ def make_train_step(
 
     @tf.function
     def _step_fn(input_ids, labels, segment_ids):
-        # Build block-diagonal causal mask from segment IDs on each replica
-        attn_mask = tf.py_function(
-            func=lambda s: tf.concat(
-                [packed_causal_mask(s[i].numpy()) for i in range(s.shape[0])],
-                axis=0,
-            ),
-            inp=[segment_ids],
-            Tout=tf.float32,
-        )
-        attn_mask.set_shape([None, 1, None, None])
+        # Build block-diagonal causal mask directly from segment IDs using
+        # pure TF ops — no tf.py_function. The previous version used
+        # tf.py_function to call the numpy-based packed_causal_mask from
+        # data_packing.py, which drops out of the traced graph into an
+        # eager Python callback. That is NOT reliably supported inside a
+        # tf.function step run via strategy.run() under MirroredStrategy
+        # with >1 replica — this was the direct cause of the
+        # "cond/Placeholder ... EagerPyFunc" crash under real multi-GPU
+        # training, and why it never reproduced on a single-device run
+        # (one replica means nothing for the eager callback to
+        # desynchronize against). packed_causal_mask_tf is verified
+        # bit-identical to the original numpy version across packed/
+        # single/all-pad/many-tiny-example segment_ids patterns.
+        attn_mask = packed_causal_mask_tf(segment_ids)
 
         with tf.GradientTape() as tape:
             logits = model(input_ids, attn_mask=attn_mask, training=True)
@@ -341,7 +345,55 @@ def train(
         grad_clip_norm=1.0,
         ignore_id=IGNORE_ID,
     )
-     
+
+    # --- Force optimizer slot-variable creation before any real step ---
+    # Adam creates its momentum/velocity slot variables lazily on the
+    # FIRST call to apply_gradients. If that first call happens to
+    # coincide with tracing ANY conditional op elsewhere in the graph
+    # (e.g. a tf.debugging.assert_equal inside the model's attention
+    # layer, which compiles to tf.cond — or, previously, the
+    # tf.py_function this code used to build the packed causal mask)
+    # under MirroredStrategy with >1 replica, variable creation and
+    # conditional branching can desynchronize across replicas. That
+    # produces exactly the "cond/Placeholder ... not fed" family of
+    # errors seen from two different sources now. optimizer.build()
+    # forces every slot variable to exist deterministically, outside any
+    # conditional trace, before the real (conditional-laden) first step
+    # ever runs — so there is no longer a first-call race for any
+    # assert anywhere in the model to collide with.
+    with strategy.scope():
+        optimizer.build(model.trainable_variables)
+
+    # --- Sharding helper ---
+    # make_packed_batch produces one plain tensor of BATCH_SIZE packed
+    # sequences (global, across all replicas) — NOT a tf.data.Dataset run
+    # through strategy.experimental_distribute_dataset(). Handing a plain
+    # tensor straight to strategy.run() does NOT shard it: every replica
+    # receives the FULL tensor, identically. Confirmed this has a real
+    # consequence beyond wasted compute: tf.keras optimizers SUM gradients
+    # across replicas by default, under the assumption that each replica
+    # computed its gradient from a DISTINCT shard (with loss already
+    # divided by the GLOBAL batch size in compute_loss). With every
+    # replica processing IDENTICAL unsharded data, summing their identical
+    # gradients multiplies the correct gradient by num_replicas_in_sync —
+    # equivalent to silently training at num_replicas x the configured
+    # learning rate. This shards the packed batch per replica using
+    # experimental_distribute_values_from_function, before strategy.run
+    # ever sees it, so gradient summation reconstructs the correct total
+    # instead of inflating it.
+    num_replicas = strategy.num_replicas_in_sync
+    assert BATCH_SIZE % num_replicas == 0, (
+        f"BATCH_SIZE ({BATCH_SIZE}) must be evenly divisible by "
+        f"num_replicas ({num_replicas}) for even per-GPU sharding."
+    )
+    per_replica_n = BATCH_SIZE // num_replicas
+
+    def _shard_for_replicas(tensor):
+        def value_fn(ctx):
+            start = ctx.replica_id_in_sync_group * per_replica_n
+            return tensor[start:start + per_replica_n]
+        return strategy.experimental_distribute_values_from_function(value_fn)
+
     # --- Checkpointing ---
     ckpt_dir = run_dir / "checkpoints"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
@@ -396,8 +448,9 @@ def train(
             optimizer.learning_rate.assign(get_lr(global_step))
  
             loss_val = float(
-                train_step(batch["input_ids"], batch["labels"],
-                           batch["segment_ids"]).numpy()
+                train_step(_shard_for_replicas(batch["input_ids"]),
+                           _shard_for_replicas(batch["labels"]),
+                           _shard_for_replicas(batch["segment_ids"])).numpy()
             )
  
             # Instability check — widened per the InstabilityDetector docstring:
