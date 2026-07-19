@@ -68,7 +68,7 @@ from src.tasks.sft.conversation.generation.validate import (
 DEFAULT_MODELS = {
     "anthropic": os.environ.get(
         "ANTHROPIC_GENERATION_MODEL",
-        "claude-sonnet-5",
+        "claude-hayaku-4.5",
     ),
     "openai": os.environ.get(
         "OPENAI_GENERATION_MODEL",

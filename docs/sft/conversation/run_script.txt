@@ -1,8 +1,0 @@
-export OPENAI_API_KEY="...pPb-DGyzQTjO_J_90LLU1H2Z29GnF8_vQA"
-export OPENAI_GENERATION_MODEL="gpt-5-mini"
-
-python -m src.tasks.sft.conversation.generation.generate_llm \
-    --provider openai \
-    --model gpt-5-mini \
-    --batch-id <ID_number like 0001> \
-    --out-dir data/sft/conversation/level0/openai

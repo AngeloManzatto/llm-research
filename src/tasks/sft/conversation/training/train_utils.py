@@ -525,7 +525,7 @@ def train(
  
     # Final checkpoint + benchmark
     ckpt_mgr.save()
-    bm = run_benchmark(model, tokenizer, global_step, benchmark_dir)
+    bm = run_benchmark(model, tokenizer, global_step, benchmark_dir, result_dir=RESULT_DIR)
     benchmark_history.append(bm)
     logger.log({**bm, "type": "benchmark"})
  
