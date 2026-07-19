@@ -99,6 +99,19 @@ class Benchmark:
     # expected_stop_token, repetition — pooled across all categories per
     # Completion Criteria v1.1 §1).
     always_computed: list[str]
+    # Category-level shared context, merged into every row of that
+    # category at evaluation time (see evaluator.py's _build_context).
+    # Solves the "hard link between category and pattern" problem: some
+    # ground truth (e.g. uncertainty's refusal patterns) is genuinely the
+    # SAME for every row in a category, not row-specific data. Duplicating
+    # it into every row's own expected_any/meta means expanding the pattern
+    # list requires editing hundreds of rows; defining it once here means
+    # expanding it is a one-line manifest edit that every row in that
+    # category picks up automatically. A row's own expected_any/meta still
+    # takes precedence when it's genuinely row-specific (e.g.
+    # knowledge_completion's actual fact) — see _build_context for the
+    # precedence rule.
+    category_shared_context: dict[str, dict[str, Any]]
 
     @classmethod
     def from_manifest(cls, manifest_path: Path) -> "Benchmark":
@@ -145,6 +158,14 @@ class Benchmark:
 
         always_computed = [str(m) for m in manifest["always_computed"]]
 
+        # Optional — absent manifests just get no shared context (fully
+        # backward compatible; every row still works via its own
+        # expected_any/meta exactly as before).
+        category_shared_context = {
+            str(cat): dict(ctx)
+            for cat, ctx in manifest.get("category_shared_context", {}).items()
+        }
+
         return cls(
             benchmark_id=str(manifest["benchmark_id"]),
             version=str(manifest["version"]),
@@ -155,6 +176,7 @@ class Benchmark:
             examples=examples,
             category_scoring_metric=category_scoring_metric,
             always_computed=always_computed,
+            category_shared_context=category_shared_context,
         )
 
     def __len__(self) -> int:
@@ -178,4 +200,5 @@ class Benchmark:
             "default_decode": self.default_decode,
             "category_scoring_metric": self.category_scoring_metric,
             "always_computed": self.always_computed,
+            "category_shared_context": self.category_shared_context,
         }

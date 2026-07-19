@@ -1,20 +1,101 @@
 {
-  "benchmark_id": "conversation_level0",
-  "version": "0.3.0",
-  "description": "Deterministic Level 0 conversation benchmark for pretrained NTP models.",
-  "data_files": [
-    "data/claude/claude_core_0001.jsonl"
-  ],
-  "default_decode": {
-    "strategy": "greedy",
-    "max_length": 64,
-    "stop_tokens": [
-        "END_OF_TURN"
-    ]
-  },
-  "category_scoring_metric": "contains_expected",
-  "always_computed": [
-    "expected_stop_token",
-    "repetition"
-  ]
+   "benchmark_id":"conversation_level0",
+   "version":"0.3.0",
+   "description":"Deterministic Level 0 conversation benchmark for pretrained NTP models.",
+   "data_files":[
+      "data/anthropic/claude_core_0001.jsonl"
+   ],
+   "default_decode":{
+      "strategy":"greedy",
+      "max_length":64,
+      "stop_tokens":[
+         "END_OF_TURN"
+      ]
+   },
+   "category_scoring_metric":"contains_expected",
+   "category_shared_context":{
+      "uncertainty":{
+         "expected_any":[
+            "i don't know",
+            "i dont know",
+            "i don't have",
+            "i dont have",
+            "i can't know",
+            "i cant know",
+            "i can't tell",
+            "i cant tell",
+            "i can't say",
+            "i cant say",
+            "i can't determine",
+            "i cant determine",
+            "i'm not able to",
+            "im not able to",
+            "i have no way",
+            "there's no way for me",
+            "theres no way for me",
+            "i have no access",
+            "no access to",
+            "not something i have access to",
+            "not something i know",
+            "outside what i know",
+            "beyond what i know",
+            "i wasn't given that",
+            "i wasnt given that",
+            "you haven't told me",
+            "you havent told me",
+            "not something i can",
+            "unable to",
+            "i have no record",
+            "no record of",
+            "that information isn't available",
+            "that information isnt available",
+            "i don't have that information",
+            "i dont have that information",
+            "not sure",
+            "no information",
+            "cannot determine",
+            "no way to know",
+            "i can't confirm",
+            "i cant confirm",
+            "não sei",
+            "nao sei",
+            "não tenho",
+            "nao tenho",
+            "não posso saber",
+            "nao posso saber",
+            "não posso dizer",
+            "nao posso dizer",
+            "não posso confirmar",
+            "nao posso confirmar",
+            "não tenho como saber",
+            "nao tenho como saber",
+            "não tenho essa informação",
+            "nao tenho essa informacao",
+            "não tenho acesso",
+            "nao tenho acesso",
+            "não foi informado",
+            "nao foi informado",
+            "não me foi dito",
+            "nao me foi dito",
+            "não há como eu saber",
+            "nao ha como eu saber",
+            "não está disponível para mim",
+            "nao esta disponivel para mim",
+            "fora do que eu sei",
+            "além do que eu sei",
+            "alem do que eu sei",
+            "não tenho registro",
+            "nao tenho registro",
+            "incapaz de",
+            "não consigo saber",
+            "nao consigo saber",
+            "você não me disse",
+            "voce nao me disse"
+         ]
+      }
+   },
+   "always_computed":[
+      "expected_stop_token",
+      "repetition"
+   ]
 }
