@@ -14,7 +14,6 @@ from typing import Any
  
 from src.tasks.sft.conversation.core.special_tokens import STOP_TOKENS, TOKEN_BY_NAME
 
-# TODO rename
 from src.tasks.sft.conversation.benchmark.metric import run_metric, MetricResult
 from src.tasks.sft.conversation.benchmark.benchmark import Benchmark, BenchmarkExample
  
@@ -94,29 +93,47 @@ def normalize_answer(
  
 def _build_context(example: BenchmarkExample, benchmark: Benchmark) -> dict[str, Any]:
     """
-    Merges three layers, in increasing precedence:
+    Merges category-level shared context with the row's own data, using
+    type-aware rules rather than one blanket precedence order:
 
-      1. Category-level shared context (benchmark.category_shared_context)
-         -- e.g. uncertainty's refusal_patterns, defined ONCE for the whole
-         category rather than duplicated into every row. Solves the "hard
-         link between category and pattern" problem: expanding the
-         refusal-pattern list is now a one-line manifest edit, not a
-         rewrite of every uncertainty row.
-      2. The row's own `meta` -- for anything genuinely row-specific
-         (stated_value, corrected_value, constraint_type, ...).
-      3. The row's own `expected_any`, but ONLY if it's non-empty. This
-         keeps existing categories working exactly as before --
-         knowledge_completion/local_context/correction rows have real,
-         row-specific facts in expected_any and that must win. A category
-         relying entirely on shared context (uncertainty, going forward)
-         simply ships an empty expected_any per row and gets the shared
-         refusal_patterns list instead.
+      - LIST-valued keys (expected_any, refusal_patterns, ...) are UNIONED
+        -- category defaults plus whatever the row adds, de-duplicated,
+        order preserved. There is no scenario where a row should EXCLUDE a
+        category-level default acceptable answer, so merging can only make
+        scoring more correct, never less. This also means a category's own
+        per-row list (e.g. an older, narrower uncertainty refusal list)
+        does not need to be blanked out for a broader shared list to take
+        effect -- it simply merges in, harmlessly.
+      - SCALAR-valued keys (constraint_type, stated_value, ...) still have
+        the row's own value win outright when present -- there's no
+        sensible way to "merge" two different single values, so this is
+        genuine precedence, not a union.
+
+    An earlier version used blanket "row overrides shared if non-empty"
+    precedence for everything, including expected_any -- which silently
+    discarded the shared refusal-pattern list for every uncertainty row,
+    since each row still shipped its own narrow list. That required every
+    future row author to remember to leave expected_any empty for a
+    category using shared context, an easy-to-forget, easy-to-silently-
+    break rule. Type-aware merging removes the need to remember it at all.
     """
-    context: dict[str, Any] = dict(benchmark.category_shared_context.get(example.category, {}))
-    context.update(example.meta or {})
+    shared = benchmark.category_shared_context.get(example.category, {})
 
-    if example.expected_any:
-        context["expected_any"] = example.expected_any
+    row_data: dict[str, Any] = dict(example.meta or {})
+    row_data.setdefault("expected_any", example.expected_any)
+
+    context: dict[str, Any] = {}
+    for key in set(shared) | set(row_data):
+        shared_val = shared.get(key)
+        row_val = row_data.get(key)
+        if isinstance(shared_val, list) and isinstance(row_val, list):
+            context[key] = list(dict.fromkeys(shared_val + row_val))  # union, de-duplicated, order preserved
+        elif row_val not in (None, [], ""):
+            context[key] = row_val
+        elif shared_val is not None:
+            context[key] = shared_val
+        else:
+            context[key] = row_val
 
     if example.expected_stop_token is not None:
         context.setdefault("expected_token", TOKEN_BY_NAME[example.expected_stop_token].token)
