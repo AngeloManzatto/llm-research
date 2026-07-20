@@ -68,7 +68,7 @@ from src.tasks.sft.conversation.generation.validate import (
 DEFAULT_MODELS = {
     "anthropic": os.environ.get(
         "ANTHROPIC_GENERATION_MODEL",
-        "claude-hayaku-4.5",
+        "claude-haiku-4-5-20251001",
     ),
     "openai": os.environ.get(
         "OPENAI_GENERATION_MODEL",
@@ -184,6 +184,14 @@ class AnthropicProvider:
     ) -> None:
         self.model = model
         self.client = anthropic.Anthropic(api_key=api_key)
+        # Set after each call — the model the API actually reports having
+        # used. Compared against self.model by the caller (see
+        # verify_model_match) to catch a mistyped/nonexistent --model
+        # string silently resolving to something unintended. This is how
+        # the "sonet-4.6" batch — a nonexistent model string with no
+        # validation anywhere — went undetected until an audit of the
+        # generated content weeks later.
+        self.last_response_model: str | None = None
 
     def generate(
         self,
@@ -202,6 +210,8 @@ class AnthropicProvider:
                 }
             ],
         )
+
+        self.last_response_model = getattr(response, "model", None)
 
         return "".join(
             block.text
@@ -223,6 +233,7 @@ class OpenAIProvider:
     ) -> None:
         self.model = model
         self.client = OpenAI(api_key=api_key)
+        self.last_response_model: str | None = None
 
     def generate(
         self,
@@ -236,6 +247,8 @@ class OpenAIProvider:
             input=prompt,
             max_output_tokens=max_output_tokens,
         )
+
+        self.last_response_model = getattr(response, "model", None)
 
         return response.output_text
 
@@ -784,6 +797,15 @@ def generate_depth_partition(
 
         batch_accepted = 0
 
+        if provider.last_response_model and provider.last_response_model != provider.model:
+            print(
+                f"    ! MODEL MISMATCH: requested {provider.model!r} but the "
+                f"API reports it was served by {provider.last_response_model!r}. "
+                f"This can happen with a mistyped or unrecognized model string "
+                f"resolving to something unintended — verify before trusting "
+                f"this batch's content."
+            )
+
         if len(raw_rows) < requested_examples:
             rejection_counts["provider_returned_fewer_rows"] += (
                 requested_examples - len(raw_rows)
@@ -1017,7 +1039,8 @@ def write_generation_report(
 
     report = {
         "provider": provider.name,
-        "model": provider.model,
+        "model_requested": provider.model,
+        "model_actually_served": getattr(provider, "last_response_model", None),
         "category": category,
         "language": language,
         "batch_id": batch_id,

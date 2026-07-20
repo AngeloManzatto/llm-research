@@ -61,6 +61,14 @@ travel, shopping, calendars, hobbies, family, pets, cooking, technology, \
 health logistics, entertainment, home organization — over generic or \
 repeated templates. No two examples in a batch should share an opening \
 sentence, a name, or a scenario.
+- Also vary the ANSWER'S FORM, not just its content — this is a separate \
+axis from scenario diversity above. Within a batch, mix bare-word answers \
+("Paris."), short phrases ("The capital's Paris."), and full sentences \
+("The capital of France is Paris.") — all equally correct and equally \
+concise for what the category calls for, but structurally different. A \
+batch where every answer is exactly one word (or exactly one sentence \
+length) teaches a rigid response template just as surely as repeating the \
+same phrasing would, even though the words themselves differ each time.
 - Portuguese examples must be natural Brazilian Portuguese phrasing, not \
 literal translations of English sentence structure.
 
@@ -75,7 +83,10 @@ Teaches bounded, role-consistent response to a single turn — nothing more.
 Structure: exactly 2 messages (one user turn, one assistant answer).
 Diversity axes to rotate across the batch: factual questions, yes/no \
 questions, greetings, imperatives, comparisons, simple how-to, counting/\
-sequencing, statement + confirmation.""",
+sequencing, statement + confirmation.
+Vary answer form across the batch too — some one-word answers, some short \
+phrases, some full sentences — matched naturally to what each question \
+calls for, not the same shape every time.""",
 
     "knowledge_completion": """Category: knowledge_completion.
 Teaches falling back to general knowledge when there is no conversational \
@@ -83,7 +94,11 @@ state to draw on (dialogue state is empty).
 Structure: exactly 2 messages.
 The answer must be a deterministic, universally known fact — capitals, \
 basic arithmetic, common units, basic science. Avoid obscure facts, \
-opinion, or anything requiring reasoning.""",
+opinion, or anything requiring reasoning.
+Do not default to a single bare word for every answer in the batch — mix \
+in some short phrases and full sentences too (e.g. "Paris." / "It's \
+Paris." / "The capital of France is Paris." should all appear across the \
+batch, not just the first form repeated every time).""",
 
     "local_context": """Category: local_context.
 Teaches maintaining dialogue state across turns.

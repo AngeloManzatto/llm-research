@@ -3,9 +3,9 @@ export OPENAI_GENERATION_MODEL="gpt-5-mini"
 
 python -m src.tasks.sft.conversation.generation.generate_llm \
     --provider openai \
-    --model gpt-5-mini \
+    --model gpt-5-mini-2025-08-07 \
     --batch-id <ID_number like 0001> \
-    --out-dir data/sft/conversation/level0/openai
+    --out-dir data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07
 
 -------------------------------------------------------------------------------
 export ANTHROPIC_API_KEY="<KEY>"
@@ -14,5 +14,5 @@ export ANTHROPIC_GENERATION_MODEL="claude-haiku-4-5-20251001"
 python -m src.tasks.sft.conversation.generation.generate_llm \
     --provider anthropic \
     --model claude-haiku-4-5-20251001 \
-    --batch-id 0002 \
-    --out-dir data/sft/conversation/level0/anthropic
+    --batch-id <ID_number like 0001> \
+    --out-dir data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001
