@@ -33,6 +33,12 @@ class EvaluationResult:
     passed: bool
     scoring_metric: str
     metrics: dict[str, MetricResult]
+    # Which metric(s) caused `passed` to be False -- empty when passed is
+    # True. Includes the scoring metric AND/OR any always_computed
+    # diagnostic. Makes a compound failure traceable without re-deriving
+    # it from `metrics` by hand (e.g. failed_checks=["repetition"] means
+    # the content check was fine but the response was a repetition loop).
+    failed_checks: list[str]
     decode: dict[str, Any]
  
     def to_dict(self) -> dict[str, Any]:
@@ -52,6 +58,7 @@ class EvaluationResult:
             "answer": self.answer,
             "passed": self.passed,
             "scoring_metric": self.scoring_metric,
+            "failed_checks": self.failed_checks,
             **flat,
             "decode": self.decode,
         }
@@ -175,7 +182,26 @@ def evaluate_example(
     for metric_id in {scoring_id, *benchmark.always_computed}:
         metrics[metric_id] = run_metric(metric_id, raw_answer, **context)
 
-    passed = metrics[scoring_id].passed
+    # `passed` requires the category's own content check AND every
+    # always_computed mechanical diagnostic to hold -- not the scoring
+    # metric alone. Real, confirmed failure mode without this: a row can
+    # be a genuine, correctly-detected repetition loop (e.g. "I don't have
+    # access to your" repeating dozens of times) and still count as a
+    # category "pass" purely because the loop garbage happens to contain a
+    # refusal substring. Traced against real uncertainty results: roughly
+    # half of one run's reported EN passes were exactly this -- confirmed
+    # repetition loops that satisfied contains_expected by accident. This
+    # was possible because `passed` was previously computed from the
+    # scoring metric alone, treating mechanical diagnostics (repetition,
+    # expected_stop_token) as informational-only rather than gating.
+    # failed_checks records which specific metric(s) broke the compound
+    # condition, so a failure is traceable without re-deriving it from
+    # `metrics` by hand every time.
+    failed_checks = [
+        m for m in ({scoring_id} | set(benchmark.always_computed))
+        if not metrics[m].passed
+    ]
+    passed = len(failed_checks) == 0
 
     return EvaluationResult(
         id=example.id,
@@ -188,5 +214,6 @@ def evaluate_example(
         passed=passed,
         scoring_metric=scoring_id,
         metrics=metrics,
+        failed_checks=failed_checks,
         decode=decode,
     )
