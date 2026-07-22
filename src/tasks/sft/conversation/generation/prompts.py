@@ -86,7 +86,16 @@ questions, greetings, imperatives, comparisons, simple how-to, counting/\
 sequencing, statement + confirmation.
 Vary answer form across the batch too — some one-word answers, some short \
 phrases, some full sentences — matched naturally to what each question \
-calls for, not the same shape every time.""",
+calls for, not the same shape every time.
+For yes/no questions specifically: the correct answer must be "No" (a \
+false premise to deny) for roughly HALF of them, not just occasionally. \
+A model trained on yes/no data skewed toward "Yes" learns a real bias \
+toward agreeing with whatever is stated, including false premises — this \
+was confirmed directly: a trained model affirmed "Yes, humans have \
+feathers" and "Yes, a rock floats on water" rather than denying them. \
+Include deliberately false, even absurd premises requiring a clear denial \
+("Is the moon made of cheese?", "Do fish have fur?"), not only obviously \
+true ones.""",
 
     "knowledge_completion": """Category: knowledge_completion.
 Teaches falling back to general knowledge when there is no conversational \

@@ -113,14 +113,14 @@ DEFAULT_MAX_OUTPUT_TOKENS = 8192
 #   local_context:         750 per language
 #   correction:            750 per language
 #   instruction_following: 500 per language
-#   uncertainty:           250 per language
+#   uncertainty:           500 per language
 CATEGORY_TARGETS = {
     "turn_taking": 1500,
     "knowledge_completion": 1500,
     "local_context": 1500,
     "correction": 1500,
     "instruction_following": 1000,
-    "uncertainty": 500,
+    "uncertainty": 1000,
 }
 
 # Message-count distribution.
