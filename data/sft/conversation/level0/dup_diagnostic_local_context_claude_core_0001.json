@@ -1,0 +1,3229 @@
+{
+  "exact_duplicates": {
+    "total_rows": 33000,
+    "duplicate_groups": 343,
+    "total_extra_copies": 466,
+    "pct_of_corpus": 1.41,
+    "top_offending_files": [
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0006/local_context_en_0006.jsonl",
+        72
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0008/local_context_en_0008.jsonl",
+        64
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0007/local_context_en_0007.jsonl",
+        53
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0010/local_context_en_0010.jsonl",
+        51
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0009/local_context_en_0009.jsonl",
+        50
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0010/local_context_pt_0010.jsonl",
+        44
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0006/local_context_pt_0006.jsonl",
+        43
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0008/local_context_pt_0008.jsonl",
+        40
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0009/local_context_pt_0009.jsonl",
+        34
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0007/local_context_pt_0007.jsonl",
+        28
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0010/local_context_pt_0010.jsonl",
+        27
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0007/local_context_pt_0007.jsonl",
+        25
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0008/local_context_pt_0008.jsonl",
+        22
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0005/local_context_pt_0005.jsonl",
+        21
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0009/local_context_en_0009.jsonl",
+        20
+      ]
+    ]
+  },
+  "answer_concentration": {
+    "flagged": [
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's my cat's name again",
+        "n_occurrences": 30,
+        "n_distinct_answers": 7,
+        "top_answer": "your cat's name is whiskers",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many bedrooms does your apartment have",
+        "n_occurrences": 23,
+        "n_distinct_answers": 8,
+        "top_answer": "two",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which floor is your apartment on",
+        "n_occurrences": 20,
+        "n_distinct_answers": 6,
+        "top_answer": "the fifth floor",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is your laptop",
+        "n_occurrences": 20,
+        "n_distinct_answers": 8,
+        "top_answer": "silver",
+        "top_answer_share": 0.55
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's my cat called",
+        "n_occurrences": 18,
+        "n_distinct_answers": 4,
+        "top_answer": "whiskers",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é o meu carro",
+        "n_occurrences": 18,
+        "n_distinct_answers": 7,
+        "top_answer": "vermelho",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is my cat",
+        "n_occurrences": 18,
+        "n_distinct_answers": 5,
+        "top_answer": "your cat is orange",
+        "top_answer_share": 0.56
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a profissão do seu pai",
+        "n_occurrences": 16,
+        "n_distinct_answers": 7,
+        "top_answer": "engenheiro",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que sabor é o bolo",
+        "n_occurrences": 15,
+        "n_distinct_answers": 4,
+        "top_answer": "chocolate",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks do i have",
+        "n_occurrences": 14,
+        "n_distinct_answers": 6,
+        "top_answer": "three",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está o bolo de chocolate",
+        "n_occurrences": 14,
+        "n_distinct_answers": 7,
+        "top_answer": "na geladeira",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many apples are in the fruit bowl",
+        "n_occurrences": 13,
+        "n_distinct_answers": 5,
+        "top_answer": "five",
+        "top_answer_share": 0.69
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é seu celular",
+        "n_occurrences": 12,
+        "n_distinct_answers": 6,
+        "top_answer": "preto",
+        "top_answer_share": 0.58
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome do cachorro do vizinho",
+        "n_occurrences": 12,
+        "n_distinct_answers": 7,
+        "top_answer": "thor",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's the plant's name",
+        "n_occurrences": 12,
+        "n_distinct_answers": 5,
+        "top_answer": "fern",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many chairs are in the dining room",
+        "n_occurrences": 11,
+        "n_distinct_answers": 5,
+        "top_answer": "five",
+        "top_answer_share": 0.55
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks did you get",
+        "n_occurrences": 10,
+        "n_distinct_answers": 6,
+        "top_answer": "three",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em qual andar fica seu escritório",
+        "n_occurrences": 10,
+        "n_distinct_answers": 6,
+        "top_answer": "no terceiro andar",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many cats did i mention",
+        "n_occurrences": 10,
+        "n_distinct_answers": 4,
+        "top_answer": "three",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many apples did you buy",
+        "n_occurrences": 10,
+        "n_distinct_answers": 3,
+        "top_answer": "five",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde deixei as chaves",
+        "n_occurrences": 10,
+        "n_distinct_answers": 5,
+        "top_answer": "na gaveta da cozinha",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where does my sister live",
+        "n_occurrences": 9,
+        "n_distinct_answers": 4,
+        "top_answer": "your sister lives in portland",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos livros eu comprei",
+        "n_occurrences": 9,
+        "n_distinct_answers": 3,
+        "top_answer": "você comprou três livros",
+        "top_answer_share": 0.56
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "o que seu irmão estuda",
+        "n_occurrences": 9,
+        "n_distinct_answers": 5,
+        "top_answer": "engenharia",
+        "top_answer_share": 0.56
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is my bike",
+        "n_occurrences": 9,
+        "n_distinct_answers": 4,
+        "top_answer": "in the garage",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many siblings did i say i have",
+        "n_occurrences": 8,
+        "n_distinct_answers": 2,
+        "top_answer": "you said you have three siblings",
+        "top_answer_share": 0.62
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is my laptop",
+        "n_occurrences": 8,
+        "n_distinct_answers": 4,
+        "top_answer": "blue",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks do you have",
+        "n_occurrences": 8,
+        "n_distinct_answers": 4,
+        "top_answer": "three",
+        "top_answer_share": 0.62
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what did i set the thermostat to",
+        "n_occurrences": 8,
+        "n_distinct_answers": 2,
+        "top_answer": "68 degrees",
+        "top_answer_share": 0.88
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas canecas eu tenho na cozinha",
+        "n_occurrences": 8,
+        "n_distinct_answers": 4,
+        "top_answer": "três",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which table did we reserve",
+        "n_occurrences": 8,
+        "n_distinct_answers": 3,
+        "top_answer": "table 12",
+        "top_answer_share": 0.62
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é o papel do presente",
+        "n_occurrences": 8,
+        "n_distinct_answers": 4,
+        "top_answer": "azul",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's my flight number",
+        "n_occurrences": 8,
+        "n_distinct_answers": 5,
+        "top_answer": "aa123",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many meetings do i have that day",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "three",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many pages does your notebook have",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "my notebook has 200 pages",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what instrument does your daughter play",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "violin",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do seu computador",
+        "n_occurrences": 7,
+        "n_distinct_answers": 3,
+        "top_answer": "meu computador é cinza",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a marca do seu telefone",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "samsung",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what is my daughter's name",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "maya",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time is your meeting",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "2 pm",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde sua irmã trabalha",
+        "n_occurrences": 7,
+        "n_distinct_answers": 3,
+        "top_answer": "em são paulo",
+        "top_answer_share": 0.71
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what do you prefer to drink",
+        "n_occurrences": 7,
+        "n_distinct_answers": 3,
+        "top_answer": "tea",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many pets do you have",
+        "n_occurrences": 7,
+        "n_distinct_answers": 3,
+        "top_answer": "two dogs and one cat",
+        "top_answer_share": 0.71
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está o bolo de aniversário",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "na geladeira",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many concert tickets did i buy",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "two",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome do bebê",
+        "n_occurrences": 7,
+        "n_distinct_answers": 3,
+        "top_answer": "sofia",
+        "top_answer_share": 0.71
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que portão sai meu voo",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "portão 12",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome do gato da ana",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "mingau",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks do i have with me",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when is the library closed",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "on sundays",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your best friend's name",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "marcus",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what did you say my cat's name was",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "whiskers",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks did you say i have",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many siblings did you say i have",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que material é seu relógio",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "de ouro",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many apples did you get",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "five",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when does the library close",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "at 6 pm on weekdays",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "o que seu primo estuda",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "engenharia",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quanto de maçã você comprou",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "dois quilos",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos primos você tem",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "quatro",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many cousins do you have",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "four",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many bedrooms does your place have",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "two",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos gatos você disse que tenho",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "três",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks did i mention",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when does the grocery store close",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "at 9 pm",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your cat's name again",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "whiskers",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que cor é o meu carro",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "azul",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many tickets did i book",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "two tickets",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas cadeiras há na sala de jantar",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "cinco",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome do cachorro da vizinha",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "thor",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many tickets did i reserve",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "two",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where did i leave the keys",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "on the kitchen counter",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome do meu irmão",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "rafael",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what temperature did i set the thermostat to",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "68 degrees",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where does max sleep",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "on the couch",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas canecas eu tenho",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas bicicletas eu tenho",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "duas",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está a chave da sala",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "na gaveta da cozinha",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your cat's name",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "whiskers",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many younger brothers do you have",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many meetings do i have on tuesday",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "you have three meetings on tuesday",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é a bicicleta que comprei",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "a bicicleta é azul",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what language are you studying",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "spanish",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a raça do meu cachorro",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "labrador",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor da bicicleta",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "vermelha",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do sofá",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "o sofá é cinza",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas é a sua reunião",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "às 15h",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how old is your son",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "eight",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos cachorros você disse que tem",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "três",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time does the grocery store close",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "at 9 pm",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time does the gym open on weekdays",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "6 am",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de qual time você gosta",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "do flamengo",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many bicycles do you own",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "two",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what material is your desk",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "oak wood",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many tickets do you have",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "desde quando você trabalha lá",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "desde 2019",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is my umbrella",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "red",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is milo right now",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "on the sofa",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o sabor do bolo",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "chocolate",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what is the thermostat set to",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "72 degrees",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas maçãs há na fruteira",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "cinco",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é meu time favorito",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "flamengo",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what instrument does marcus play",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "marcus plays guitar",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when does the library close on weekdays",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "at 6 pm",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many houseplants do i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time does the library close on weekdays",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "the library closes at 6 pm on weekdays",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many chairs are at the dining table",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "six",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many sisters do i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many cats did you say i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "you said you have three cats at home",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what year did you graduate",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "2019",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "who is your boss",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "jennifer",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many brothers do you have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time is the soccer game",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "2 pm",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do seu telefone",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "preto",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a idade do seu avó",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "82 anos",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos meu filho tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "sete anos",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde você nasceu",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "em salvador",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é seu carro mesmo",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "seu carro é cinza",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o gênero do seu livro favorito",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "ficção científica",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's my daughter's name again",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "your daughter's name is elena",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which apartment do i live in",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "apartment 4b",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many bedrooms does the apartment have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "two",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how old is marcus",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "seven",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em qual andar fica meu escritório",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "no terceiro andar",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas plantas tenho",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "você tem cinco plantas",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de qual time você é torcedor",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "sou torcedor do flamengo",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos sobrinhos você tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "cinco",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas irmãs gêmeas você tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "tenho duas irmãs gêmeas",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas você toma café da manhã",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "às 7 da manhã",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a marca do seu celular",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "samsung",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é a blusa que você comprou",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "vermelha",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where does elena live",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "elena lives in portland",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is the kitchen wall",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "yellow",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "who's your best friend",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "marcus",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas maçãs você tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "cinco",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos irmãos você tem no total",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "três — duas irmãs e um irmão",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que horas a reunião começa",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "às 14h30",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que distância fica a farmácia",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "a duas quadras daqui",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é seu time",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "flamengo",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do notebook do carlos",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "preto",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas a biblioteca fecha",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "às 18h",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos seu filho tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "sete anos",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é a bolsa que você comprou",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "vermelha",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "do you prefer tea or coffee",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "tea",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which season do you like best",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "autumn",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time does the bakery close",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "at 6 pm",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many books are on your shelf",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "five",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where did i say i parked",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "you parked on maple street",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your favorite food",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "pasta",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos tem seu carro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "dez anos",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many meetings do i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your sister's name",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "elena",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where's your car",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "in the garage",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when do you pay rent",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "on the first of each month",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what do you study",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "chemistry",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is your brother's car",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "silver",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where did your cousin move",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "to portland",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which school does your daughter go to",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "lincoln high school",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que cor é seu celular",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "preto",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos quartos tem o apartamento",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "dois",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome do seu chefe",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "paulo",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o seu time",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "flamengo",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many tomato plants are in the garden",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "twelve",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's wrong with the printer",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "it's broken",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em que ano sua filha nasceu",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "2018",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas filhas você tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "duas",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is the meeting",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "conference room b",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome da minha gata",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "lili",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em que andar fica o seu escritório",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "no quinto andar",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está a chave do apartamento",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "na gaveta da cozinha",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which level did i park on",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "you parked on level b2",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what is the plant on my desk named",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "the plant on your desk is named fernie",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what is the meeting room called",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "the meeting room is called cedar",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "who borrowed my headphones",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "ethan",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what flavor is the birthday cake",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "chocolate",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when is sofia's birthday",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "april 12th",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do meu guarda-chuva novo",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "seu guarda-chuva novo é amarelo",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do meu guarda-chuva",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "seu guarda-chuva é amarelo",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor da minha mochila de trabalho",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "sua mochila de trabalho é verde",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "como se chama a planta da varanda",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "a planta da varanda se chama nina",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is my helmet",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "yellow",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when does our vacation start",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "june 12th",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many unread emails from hr do i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many unopened letters do i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "three",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "como se chama o cachorro do vizinho",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "thor",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas cadeiras há na sala",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "três",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que cor é o carro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "vermelho",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas páginas tem o relatório",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "doze páginas",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas plantas eu tenho na sala",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual o sabor do bolo",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "chocolate",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where's the grocery list",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "on the refrigerator door",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many green mugs do i have",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when did i pay the electricity bill",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "yesterday",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas canecas vermelhas você tem",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "três",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's my parking spot number",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "42",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many tickets are reserved",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "five",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which room is the design meeting in",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "conference room b",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está o gato da ana",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "no sofá da sala",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quando devo tomar o remédio",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "às 8h e às 20h",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which room is your office in",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "room 1204",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many apples are in the fridge",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many suitcases did i pack",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em qual vaga você estacionou",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "vaga 27",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de quem é o livro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "da mariana",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "who has my blue scarf",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "jenna",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em qual vaga está o carro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "vaga 12",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many blue notebooks do i have",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's the name of my sister's cat",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "whiskers",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where are you going",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "japan",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many older brothers do you have",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what is your daughter's name",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "emma",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is the notebook you got",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "red",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many eggs did i buy",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "you bought twelve eggs",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks are on my desk",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what language are you learning",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "spanish",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many cats do i own",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what did you say my dog's name was",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "biscuit",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your neighbor's dog called",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your neighbor's dog is named buddy",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's your shoe size",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "size 10",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quanto de arroz você comprou",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "dois kilos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o telefone do consultório",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "3456-7890",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "até quando o projeto precisa estar pronto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "até sexta-feira",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é o notebook que comprei",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "o notebook que você comprou é preto",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em que ano sua filha estuda",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "minha filha estuda no segundo ano",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde você tem uma cicatriz",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na testa",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde fica seu apartamento",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "em são paulo",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos minha filha tem",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "marina tem 7 anos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what material is the kitchen table made from",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "oak wood",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many plants are in the living room",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "five",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which floor is elena's apartment on",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the fifth floor",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time does the store close on weekdays",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "9 pm",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "when do you volunteer at the shelter",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "on saturdays",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what material is your desk made from",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your desk is made of oak wood",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what floor do you live on",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the fifth floor",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "por quanto tempo você estudou inglês",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "por cinco anos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "o que seu irmão faz profissionalmente",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "trabalha como engenheiro",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos meu avó tem",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "seu avó tem 78 anos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos gatos você disse que eu tenho",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quanto pesa seu gato",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "seu gato pesa 4 quilos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how old is max",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "five years old",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how much did you spend",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "i spent thirty dollars",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many plants are there",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "five",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas plantas tem no meu quarto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos irmãos eu falei que tenho",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "você disse que tem 3 irmãos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which floor is the conference room on",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the third floor",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many books are on my nightstand",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "five",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which direction does your bedroom window face",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "north",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which street do i live on",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "maple street",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é a mochila que comprei",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "a mochila que você comprou é azul",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor da blusa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "azul-marinho",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what does your backpack look like",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "it's blue with red straps",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "who is your dentist",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "dr. patel",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many chairs are there",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "four",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what did i tell you about my cat",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "you said your cat's name is whiskers",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many siblings did i mention",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what street do you live on",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "maple street",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde seu irmão estuda",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na universidade federal",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que cor é o livro que você comprou",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "vermelho",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas você sai de casa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "às 7 da manhã",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quanto você paga de aluguel",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "1200 reais",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "como é o nome do seu melhor amigo",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "lucas",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "há quanto tempo você estuda violão",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "há dois anos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde a sua avó mora",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "em salvador",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em que andar fica o apartamento da sua avó",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "no quinto andar",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "como é sua cozinha",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "pequena",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quanto pesa seu cão",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "25 quilos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many bedrooms does it have",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "two",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many notebooks are in the backpack",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "five",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many languages do you speak",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "four",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do notebook",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "preto",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "em que dia é a festa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "no próximo sábado",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que tipo de bolo sua avó faz",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "bolo de chocolate",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos livros estão lá",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três livros",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é seu número de sapato",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "42",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is marcus's car",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "blue",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is the kitchen door",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "blue",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o nome da sua irmã",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "juliana",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what brand is your laptop",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "dell",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is the sofa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "blue",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what is your sister's name",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "elena",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which street do you live on",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "maple street",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "como é sua camisa favorita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "listrada",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "que cor é a minha bicicleta",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "azul",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is my raincoat",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "your raincoat is yellow",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how much does my suitcase weigh",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your suitcase weighs 18 kilograms",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos cadernos eu comprei para o curso",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "você comprou três cadernos para o curso",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde eu guardei as chaves",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "você guardou as chaves na gaveta da cozinha",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas reuniões eu tenho amanhã",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor do vestido da festa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "o vestido da festa é verde-claro",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual a cor do seu carro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "vermelho",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde você colocou o bolo",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na prateleira de cima da geladeira",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas meu voo sai",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "às 14h30",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas maçãs eu tenho",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde estão as minhas chaves",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na gaveta da cozinha",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor é a capa do meu telefone",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "verde",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many loaves are in the pantry",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "who owns the spare house key",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "ana",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is the blue sweater",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "hanging on the bedroom door",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many bananas are in the bowl",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which room did i reserve",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "conference room b",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many tickets do i have for the movie",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many slices of pizza are left",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "four",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what do i prefer in my coffee",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "almond milk",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is the blue bicycle",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "in the garage",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está a geladeira",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na varanda",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos ingressos eu tenho para o show",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "dois",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde ficam as plantas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na varanda",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde a ana mora",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "em curitiba",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas sai seu voo para salvador",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "às 7h20",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many red apples are in the fruit bowl",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is my bicycle parked",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "behind the blue fence",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many unopened letters are there",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "five",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what color is my grandmother's house",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yellow",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many seats did i reserve",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "two",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas entradas você comprou",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "duas",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está o gato do joão",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "no sofá da sala",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde a luiza mora",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "em porto alegre",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde está minha mala vermelha",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "sua mala vermelha está no compartimento superior do ônibus",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time is my alarm set for",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "6:15 am",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's the wi-fi password",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "summer2026",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many green notebooks do i have",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "three",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o seu livro preferido",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "o pequeno príncipe",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos ingressos compramos",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que cor está o embrulho do presente da ana",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "verde",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quando as plantas precisam de água",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "às segundas",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "com que frequência devo tomar o remédio",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "duas vezes ao dia",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "under which name is the reservation",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "lopez",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many apples did i leave",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "three",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many unread messages do i have",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "five",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what's the puppy's name",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "toby",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "which umbrella did i leave",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the blue umbrella",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "onde estão suas chaves",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "na gaveta da cozinha",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de qual portão parte meu voo",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "portão 12",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "a que horas é a reunião com o joão",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "às 15h",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quando o pacote chega",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "na sexta-feira",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é meu horário de trabalho",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "das 9h às 17h",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o seu número favorito",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "7",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quanto de açúcar a receita pede",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "duas xícaras",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "where is the plant",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "on the windowsill",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "what time and gate is my flight",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "7:45 am from gate 12",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "en",
+        "question": "how many vegetarian sandwiches did i pack",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "two",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos ingressos o joão comprou",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas plantas há na sala",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "de que portão sai seu voo",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "portão 12",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantas mensagens não lidas eu tenho",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "cinco",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é a cor da minha camiseta favorita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "azul-marinho",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos tem meu filho lucas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "8 anos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "quantos anos tem minha filha",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "sete anos",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "local_context",
+        "language": "pt",
+        "question": "qual é o número da reserva",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "4521",
+        "top_answer_share": 0.67
+      }
+    ],
+    "by_category": {
+      "local_context": {
+        "groups_checked": 14928,
+        "groups_flagged": 349
+      }
+    }
+  },
+  "benchmark_leak": {
+    "local_context": {
+      "total": 100,
+      "near": 0,
+      "question_only": 41,
+      "details": []
+    }
+  }
+}

@@ -1,0 +1,1780 @@
+{
+  "exact_duplicates": {
+    "total_rows": 32950,
+    "duplicate_groups": 19,
+    "total_extra_copies": 20,
+    "pct_of_corpus": 0.06,
+    "top_offending_files": [
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0008/correction_en_0008.jsonl",
+        4
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0005/correction_en_0005.jsonl",
+        4
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0010/correction_en_0010.jsonl",
+        3
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0002/correction_en_0002.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0004/correction_en_0004.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0006/correction_en_0006.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0009/correction_en_0009.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0006/correction_pt_0006.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0009/correction_pt_0009.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0007/correction_en_0007.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0008/correction_en_0008.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0006/correction_en_0006.jsonl",
+        2
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0005/correction_en_0005.jsonl",
+        1
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0003/correction_pt_0003.jsonl",
+        1
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0005/correction_pt_0005.jsonl",
+        1
+      ]
+    ]
+  },
+  "answer_concentration": {
+    "flagged": [
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, dolar e meu(minha) hamster",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, dolar e seu(sua) hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, ele nasceu em 1938",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "certo, seu avó nasceu em 1938",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fumaca is my guinea pig",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fumaca is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, nina is my ferret",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, nina is your ferret",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, luna is my rabbit",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, luna is your rabbit",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, lira e meu(minha) tartaruga",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, lira e seu(sua) tartaruga",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, biscoito e meu(minha) coelho",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, biscoito e seu(sua) coelho",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, girassol e meu(minha) coelho",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, girassol e seu(sua) coelho",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually i prefer green",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "your favorite color is green",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, manga is my ferret",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, manga is your ferret",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fumaca is my turtle",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fumaca is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, neve is my rabbit",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, neve is your rabbit",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, zorro is my chinchilla",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, zorro is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, toby is my dog",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, toby is your dog",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bibi is my canary",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bibi is your canary",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fumaca is my lizard",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fumaca is your lizard",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, onix is my turtle",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, onix is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, manga is my cockatiel",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, manga is your cockatiel",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fifi is my chinchilla",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fifi is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, vento is my fish",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, vento is your fish",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, hera is my turtle",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, hera is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, mel e meu(minha) cachorro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, mel e seu(sua) cachorro",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, girassol e meu(minha) canario",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, girassol e seu(sua) canario",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) furao",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) furao",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) canario",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) canario",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, uva e meu(minha) calopsita",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, uva e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, onix e meu(minha) porquinho-da-india",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, onix e seu(sua) porquinho-da-india",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, ambar e meu(minha) jabuti",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, ambar e seu(sua) jabuti",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, uva e meu(minha) lagartixa",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, uva e seu(sua) lagartixa",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, toby e meu(minha) lagartixa",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, toby e seu(sua) lagartixa",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) calopsita",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, vento e meu(minha) cachorro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, vento e seu(sua) cachorro",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, bento e meu(minha) papagaio",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, bento e seu(sua) papagaio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, rex e meu(minha) cachorro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, rex e seu(sua) cachorro",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, i just checked my confirmation. it's at 5 pm, not 3",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "thanks for clarifying. your flight leaves at 5 pm tomorrow",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, she moved to seattle last month",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "got it — your sister lives in seattle now",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, we moved it to 3 pm instead",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "got it — you're meeting sarah at 3 pm tomorrow",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, meu carro é prata, não azul",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "certo, seu carro é prata",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, i'm allergic to shellfish, not peanuts",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "you're allergic to shellfish",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, she moved to boulder last month",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "got it — your sister lives in boulder now",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, that was mistaken. nora will bring the receipt to the reception area instead",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "thanks for the correction. nora will bring the receipt to the reception area instead",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually it's 2.5 kg",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "the package weighs 2.5 kilograms",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually it's green",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "your car is green",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, it's on wednesday at 11 am",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "your dentist appointment is on wednesday at 11 am",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, it's on wednesday at 2 pm",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "your dentist appointment is on wednesday at 2 pm",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually i prefer portuguese",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "your preferred language is portuguese",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade começa às 19h",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "a festa começa às 19h",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, amora is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, amora is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, zorro is my canary",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, zorro is your canary",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, simba is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, simba is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, mel is my cat",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, mel is your cat",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, amora is my guinea pig",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, amora is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, simba is my turtle",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, simba is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, kiwi is my gecko",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, kiwi is your gecko",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, biscoito is my hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, biscoito is your hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bento is my ferret",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bento is your ferret",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, duque is my turtle",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, duque is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, dolar is my guinea pig",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, dolar is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, lira is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, lira is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, dolar is my ferret",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, dolar is your ferret",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, simba is my lizard",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, simba is your lizard",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, rex is my parrot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, rex is your parrot",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, mel is my hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, mel is your hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bibi is my parrot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bibi is your parrot",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, xuxa is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, xuxa is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, mimi is my parrot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, mimi is your parrot",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, neve is my hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, neve is your hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, zorro is my tortoise",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, zorro is your tortoise",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bela is my cockatiel",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bela is your cockatiel",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, mimi is my tortoise",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, mimi is your tortoise",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fifi is my lizard",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fifi is your lizard",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, vento is my lizard",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, vento is your lizard",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, manga is my canary",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, manga is your canary",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, yuki is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, yuki is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, zeus is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, zeus is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, yuki is my lizard",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, yuki is your lizard",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, nala is my dog",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, nala is your dog",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, mel is my guinea pig",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, mel is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, nina is my turtle",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, nina is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, mimi is my guinea pig",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, mimi is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, thor is my dog",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, thor is your dog",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, iate is my lizard",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, iate is your lizard",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, max is my cockatiel",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, max is your cockatiel",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, nina is my tortoise",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, nina is your tortoise",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, toby is my guinea pig",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, toby is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, dolar is my tortoise",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, dolar is your tortoise",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, xuxa is my tortoise",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, xuxa is your tortoise",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bento is my canary",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bento is your canary",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, nala is my guinea pig",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, nala is your guinea pig",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, onix is my dog",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, onix is your dog",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, jade is my canary",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, jade is your canary",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, ambar is my cockatiel",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, ambar is your cockatiel",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fumaca is my parrot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fumaca is your parrot",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, neve is my turtle",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, neve is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, nala is my ferret",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, nala is your ferret",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, neve is my chinchilla",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, neve is your chinchilla",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, kiko is my tortoise",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, kiko is your tortoise",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, manga is my cat",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, manga is your cat",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, amora is my canary",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, amora is your canary",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, dolar is my turtle",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, dolar is your turtle",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, kiwi is my hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, kiwi is your hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, dolar is my parrot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, dolar is your parrot",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bibi is my cockatiel",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bibi is your cockatiel",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bela is my dog",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bela is your dog",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, girassol is my fish",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, girassol is your fish",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, fifi is my cat",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, fifi is your cat",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, uva is my parrot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, uva is your parrot",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, jade is my hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, jade is your hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, bento is my rabbit",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "got it, bento is your rabbit",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, xuxa e meu(minha) hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, xuxa e seu(sua) hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, rex e meu(minha) chinchila",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, rex e seu(sua) chinchila",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, nina e meu(minha) canario",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, nina e seu(sua) canario",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, lola e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, lola e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, zorro e meu(minha) calopsita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, zorro e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, mimi e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, mimi e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, luna e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, luna e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, hera e meu(minha) lagartixa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, hera e seu(sua) lagartixa",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, nala e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, nala e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) cachorro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) cachorro",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, luna e meu(minha) gato",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, luna e seu(sua) gato",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, kiko e meu(minha) calopsita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, kiko e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, bento e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, bento e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, vento e meu(minha) furao",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, vento e seu(sua) furao",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, amora e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, amora e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, onix e meu(minha) calopsita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, onix e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, eco e meu(minha) calopsita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, eco e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, nina e meu(minha) papagaio",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, nina e seu(sua) papagaio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, mimi e meu(minha) lagarto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, mimi e seu(sua) lagarto",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, max e meu(minha) hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, max e seu(sua) hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, max e meu(minha) papagaio",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, max e seu(sua) papagaio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, nina e meu(minha) furao",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, nina e seu(sua) furao",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, hera e meu(minha) furao",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, hera e seu(sua) furao",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, kiko e meu(minha) chinchila",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, kiko e seu(sua) chinchila",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, fumaca e meu(minha) jabuti",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, fumaca e seu(sua) jabuti",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, hera e meu(minha) hamster",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, hera e seu(sua) hamster",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, bibi e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, bibi e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) porquinho-da-india",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) porquinho-da-india",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, uva e meu(minha) lagarto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, uva e seu(sua) lagarto",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, zeus e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, zeus e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, fumaca e meu(minha) papagaio",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, fumaca e seu(sua) papagaio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, zeus e meu(minha) gato",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, zeus e seu(sua) gato",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, luna e meu(minha) lagartixa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, luna e seu(sua) lagartixa",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, xuxa e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, xuxa e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, hera e meu(minha) gato",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, hera e seu(sua) gato",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, zeus e meu(minha) papagaio",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, zeus e seu(sua) papagaio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, duque e meu(minha) lagartixa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, duque e seu(sua) lagartixa",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, jade e meu(minha) jabuti",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, jade e seu(sua) jabuti",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, kiwi e meu(minha) cachorro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, kiwi e seu(sua) cachorro",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, onix e meu(minha) furao",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, onix e seu(sua) furao",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, amora e meu(minha) porquinho-da-india",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, amora e seu(sua) porquinho-da-india",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, fumaca e meu(minha) tartaruga",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, fumaca e seu(sua) tartaruga",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, xuxa e meu(minha) lagarto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, xuxa e seu(sua) lagarto",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, jade e meu(minha) calopsita",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, jade e seu(sua) calopsita",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, mel e meu(minha) lagartixa",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, mel e seu(sua) lagartixa",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, girassol e meu(minha) porquinho-da-india",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, girassol e seu(sua) porquinho-da-india",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, bibi e meu(minha) lagarto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, bibi e seu(sua) lagarto",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, fifi e meu(minha) tartaruga",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, fifi e seu(sua) tartaruga",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, neve e meu(minha) chinchila",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, neve e seu(sua) chinchila",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, pipoca e meu(minha) peixe",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "entendido, pipoca e seu(sua) peixe",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, i checked the manual. it's every 7,500 miles",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your car needs an oil change every 7,500 miles",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, he plays basketball, not soccer",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your son plays basketball",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, ele faz quatro anos no próximo mês",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "certo, então seu cachorro vai fazer quatro anos em breve",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, it got moved to wednesday",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the meeting is now on wednesday",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "i need to correct my note. it was the package in the school office on friday, not the original item and place",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "understood. the corrected detail is that liam left the package in the school office on friday",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "i need to correct my note. it was the textbook in the garden shed on wednesday, not the original item and place",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "understood. the corrected detail is that grace left the textbook in the garden shed on wednesday",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "i need to correct my note. it was the tablet in the meeting room on saturday, not the original item and place",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "understood. the corrected detail is that liam left the tablet in the meeting room on saturday",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, that was mistaken. ethan will bring the package to the second drawer instead",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "thanks for the correction. ethan will bring the package to the second drawer instead",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, that was mistaken. henry will bring the mug to the front desk instead",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "thanks for the correction. henry will bring the mug to the front desk instead",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, that was mistaken. liam will bring the textbook to the kitchen cabinet instead",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "thanks for the correction. liam will bring the textbook to the kitchen cabinet instead",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "i need to correct my note. it was the textbook in the garden shed on monday, not the original item and place",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "understood. the corrected detail is that henry left the textbook in the garden shed on monday",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, that was mistaken. jonah will bring the jacket to the front desk instead",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "thanks for the correction. jonah will bring the jacket to the front desk instead",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, that was mistaken. mila will bring the jacket to the reception area instead",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "thanks for the correction. mila will bring the jacket to the reception area instead",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "i need to correct my note. it was the umbrella in the reception area on wednesday, not the original item and place",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "understood. the corrected detail is that noah left the umbrella in the reception area on wednesday",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, essa informação estava errada. miguel levará o mochila para a recepção",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "obrigado pela correção. miguel levará o mochila para a recepção",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, essa informação estava errada. andré levará o casaco para o ponto de ônibus",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "obrigado pela correção. andré levará o casaco para o ponto de ônibus",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "preciso corrigir minha anotação. era o recibo em a sala de reuniões na sábado, e não o item e o local anteriores",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "entendi. a informação correta é que rafael deixou o recibo em a sala de reuniões na sábado",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, essa informação estava errada. beatriz levará o lancheira para o guarda-roupa do quarto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "obrigado pela correção. beatriz levará o lancheira para o guarda-roupa do quarto",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, essa informação estava errada. beatriz levará o chave para o ponto de ônibus",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "obrigado pela correção. beatriz levará o chave para o ponto de ônibus",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "preciso corrigir minha anotação. era o tablet em o depósito do jardim na segunda-feira, e não o item e o local anteriores",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "entendi. a informação correta é que marina deixou o tablet em o depósito do jardim na segunda-feira",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "desculpe, é preto",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "seu carro é preto",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually it's conference c",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the meeting room is conference c",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "no, it's actually green",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your car is green",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually his name is max",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your dog's name is max",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "pt",
+        "question": "na verdade, o voo sai às 16h",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "o voo para salvador sai às 16h",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, it's at 5 pm",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "your flight to boston is at 5 pm",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually, it starts at 9:00 pm",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "the concert starts at 9:00 pm",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "correction",
+        "language": "en",
+        "question": "actually it's platform 4",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "the train departs from platform 4",
+        "top_answer_share": 0.67
+      }
+    ],
+    "by_category": {
+      "correction": {
+        "groups_checked": 30891,
+        "groups_flagged": 188
+      }
+    }
+  },
+  "benchmark_leak": {
+    "correction": {
+      "total": 100,
+      "near": 0,
+      "question_only": 0,
+      "details": []
+    }
+  }
+}

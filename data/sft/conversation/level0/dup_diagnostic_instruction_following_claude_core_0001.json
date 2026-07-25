@@ -1,0 +1,2071 @@
+{
+  "exact_duplicates": {
+    "total_rows": 22000,
+    "duplicate_groups": 391,
+    "total_extra_copies": 651,
+    "pct_of_corpus": 2.96,
+    "top_offending_files": [
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0006/instruction_following_pt_0006.jsonl",
+        69
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0008/instruction_following_pt_0008.jsonl",
+        63
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0009/instruction_following_pt_0009.jsonl",
+        63
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0002/instruction_following_pt_0002.jsonl",
+        61
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0007/instruction_following_pt_0007.jsonl",
+        60
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0003/instruction_following_pt_0003.jsonl",
+        59
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0005/instruction_following_pt_0005.jsonl",
+        59
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0010/instruction_following_pt_0010.jsonl",
+        56
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0004/instruction_following_pt_0004.jsonl",
+        51
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0006/instruction_following_en_0006.jsonl",
+        46
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0008/instruction_following_en_0008.jsonl",
+        44
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0005/instruction_following_en_0005.jsonl",
+        41
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0007/instruction_following_en_0007.jsonl",
+        38
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0010/instruction_following_en_0010.jsonl",
+        35
+      ],
+      [
+        "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0009/instruction_following_en_0009.jsonl",
+        34
+      ]
+    ]
+  },
+  "answer_concentration": {
+    "flagged": [
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's your favorite color",
+        "n_occurrences": 27,
+        "n_distinct_answers": 2,
+        "top_answer": "blue",
+        "top_answer_share": 0.93
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente 3 frutas que você conhece",
+        "n_occurrences": 16,
+        "n_distinct_answers": 5,
+        "top_answer": "maçã, banana, laranja",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é a capital do brasil",
+        "n_occurrences": 16,
+        "n_distinct_answers": 3,
+        "top_answer": "brasília",
+        "top_answer_share": 0.88
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente quatro estações do ano",
+        "n_occurrences": 15,
+        "n_distinct_answers": 2,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 0.53
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é a capital da frança",
+        "n_occurrences": 15,
+        "n_distinct_answers": 3,
+        "top_answer": "paris",
+        "top_answer_share": 0.87
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente três frutas que você gosta",
+        "n_occurrences": 14,
+        "n_distinct_answers": 4,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.64
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente quatro cores do arco-íris",
+        "n_occurrences": 13,
+        "n_distinct_answers": 4,
+        "top_answer": "vermelho, laranja, amarelo e verde",
+        "top_answer_share": 0.54
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "você gosta de música",
+        "n_occurrences": 13,
+        "n_distinct_answers": 7,
+        "top_answer": "sim",
+        "top_answer_share": 0.54
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é a cor do céu",
+        "n_occurrences": 13,
+        "n_distinct_answers": 4,
+        "top_answer": "azul",
+        "top_answer_share": 0.77
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "name some fruits",
+        "n_occurrences": 11,
+        "n_distinct_answers": 5,
+        "top_answer": "apple, banana, orange",
+        "top_answer_share": 0.55
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é a sua cor favorita",
+        "n_occurrences": 10,
+        "n_distinct_answers": 2,
+        "top_answer": "azul",
+        "top_answer_share": 0.9
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in one word only. what color is the sky on a clear day",
+        "n_occurrences": 9,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's the capital of france",
+        "n_occurrences": 9,
+        "n_distinct_answers": 4,
+        "top_answer": "paris",
+        "top_answer_share": 0.56
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "will it rain tomorrow",
+        "n_occurrences": 9,
+        "n_distinct_answers": 2,
+        "top_answer": "maybe",
+        "top_answer_share": 0.89
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a cor do céu",
+        "n_occurrences": 9,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas letras tem a palavra 'gato' e diga o número",
+        "n_occurrences": 9,
+        "n_distinct_answers": 1,
+        "top_answer": "4",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: qual é a cor do céu",
+        "n_occurrences": 8,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "só sim ou não: você gosta de chocolate",
+        "n_occurrences": 8,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é sua cor favorita",
+        "n_occurrences": 8,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 1 a 5, separado por vírgulas",
+        "n_occurrences": 8,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "do you like coffee",
+        "n_occurrences": 8,
+        "n_distinct_answers": 2,
+        "top_answer": "yes",
+        "top_answer_share": 0.88
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what is the capital of france",
+        "n_occurrences": 7,
+        "n_distinct_answers": 2,
+        "top_answer": "paris",
+        "top_answer_share": 0.86
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "reply with yes or no only. is water a liquid at room temperature",
+        "n_occurrences": 7,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in exactly one sentence. what did you have for breakfast today",
+        "n_occurrences": 7,
+        "n_distinct_answers": 4,
+        "top_answer": "i don't eat breakfast since i'm an ai, but i can help you plan yours",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em exatamente uma frase: qual é a capital do brasil",
+        "n_occurrences": 7,
+        "n_distinct_answers": 2,
+        "top_answer": "brasília é a capital do brasil",
+        "top_answer_share": 0.57
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta em letras maiúsculas: qual é a capital do brasil",
+        "n_occurrences": 7,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: qual é a capital da frança",
+        "n_occurrences": 7,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer only with one word. what color is the sky on a clear day",
+        "n_occurrences": 7,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é a cor do céu em um dia claro",
+        "n_occurrences": 7,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your answer in all caps. what is the capital of france",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your answer in all capitals. what is the opposite of hot",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "cold",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente três frutas que você gosta. quais são suas frutas favoritas",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas letras tem a palavra 'gato' e me diga o número",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "4",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "sim ou não: a água ferve a 100 graus celsius",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em exatamente uma frase: qual é a capital da frança",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "a capital da frança é paris",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "como você está",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "estou bem, obrigado por perguntar",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "o brasil fica na américa do sul",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "name exactly two countries in south america",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "brazil and chile",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "is paris the capital of france",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra. qual é a cor do céu em um dia claro",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in one word only: what color is the sky on a clear day",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "list exactly three types of fruit. go ahead",
+        "n_occurrences": 6,
+        "n_distinct_answers": 3,
+        "top_answer": "apple, banana, orange",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é o maior planeta do sistema solar",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "júpiter",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 1 a 7, separado por vírgulas",
+        "n_occurrences": 6,
+        "n_distinct_answers": 2,
+        "top_answer": "1, 2, 3, 4, 5, 6, 7",
+        "top_answer_share": 0.83
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's the weather like",
+        "n_occurrences": 6,
+        "n_distinct_answers": 4,
+        "top_answer": "sunny",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "repita exatamente a palavra 'saudade'",
+        "n_occurrences": 6,
+        "n_distinct_answers": 1,
+        "top_answer": "saudade",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what is the largest planet in our solar system",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "jupiter",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "diga sim ou não: paris fica na frança",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a cor do céu em um dia claro",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é a capital da frança",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "paris",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a capital da frança",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "use apenas sim ou não: você gosta de chocolate",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "você gosta de chocolate",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "is water wet",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "yes",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em letras maiúsculas: qual é a capital do brasil",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "cite exatamente quatro estações do ano",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas letras tem a palavra 'gato' e responda apenas com o número",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "4",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer yes or no only. can penguins fly",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "no",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "nomeie exatamente quatro estações do ano",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 0.8
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente 3 frutas que você gosta",
+        "n_occurrences": 5,
+        "n_distinct_answers": 3,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: qual é a capital do brasil",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "reply with yes or no only. is water wet",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in only one word. what color is the sky on a clear day",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "a água ferve a 100 graus celsius",
+        "n_occurrences": 5,
+        "n_distinct_answers": 2,
+        "top_answer": "verdadeiro",
+        "top_answer_share": 0.6
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra. qual é a capital do brasil",
+        "n_occurrences": 5,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what is the capital of japan",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "tokyo",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in exactly one sentence. what did you have for breakfast this morning",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "i had toast with butter and jam",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "use only one word to answer. what color is the sky on a clear day",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a cor do céu durante o dia",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é a maior montanha do mundo",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "monte everest",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a cor do céu em um dia ensolarado",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "apenas sim ou não: a água ferve a cem graus celsius",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é a maior cidade do brasil",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "são paulo",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em letras maiúsculas: qual é a capital da frança",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "apenas sim ou não: o brasil fica na américa do sul",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra. qual é a cor do céu",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta em letras maiúsculas: qual é a capital da frança",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta toda em maiúsculas: qual é a capital do brasil",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é o planeta mais próximo do sol",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "mercúrio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em exatamente uma frase: qual é o maior planeta do sistema solar",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "júpiter é o maior planeta do sistema solar",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "qual é a capital da itália",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "roma",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "reply with yes or no only. do cats have fur",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "list exactly four seasons of the year",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "spring, summer, fall, and winter",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count how many letters are in the word 'elephant' and tell me the number",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "8",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's the capital of italy",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "rome is the capital of italy",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra. qual é a cor do céu em um dia claro",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente 4 estações do ano",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com sim ou não: a água ferve a 100 graus celsius",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente 3 frutas que você gosta de comer",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "cite exatamente 4 estações do ano",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com uma única palavra: qual é o oposto de quente",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "frio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas letras tem a palavra 'gato' e responda com um número",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "4",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "você gosta de chuva",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "list exactly three fruits you like to eat",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "apples, bananas, oranges",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in exactly one sentence. what time does the library close today",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "the library closes at 6 pm today",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: qual é a cor do céu durante o dia",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "reply with yes or no only. is water a solid at room temperature",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "no",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your answer in all caps. what is the opposite of hot",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "cold",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "apenas sim ou não: a neve é quente",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "não",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva a resposta em letras maiúsculas: qual é a capital da frança",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "você gosta de chocolate? responda apenas sim ou não",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "quem foi o primeiro presidente do brasil",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "deodoro da fonseca",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "name exactly four seasons of the year",
+        "n_occurrences": 4,
+        "n_distinct_answers": 3,
+        "top_answer": "spring, summer, autumn, and winter",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your answer in all uppercase letters. what is the opposite of hot",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "cold",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente quatro cores diferentes",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "vermelho, verde, amarelo e roxo",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantos dedos tem uma mão e responda com o número",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "5",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva em minúsculas: qual é o maior planeta do sistema solar",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "júpiter",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "você gosta de café",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what color is the sky on a clear day",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: qual é a capital da itália",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "roma",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's the color of the sky on a clear day",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 5 a 9, separados por espaços",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "5 6 7 8 9",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte os números pares de 2 a 10, separados por espaço",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "2 4 6 8 10",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 1 a 5, separando os números por vírgulas",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 1 a 5",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra. qual é a cor do carro do joão",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "vermelho",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas 'sim' ou 'não': você quer café agora",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "sim",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas 'sim' ou 'não': você vai ao mercado hoje",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "não",
+        "top_answer_share": 0.5
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count from 1 to 5, separated by commas",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 1 a 5 separado por vírgulas",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: qual animal mia",
+        "n_occurrences": 4,
+        "n_distinct_answers": 1,
+        "top_answer": "gato",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's your favorite fruit",
+        "n_occurrences": 4,
+        "n_distinct_answers": 2,
+        "top_answer": "banana",
+        "top_answer_share": 0.75
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count to 4",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what is the capital of spain",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "madrid",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what is the capital of italy",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "rome",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "list exactly three things you need for a camping trip",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "a tent, a sleeping bag, and a flashlight",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer yes or no only. can penguins fly in the air",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "no",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer yes or no only. can cats swim",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "one word only. what is the opposite of hot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "cold",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "only yes or no. can penguins fly",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "no",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "only yes or no. is paris the capital of france",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "keep your answer to 10 words maximum. describe what you had for breakfast",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "toast, eggs, and coffee this morning",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "is it raining outside right now",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "no",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente quatro estações do ano. quais são elas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra. qual é o seu animal de estimação favorito",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "cachorro",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "sim ou não: gatos conseguem nadar",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "sim ou não: o brasil fica na américa do sul",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "apenas sim ou não: você gosta de chocolate",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "apenas sim ou não: o gelo é água congelada",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "quais são frutas que você conhece",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your answer in all caps. what is your favorite color",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "blue",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer yes or no only. is water essential for human survival",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer yes or no only. is paris the capital of france",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "use only lowercase letters in your response. what is the capital of france",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what are some good breakfast foods",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "eggs, oatmeal, and toast",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "can dogs swim",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta toda em maiúsculas: qual é o planeta mais próximo do sol",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "mercúrio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em no máximo 5 palavras: o que você fez hoje",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "trabalhei e estudei bastante",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em minúsculas: qual é a capital da frança",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "paris",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "apenas sim ou não: paris fica na frança",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda sim ou não: você gosta de chuva",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é o maior planeta do nosso sistema solar",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "júpiter",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em no máximo 5 palavras: por que as pessoas dormem",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "para descansar e recuperar energia",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "a água ferve a cem graus celsius",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "sim",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your answer in all uppercase. what is the opposite of hot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "cold",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "name exactly two animals that live in the ocean",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "dolphins and sea turtles",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente três frutas que você gosta de comer",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em exatamente uma frase: qual é o seu hobby favorito",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "gosto de ler livros de ficção científica",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta toda em maiúsculas: qual é o oposto de quente",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "frio",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a cor do céu em um dia limpo",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda sim ou não: a água ferve a 100 graus celsius",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "sim ou não: a água ferve a cem graus celsius",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é a capital do brasil",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in only one word: what color is the sky on a clear day",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "blue",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "respond with only yes or no. can penguins fly",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "no",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "respond with yes or no only. is water a liquid at room temperature",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "how do you make pasta",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "boil water, add pasta, drain",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas letras tem a palavra 'sol'",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "três",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "dê exatamente dois exemplos de animais domésticos",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "cachorro e gato",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas vogais tem a palavra 'computador'",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "4",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "liste exatamente três frutas que você gosta. quais são",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "maçã, banana e morango",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com uma única palavra. qual é a cor do céu em um dia claro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "quais são estações do ano",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "primavera, verão, outono e inverno",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "vai chover amanhã",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "talvez",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count how many vowels are in the word 'elephant' and tell me the number",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "three",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "keep your answer to 10 words or fewer. describe what you had for breakfast",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "toast with butter and orange juice",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer yes or no only. do plants need sunlight to grow",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "name exactly three types of fruit. go",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "apple, banana, orange",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "write your entire response in lowercase letters. what is the largest planet in our solar system",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "jupiter",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "name exactly three types of fruit. go ahead",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "apple, banana, orange",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em maiúsculas: qual é a cor da grama",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "verde",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "só respostas sim ou não, por favor: você gosta de chocolate",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em exatamente uma frase: qual é a capital da itália",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "a capital da itália é roma",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda em minúsculas: qual é o maior planeta do sistema solar",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "júpiter",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta em letras maiúsculas: qual é o maior planeta do sistema solar",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "júpiter",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "is paris in france",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "yes",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva sua resposta em maiúsculas: qual é o maior planeta do sistema solar",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "júpiter",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "answer in one word only. what's the capital of brazil",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "brasília",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count the number of vowels in 'beautiful' and provide only that number",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "6",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas com uma palavra: qual é a capital da itália",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "roma",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "escreva tudo em minúsculas: qual é o maior oceano do mundo",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "oceano pacífico",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte quantas letras tem a palavra 'gato' e responda com esse número",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "4",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what's the opposite of hot",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "cold",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count from 1 to 6, separated by commas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "1, 2, 3, 4, 5, 6",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "list three items to pack for a beach day",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "sunscreen, towel, sunglasses",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count from 1 to 6 separated by commas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "1, 2, 3, 4, 5, 6",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "what city are you in right now",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "london",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas 'sim' ou 'não'. você terminou o relatório",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "não",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda exatamente com a palavra 'saudade'",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "saudade",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte os números pares de 2 a 10, separados por vírgulas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "2, 4, 6, 8, 10",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra: de que cor é o céu em um dia claro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com apenas uma palavra. qual é o oposto de 'frio'",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "quente",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte a sequência de 1 a 5, separando os números por vírgulas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "conte de 1 a 5, separando por vírgulas",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "1, 2, 3, 4, 5",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda apenas 'sim' ou 'não': você fala português",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "sim",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "repita exatamente a palavra 'olá'",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "olá",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "repita exatamente a palavra 'saúde'",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "saúde",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "repita exatamente a palavra 'saudade' como resposta",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "saudade",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com uma única palavra: qual animal mia",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "gato",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "onde fica o banheiro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 2,
+        "top_answer": "no corredor à esquerda",
+        "top_answer_share": 0.67
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "count backwards from 5 to 1, separated by spaces",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "5 4 3 2 1",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "pt",
+        "question": "responda com uma palavra: qual é a cor do céu em um dia claro",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "azul",
+        "top_answer_share": 1.0
+      },
+      {
+        "category": "instruction_following",
+        "language": "en",
+        "question": "did you finish the report",
+        "n_occurrences": 3,
+        "n_distinct_answers": 1,
+        "top_answer": "no",
+        "top_answer_share": 1.0
+      }
+    ],
+    "by_category": {
+      "instruction_following": {
+        "groups_checked": 20359,
+        "groups_flagged": 213
+      }
+    }
+  },
+  "benchmark_leak": {
+    "instruction_following": {
+      "total": 100,
+      "near": 8,
+      "question_only": 8,
+      "details": [
+        {
+          "benchmark_id": "instruction_following_en_001",
+          "expected_any": [
+            "Paris"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0002/instruction_following_en_0002.jsonl",
+          "matched_answer": "Paris."
+        },
+        {
+          "benchmark_id": "instruction_following_en_046",
+          "expected_any": [
+            "Paris"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0001/instruction_following_en_0001.jsonl",
+          "matched_answer": "Paris."
+        },
+        {
+          "benchmark_id": "instruction_following_en_047",
+          "expected_any": [
+            "GREEN"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0008/instruction_following_en_0008.jsonl",
+          "matched_answer": "GREEN."
+        },
+        {
+          "benchmark_id": "instruction_following_en_048",
+          "expected_any": [
+            "Jupiter"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0004/instruction_following_en_0004.jsonl",
+          "matched_answer": "jupiter is the largest planet."
+        },
+        {
+          "benchmark_id": "instruction_following_en_049",
+          "expected_any": [
+            "Well",
+            "Tokyo"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0001/instruction_following_en_0001.jsonl",
+          "matched_answer": "Tokyo."
+        },
+        {
+          "benchmark_id": "instruction_following_pt_001",
+          "expected_any": [
+            "Paris"
+          ],
+          "matched_file": "data/sft/conversation/level0/openai/gpt-5-mini-2025-08-07/0006/instruction_following_pt_0006.jsonl",
+          "matched_answer": "Paris"
+        },
+        {
+          "benchmark_id": "instruction_following_pt_013",
+          "expected_any": [
+            "Roma"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0010/instruction_following_pt_0010.jsonl",
+          "matched_answer": "A capital da Itália é Roma."
+        },
+        {
+          "benchmark_id": "instruction_following_pt_046",
+          "expected_any": [
+            "Paris"
+          ],
+          "matched_file": "data/sft/conversation/level0/anthropic/claude-haiku-4-5-20251001/0002/instruction_following_pt_0002.jsonl",
+          "matched_answer": "Paris."
+        }
+      ]
+    }
+  }
+}
