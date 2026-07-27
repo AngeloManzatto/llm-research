@@ -1,6 +1,6 @@
 {"id": "turn_taking_en_001", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Say hello."}], "expected_any": ["hello"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_002", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Say good morning."}], "expected_any": ["good morning"], "expected_stop_token": "END_OF_TURN"}
-{"id": "turn_taking_en_003", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What color is the sky on a clear day?"}], "expected_any": ["blue"], "expected_stop_token": "END_OF_TURN"}
+{"id": "turn_taking_en_003", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What color is grass?"}], "expected_any": ["Green."], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_004", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What animal says meow?"}], "expected_any": ["cat"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_005", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What animal barks?"}], "expected_any": ["dog"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_006", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What do people drink when they are thirsty?"}], "expected_any": ["water"], "expected_stop_token": "END_OF_TURN"}

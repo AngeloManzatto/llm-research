@@ -1,4 +1,4 @@
-{"id": "turn_taking_en_001", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What color is the sky on a clear day?"}], "expected_any": ["Blue"], "expected_stop_token": "END_OF_TURN"}
+{"id": "turn_taking_en_001", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What do you call a baby cat?"}], "expected_any": ["kitten"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_002", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "How many days are there in a week?"}], "expected_any": ["Seven", "7"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_003", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What sound does a dog make?"}], "expected_any": ["Bark"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_004", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What is the opposite of hot?"}], "expected_any": ["Cold"], "expected_stop_token": "END_OF_TURN"}
