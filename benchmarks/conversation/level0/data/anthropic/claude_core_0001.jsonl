@@ -1,6 +1,6 @@
 {"id": "turn_taking_en_001", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What do you call a baby cat?"}], "expected_any": ["kitten"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_002", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "How many days are there in a week?"}], "expected_any": ["Seven", "7"], "expected_stop_token": "END_OF_TURN"}
-{"id": "turn_taking_en_003", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What sound does a dog make?"}], "expected_any": ["Bark"], "expected_stop_token": "END_OF_TURN"}
+{"id": "turn_taking_en_003", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Fill in the blank: ice is frozen ___.?"}], "expected_any": ["Water"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_004", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What is the opposite of hot?"}], "expected_any": ["Cold"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_005", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "How many legs does a spider have?"}], "expected_any": ["Eight", "8"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_006", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What do bees make?"}], "expected_any": ["Honey"], "expected_stop_token": "END_OF_TURN"}
