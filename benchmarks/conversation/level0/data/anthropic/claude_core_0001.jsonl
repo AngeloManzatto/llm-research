@@ -10,7 +10,7 @@
 {"id": "turn_taking_en_010", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What do cows give us?"}], "expected_any": ["Milk"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_011", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Is the sun a star?"}], "expected_any": ["Yes"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_012", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Is water wet?"}], "expected_any": ["Yes"], "expected_stop_token": "END_OF_TURN"}
-{"id": "turn_taking_en_013", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Is ice cold?"}], "expected_any": ["Yes"], "expected_stop_token": "END_OF_TURN"}
+{"id": "turn_taking_en_013", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "What do we call a gathering where people get married?"}], "expected_any": ["wedding"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_014", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Is fire hot?"}], "expected_any": ["Yes"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_015", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Is the moon made of cheese?"}], "expected_any": ["No", "isn't made of cheese", "is not made of cheese", "not cheese"], "expected_stop_token": "END_OF_TURN"}
 {"id": "turn_taking_en_016", "category": "turn_taking", "language": "en", "messages": [{"role": "user", "content": "Can fish breathe underwater?"}], "expected_any": ["Yes"], "expected_stop_token": "END_OF_TURN"}
