@@ -1,5 +1,5 @@
 {"id": "turn_taking_en_sft_00001", "category": "turn_taking", "language": "en", "stage": "stage0", "messages": [{"role": "user", "content": "What color is the sky?"}, {"role": "assistant", "content": "Blue."}]}
-{"id": "turn_taking_en_sft_00002", "category": "turn_taking", "language": "en", "stage": "stage0", "messages": [{"role": "user", "content": "What color is grass?"}, {"role": "assistant", "content": "Green."}]}
+{"id": "turn_taking_en_sft_00002", "category": "turn_taking", "language": "en", "stage": "stage0", "messages": [{"role": "user", "content": "What is the smallest country in the world?"}, {"role": "assistant", "content": "Vatican City is the smallest country in the world."}]}
 {"id": "turn_taking_en_sft_00003", "category": "turn_taking", "language": "en", "stage": "stage0", "messages": [{"role": "user", "content": "What color is a banana?"}, {"role": "assistant", "content": "Yellow."}]}
 {"id": "turn_taking_en_sft_00004", "category": "turn_taking", "language": "en", "stage": "stage0", "messages": [{"role": "user", "content": "What color is snow?"}, {"role": "assistant", "content": "White."}]}
 {"id": "turn_taking_en_sft_00005", "category": "turn_taking", "language": "en", "stage": "stage0", "messages": [{"role": "user", "content": "What color is coal?"}, {"role": "assistant", "content": "Black."}]}
