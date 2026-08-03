@@ -8,7 +8,7 @@ Created on Sat Jul 11 09:31:42 2026
 ###############################################################################
 
 import numpy as np
-from tasks.sft.conversation.benchmark.special_tokens import TOKEN_BY_NAME
+from src.tasks.sft.conversation.core.special_tokens import TOKEN_BY_NAME
  
 ###############################################################################
 # Resolve Token IDs
@@ -23,10 +23,10 @@ def resolve_token_ids(tokenizer) -> dict[str, int]:
     dict with keys: USER_ID, ASST_ID, SYS_ID, EOS_ID, PAD_ID, IGNORE_ID
     """
     return {
-        "USER_ID":  tokenizer.token_to_index[TOKEN_BY_NAME["USER_TURN"].token],
-        "ASST_ID":  tokenizer.token_to_index[TOKEN_BY_NAME["ASSISTANT_TURN"].token],
-        "SYS_ID":   tokenizer.token_to_index[TOKEN_BY_NAME["SYSTEM_TURN"].token],
-        "EOS_ID":   tokenizer.token_to_index[TOKEN_BY_NAME["END_OF_TURN"].token],
+        "USER_ID":  tokenizer.token_to_index[TOKEN_BY_NAME["USER_TURN"]],
+        "ASST_ID":  tokenizer.token_to_index[TOKEN_BY_NAME["ASSISTANT_TURN"]],
+        "SYS_ID":   tokenizer.token_to_index[TOKEN_BY_NAME["SYSTEM_TURN"]],
+        "EOS_ID":   tokenizer.token_to_index[TOKEN_BY_NAME["END_OF_TURN"]],
         "PAD_ID":   tokenizer.token_to_index["<PAD>"],
         "IGNORE_ID": -100,
     }

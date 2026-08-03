@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from typing import Any
 from collections import defaultdict
 
-from src.tasks.sft.conversation.benchmark.special_tokens import TOKEN_BY_NAME
+from src.tasks.sft.conversation.core.special_tokens import TOKEN_BY_NAME
 from src.tasks.sft.conversation.metrics import run_metric, MetricResult
 from src.tasks.sft.conversation.metrics.utils import strip_trailing_tags
 

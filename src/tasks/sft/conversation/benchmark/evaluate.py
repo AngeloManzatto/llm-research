@@ -71,9 +71,9 @@ import tensorflow as tf
 from src.core.loader import load_model_and_tokenizer
 from src.core.model.serialization import restore_model_from_checkpoint
 
+from src.tasks.sft.conversation.core.special_tokens import resolve_special_tokens
 from src.tasks.sft.conversation.benchmark.benchmark import load_benchmark
 from src.tasks.sft.conversation.benchmark.generator import generate_batch
-from src.tasks.sft.conversation.benchmark.special_tokens import resolve_special_tokens
 from src.tasks.sft.conversation.benchmark.evaluator import evaluate_example
 from src.tasks.sft.conversation.benchmark.report import (
     summarize_results, print_summary, write_result, write_summary,
