@@ -1,9 +1,21 @@
-# -*- coding: utf-8 -*-
-from __future__ import annotations
+"""
+Created on Sat Aug  1 12:57:42 2026
+
+@author: Angelo Antonio Manzatto
+"""
+
+###############################################################################
+# Libraries
+###############################################################################
 
 import re
 
-from src.tasks.sft.conversation.metrics.base import MetricResult, strip_trailing_tags
+from src.tasks.sft.conversation.metrics.base import MetricResult
+from src.tasks.sft.conversation.metrics.utils import strip_trailing_tags
+
+###############################################################################
+# Spell Checker
+###############################################################################
 
 try:
     from spellchecker import SpellChecker
@@ -13,6 +25,9 @@ except ImportError:
 
 _WORD_RE = re.compile(r"[a-zA-ZÀ-ÿ]+")
 
+###############################################################################
+# Coherece 
+###############################################################################
 
 def coherence(raw_answer: str, *, language: str, **kwargs) -> MetricResult:
     """

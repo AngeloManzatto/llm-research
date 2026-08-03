@@ -1,8 +1,18 @@
-# -*- coding: utf-8 -*-
-from __future__ import annotations
+"""
+Created on Sat Aug  1 12:52:23 2026
 
-from .base import MetricResult
+@author: Angelo Antonio Manzatto
+"""
 
+###############################################################################
+# Libraries
+###############################################################################
+
+from src.tasks.sft.conversation.metrics.base import MetricResult
+
+###############################################################################
+# Expected Stop Token
+###############################################################################
 
 def expected_stop_token(raw_answer: str, **kwargs) -> MetricResult:
     """
@@ -19,6 +29,9 @@ def expected_stop_token(raw_answer: str, **kwargs) -> MetricResult:
     """
     expected_token = kwargs["expected_token"]
     passed = raw_answer.rstrip().endswith(expected_token)
-    return MetricResult(passed=passed, details={"expected_token": expected_token})
+    
+    result = MetricResult(passed=passed, details={"expected_token": expected_token})
+    
+    return result
 
 expected_stop_token.requires = ("expected_token",)

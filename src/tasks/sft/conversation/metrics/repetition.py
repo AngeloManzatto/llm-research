@@ -1,15 +1,24 @@
-# -*- coding: utf-8 -*-
-from __future__ import annotations
+"""
+Created on Sat Aug  1 12:57:42 2026
+
+@author: Angelo Antonio Manzatto
+"""
+
+###############################################################################
+# Libraries
+###############################################################################
 
 import re
 
-from .base import MetricResult
+from src.tasks.sft.conversation.metrics.base import MetricResult
 
+###############################################################################
+# Repetition Metric
+###############################################################################
 
 def _tokenize_for_repetition(text: str) -> list[str]:
     """Tokenize while preserving contractions ("don't"); punctuation ignored."""
     return re.findall(r"\b[\w]+(?:['’][\w]+)?\b", text.lower())
-
 
 def _detect_consecutive_repetition(text: str) -> dict:
     """

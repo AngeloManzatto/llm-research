@@ -17,10 +17,13 @@ import tensorflow as tf
  
 from src.core.model.serialization import model_all_finite
 
-from src.tasks.sft.conversation.benchmark.benchmark import Benchmark
+from src.tasks.sft.conversation.benchmark.benchmark import load_benchmark
+from src.tasks.sft.conversation.benchmark.generator import generate_batch
+from src.tasks.sft.conversation.benchmark.special_tokens import resolve_special_tokens
 from src.tasks.sft.conversation.benchmark.evaluator import evaluate_example
-from src.tasks.sft.conversation.benchmark.generator import TextGenerator
-from src.tasks.sft.conversation.benchmark.report import EvaluationSummary
+from src.tasks.sft.conversation.benchmark.report import (
+    summarize_results, print_summary, write_result, write_summary,
+)
 
 from src.tasks.sft.conversation.training.data_packing import (
     make_packed_batch,
@@ -190,7 +193,7 @@ def make_train_step(
 ###############################################################################
 # Benchmark hook
 ###############################################################################
- 
+
 def run_benchmark(
     model,
     tokenizer,
@@ -212,52 +215,44 @@ def run_benchmark(
         print(f"⚠ Skipping benchmark at step {step} — model weights contain NaN/Inf")
         return {"step": step, "skipped": True, "reason": "nan_weights"}
 
-    bm  = Benchmark.from_manifest(benchmark_dir / "benchmark.json")
-    gen = TextGenerator(model=model, tokenizer=tokenizer,
-                        decode_config=bm.default_decode)
+    bm = load_benchmark(benchmark_dir / "benchmark.json")
+    resolved = resolve_special_tokens(tokenizer)
 
-    run_meta = {"benchmark_id": bm.benchmark_id,
-                "benchmark_version": bm.version, "step": step}
-    summary  = EvaluationSummary(run_metadata=run_meta)
-    results  = []   # collect for disk write
+    run_meta = {"benchmark_id": bm.benchmark_id, "step": step}
+    results = []
 
-    examples_all = list(bm)
+    examples_all = bm.examples
 
     for i in range(0, len(examples_all), batch_size):
-        examples    = examples_all[i:i + batch_size]
-        completions = gen.generate_batch([ex.messages for ex in examples])
+        examples = examples_all[i:i + batch_size]
+        completions = generate_batch(
+            model,
+            [ex.messages for ex in examples],
+            text_to_indices=tokenizer.text_to_indices,
+            indices_to_text=tokenizer.indices_to_text,
+            decode_config=bm.default_decode,
+            **resolved,
+        )
 
-        for example, generated in zip(examples, completions):
-            result = evaluate_example(
-                benchmark=bm,
-                example=example,
-                generated=generated,
-                decode=bm.default_decode,
-            )
-            summary.update(result)
+        for example, raw_answer in zip(examples, completions):
+            result = evaluate_example(example, bm, raw_answer)
             results.append(result)
 
-    summary.print_table()
+    summary = summarize_results(results, run_metadata=run_meta)
+    print_summary(summary, step=step)
 
     # Persist to disk if result_dir provided
     if result_dir is not None:
         step_dir = Path(result_dir) / f"step_{step:06d}"
         step_dir.mkdir(parents=True, exist_ok=True)
 
-        # Per-example results
-        with (step_dir / "results.jsonl").open("w", encoding="utf-8") as f:
-            for r in results:
-                f.write(json.dumps(r.to_dict(), ensure_ascii=False) + "\n")
-
-        # Summary
-        (step_dir / "summary.json").write_text(
-            json.dumps(summary.to_dict(), indent=2, ensure_ascii=False),
-            encoding="utf-8",
-        )
+        for r in results:
+            write_result(step_dir, r)
+        write_summary(step_dir, summary)
 
         print(f"  → benchmark results saved: {step_dir}")
 
-    return summary.to_dict()
+    return summary
  
 ###############################################################################
 # Training logger

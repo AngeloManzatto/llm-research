@@ -1,7 +1,7 @@
 """
 Created on Sun Jul  5 13:39:18 2026
 
-@author: root
+@author: Angelo Antonio Manzatto
 """
 
 ###############################################################################
@@ -17,10 +17,13 @@ import tensorflow as tf
 from src.core.loader import load_model_and_tokenizer
 from src.core.model.serialization import restore_model_from_checkpoint
 
-from src.tasks.sft.conversation.benchmark.benchmark import Benchmark
+from src.tasks.sft.conversation.benchmark.benchmark import load_benchmark
+from src.tasks.sft.conversation.benchmark.generator import generate_batch
+from src.tasks.sft.conversation.benchmark.special_tokens import resolve_special_tokens
 from src.tasks.sft.conversation.benchmark.evaluator import evaluate_example
-from src.tasks.sft.conversation.benchmark.report import EvaluationSummary, ReportWriter
-from src.tasks.sft.conversation.benchmark.generator import TextGenerator
+from src.tasks.sft.conversation.benchmark.report import (
+    summarize_results, print_summary, write_result, write_summary,
+)
 
 ###############################################################################
 # GPU Strategy
@@ -66,52 +69,67 @@ checkpoint_path = restore_model_from_checkpoint(
 # Benchmark
 ###############################################################################
 
-benchmark_path = Path("benchmarks") / "conversation" / "level0"
-benchmark      = Benchmark.from_manifest(benchmark_path / "benchmark.json")
+benchmark_path = Path("benchmarks") / "conversation" / "level0" / "benchmark.json"
+benchmark      = load_benchmark(benchmark_path)
+
+# resolve once -- everything downstream (generate_batch) takes plain ints,
+# not the tokenizer object itself
+resolved = resolve_special_tokens(tokenizer)
 
 run_metadata = {
-    "benchmark_id":      benchmark.benchmark_id,
-    "benchmark_version": benchmark.version,
-    "model_id":          base_model_id,
-    "checkpoint_path":   str(checkpoint_path),
-    "timestamp_utc":     datetime.now(timezone.utc).isoformat(),
-    "decode":            benchmark.default_decode,
+    "benchmark_id":    benchmark.benchmark_id,
+    "model_id":        base_model_id,
+    "checkpoint_path": str(checkpoint_path),
+    "timestamp_utc":   datetime.now(timezone.utc).isoformat(),
+    "decode":          benchmark.default_decode,
 }
 
-text_generator = TextGenerator(
-    model=model,
-    tokenizer=tokenizer,
-    decode_config=benchmark.default_decode,
-)
-
+# benchmark_path is a FILE (benchmark.json), not a directory --
+# .parent is required here, appending directly under a file was a
+# latent bug in the original script.
 result_path = (
-    benchmark_path / "results" / base_model_id
+    benchmark_path.parent / "results" / base_model_id
     / run_metadata["timestamp_utc"].replace(":", "-").replace("+00:00", "Z")
 )
+result_path.mkdir(parents=True, exist_ok=True)
 
 ###############################################################################
 # Run
 ###############################################################################
 
-writer  = ReportWriter(result_path)
-summary = EvaluationSummary(run_metadata=run_metadata)
+BATCH_SIZE = 32
+all_results = []
 
-for example in benchmark:
-    
-    generated = text_generator.generate(example.messages)
-    
-    result = evaluate_example(
-        benchmark=benchmark,
-        example=example,
-        generated=generated,
-        decode=benchmark.default_decode,
+examples = benchmark.examples
+for i in range(0, len(examples), BATCH_SIZE):
+    batch = examples[i : i + BATCH_SIZE]
+
+    raw_answers = generate_batch(
+        model,
+        [ex.messages for ex in batch],
+        text_to_indices=tokenizer.text_to_indices,
+        indices_to_text=tokenizer.indices_to_text,
+        decode_config=benchmark.default_decode,
+        **resolved,
     )
-    
-    summary.update(result)
-    writer.write_result(result)
-    print(f"[{result.id}] passed={result.passed} | answer={result.answer!r}")
 
-writer.write_summary(summary)
+    for example, raw_answer in zip(batch, raw_answers):
+        result = evaluate_example(example, benchmark, raw_answer)
+        all_results.append(result)
+        write_result(result_path, result)
+        print(f"[{result.id}] passed={result.passed} | answer={result.answer!r}")
+
+    print(f"-- batch {i // BATCH_SIZE + 1}/{-(-len(examples) // BATCH_SIZE)} done "
+          f"({len(all_results)}/{len(examples)} examples) --")
+
+###############################################################################
+# Summary
+###############################################################################
+
+summary = summarize_results(all_results, run_metadata=run_metadata)
+write_summary(result_path, summary)
 
 print("=" * 80)
-print(json.dumps(summary.to_dict(), indent=3, ensure_ascii=False))
+print_summary(summary)
+print("=" * 80)
+print(json.dumps(summary, indent=3, ensure_ascii=False))

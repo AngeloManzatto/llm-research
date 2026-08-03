@@ -1,8 +1,19 @@
-# -*- coding: utf-8 -*-
-from __future__ import annotations
+"""
+Created on Sat Aug  1 12:57:42 2026
 
-from src.tasks.sft.conversation.metrics.base import MetricResult, strip_trailing_tags
+@author: Angelo Antonio Manzatto
+"""
 
+###############################################################################
+# Libraries
+###############################################################################
+
+from src.tasks.sft.conversation.metrics.base import MetricResult
+from src.tasks.sft.conversation.metrics.utils import strip_trailing_tags
+
+###############################################################################
+# Constainr Satisfied Metric
+###############################################################################
 
 def constraint_satisfied(raw_answer: str, **kwargs) -> MetricResult:
     """

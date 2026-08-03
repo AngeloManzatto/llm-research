@@ -8,7 +8,7 @@ Created on Sat Jul 11 09:31:42 2026
 ###############################################################################
 
 import numpy as np
-from src.tasks.sft.conversation.core.special_tokens import TOKEN_BY_NAME
+from tasks.sft.conversation.benchmark.special_tokens import TOKEN_BY_NAME
  
 ###############################################################################
 # Resolve Token IDs
