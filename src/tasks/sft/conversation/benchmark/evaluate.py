@@ -4,6 +4,60 @@ Created on Sun Jul  5 13:39:18 2026
 @author: Angelo Antonio Manzatto
 """
 
+"""
+evaluate.py
+
+BENCHMARK PIPELINE FLOW
+------------------------
+
+1. load_benchmark(manifest_path) -> Benchmark
+       Reads benchmark.json + every data file it points to.
+       Benchmark = { benchmark_id, examples, category_metrics, default_decode }
+       category_metrics = { category: { metric_id: {"role": "gate"|"diagnostic",
+                                                       "context": {...}} } }
+
+2. resolve_special_tokens(tokenizer) -> dict
+       Looks up the real integer token IDs ONCE from the tokenizer.
+       Returns { eos_id, asst_id, pad_id, role_token_ids, stop_ids }
+
+3. For each batch of examples:
+
+       generate_batch(model, messages, text_to_indices, indices_to_text,
+                       decode_config, **resolved) -> list[str]
+           a. messages_to_ids   : messages -> flat token ID sequence
+                                   (role_token, ...text_tokens, boundary_token
+                                   per turn; last turn ends on asst_id, the
+                                   generation trigger)
+           b. decode_loop        : repeatedly calls model + select_fn
+                                   (greedy / top_k / nucleus) until every
+                                   row hits a stop_id or max_length
+           c. indices_to_text     : generated token IDs -> raw_answer string
+
+       For each (example, raw_answer) pair:
+
+           evaluate_example(example, benchmark, raw_answer) -> EvaluationResult
+               - looks up example.category in category_metrics
+               - for each metric: build_metric_context() then run_metric()
+               - passed = ALL role:"gate" metrics passed
+                 (role:"diagnostic" metrics are computed + shown, never gate)
+               - answer = strip_trailing_tags(raw_answer)
+
+4. summarize_results(all_results, run_metadata) -> summary dict
+       total / passed / pass_rate, overall and per category+language,
+       plus per-metric diagnostics (pooled and per-category).
+
+5. print_summary(summary, previous_summary=None, step=None)
+       Human-readable table. Pass the last checkpoint's summary as
+       previous_summary to see ↑/↓ deltas per category across training.
+
+6. write_result() / write_summary()  -- persist results.jsonl / summary.json
+
+
+KEY INVARIANT: nothing between step 3a and 3c ever touches raw text --
+only integer token ID sequences. text_to_indices/indices_to_text are the
+only two points where the tokenizer's string<->ID conversion happens.
+"""
+
 ###############################################################################
 # Libraries
 ###############################################################################
