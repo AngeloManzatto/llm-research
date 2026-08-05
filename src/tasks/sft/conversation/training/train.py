@@ -9,6 +9,10 @@ Created on Fri Jul 10 07:58:22 2026
 ###############################################################################
 
 import os
+
+# Use only the first 5 GPUs
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3,4"
+
 from pathlib import Path
 import tensorflow as tf
  
@@ -47,8 +51,8 @@ per_replica_batch_size = global_batch_size // num_gpus
 assert global_batch_size % num_gpus == 0
 
 BATCH_SIZE       = global_batch_size
-EPOCHS           = 4
-LEARNING_RATE    = 3e-4      # reduced from 3e-4 after NaN at step 800
+EPOCHS           = 12
+LEARNING_RATE    = 1e-4      # reduced from 3e-4 after NaN at step 800
 WARMUP_STEPS     = 100
 CHECKPOINT_EVERY = 250
 

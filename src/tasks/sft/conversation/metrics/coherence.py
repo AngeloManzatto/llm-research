@@ -74,25 +74,30 @@ def coherence(raw_answer: str, *, language: str, **kwargs) -> MetricResult:
     is correct.
     """
     text = strip_trailing_tags(raw_answer).strip()
-
-    alpha_chars = [c for c in text if c.isalpha()]
-    if len(alpha_chars) < 2:
+ 
+    # alphanumeric, not just alphabetic -- a purely numeric answer like
+    # "1945" (a real, substantive year) has zero LETTERS but is not
+    # remotely empty. Confirmed real false negative: "1945." for "In
+    # what year did World War II end?" was failing near_empty before
+    # this fix, purely because digits weren't counted as content.
+    alnum_chars = [c for c in text if c.isalnum()]
+    if len(alnum_chars) < 1:
         return MetricResult(passed=False, details={"reason": "near_empty", "text": text})
-
+ 
     checker = _SPELL_CHECKERS.get(language)
     if checker is None:
         # No dictionary for this language — the near-empty check above
         # still ran, but the word check can't. Pass rather than penalize
         # an unsupported language for a check it was never able to do.
         return MetricResult(passed=True, details={"reason": "no_dictionary_for_language"})
-
+ 
     tokens = _WORD_RE.findall(text)
     lowercase_tokens = [t for t in tokens if t.islower() and len(t) >= 2]
     unknown = checker.unknown(lowercase_tokens)
-
+ 
     if unknown:
         return MetricResult(passed=False, details={"reason": "invented_words", "words": sorted(unknown)})
-
+ 
     return MetricResult(passed=True, details={})
 
 coherence.requires = ("language",)

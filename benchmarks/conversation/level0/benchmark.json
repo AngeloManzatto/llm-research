@@ -12,22 +12,35 @@
    },
    "category_metrics":{
       "turn_taking": {
-         "expected_stop_token": {"role": "gate"}
+         "expected_stop_token": {"role": "gate"},
+         "repetition":          {"role": "gate"},
+         "coherence":           {"role": "gate"}
       },
       "knowledge_completion": {
-         "expected_stop_token": {"role": "gate"}
+         "expected_stop_token": {"role": "gate"},
+         "repetition":          {"role": "gate"},
+         "coherence":           {"role": "gate"}
       },
       "local_context": {
-         "expected_stop_token": {"role": "gate"}
+         "expected_stop_token": {"role": "gate"},
+         "repetition":          {"role": "gate"},
+         "coherence":           {"role": "gate"},
+         "contains_expected":   {"role": "gate"}
       },
       "correction": {
-         "expected_stop_token": {"role": "gate"}
+         "expected_stop_token": {"role": "gate"},
+         "repetition":          {"role": "gate"},
+         "coherence":           {"role": "gate"}
       },
       "instruction_following": {
-         "expected_stop_token": {"role": "gate"}
+         "expected_stop_token": {"role": "gate"},
+         "repetition":          {"role": "gate"},
+         "coherence":           {"role": "gate"}
       },
       "uncertainty": {
-         "expected_stop_token": {"role": "gate"}
+         "expected_stop_token": {"role": "gate"},
+         "repetition":          {"role": "gate"},
+         "coherence":           {"role": "gate"}
       }
    }
 }
