@@ -25,6 +25,12 @@ except ImportError:
 
 _WORD_RE = re.compile(r"[a-zA-ZÀ-ÿ]+")
 
+# This project only ever has these two languages -- a simple fixed
+# mapping, not a general N-language lookup, matching the same
+# "build for the scope that's actually true" call made for
+# resolve_special_tokens' defaults.
+_OTHER_LANGUAGE = {"en": "pt", "pt": "en"}
+
 ###############################################################################
 # Coherece 
 ###############################################################################
@@ -96,7 +102,39 @@ def coherence(raw_answer: str, *, language: str, **kwargs) -> MetricResult:
     unknown = checker.unknown(lowercase_tokens)
  
     if unknown:
-        return MetricResult(passed=False, details={"reason": "invented_words", "words": sorted(unknown)})
+        # Confirmed real pattern, not hypothetical: many "invented_words"
+        # failures were actually the model answering in the WRONG
+        # language entirely -- real, correctly-spelled words, just not
+        # in the target language ("Tá bom!" for an English prompt was
+        # 14 of 42 failures in one real run alone). That's a genuinely
+        # different problem from true gibberish ("strawberlin") and
+        # deserves a different label, even though both still fail.
+        other_lang = _OTHER_LANGUAGE.get(language)
+        other_checker = _SPELL_CHECKERS.get(other_lang) if other_lang else None
+ 
+        if other_checker is not None:
+            still_unknown = other_checker.unknown(unknown)
+            wrong_language_words = unknown - still_unknown
+        else:
+            still_unknown = unknown
+            wrong_language_words = set()
+ 
+        if still_unknown:
+            # genuine gibberish present -- this is the primary reason,
+            # even if some other flagged words also turned out to be
+            # real words in the other language
+            details = {"reason": "invented_words", "words": sorted(still_unknown)}
+            if wrong_language_words:
+                details["also_wrong_language_words"] = sorted(wrong_language_words)
+            return MetricResult(passed=False, details=details)
+        else:
+            # every flagged word turned out to be a real word in the
+            # OTHER project language -- not gibberish, a language-match
+            # failure
+            return MetricResult(passed=False, details={
+                "reason": "wrong_language", "other_language": other_lang,
+                "words": sorted(wrong_language_words),
+            })
  
     return MetricResult(passed=True, details={})
 

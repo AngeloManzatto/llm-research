@@ -30,12 +30,14 @@
       "correction": {
          "expected_stop_token": {"role": "gate"},
          "repetition":          {"role": "gate"},
-         "coherence":           {"role": "gate"}
+         "coherence":           {"role": "gate"},
+         "contains_expected":   {"role": "gate"}
       },
       "instruction_following": {
          "expected_stop_token": {"role": "gate"},
          "repetition":          {"role": "gate"},
-         "coherence":           {"role": "gate"}
+         "coherence":           {"role": "gate"},
+         "contains_expected":   {"role": "gate"}
       },
       "uncertainty": {
          "expected_stop_token": {"role": "gate"},
