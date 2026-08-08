@@ -34,10 +34,11 @@
          "contains_expected":   {"role": "gate"}
       },
       "instruction_following": {
-         "expected_stop_token": {"role": "gate"},
-         "repetition":          {"role": "gate"},
-         "coherence":           {"role": "gate"},
-         "contains_expected":   {"role": "gate"}
+         "expected_stop_token":   {"role": "gate"},
+         "repetition":            {"role": "gate"},
+         "coherence":             {"role": "gate"},
+         "constraint_satisfied":  {"role": "gate"},
+         "contains_expected":     {"role": "diagnostic"}
       },
       "uncertainty": {
          "expected_stop_token": { "role": "gate"},
