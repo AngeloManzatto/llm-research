@@ -1,0 +1,6 @@
+{"id":"animal.dog","node_type":"animal","labels":{"en":"dog","pt":"cachorro"}}
+{"id":"animal.cat","node_type":"animal","labels":{"en":"cat","pt":"gato"}}
+{"id":"animal.puppy","node_type":"animal_young","labels":{"en":"puppy","pt":"filhote de cachorro"}}
+{"id":"animal.kitten","node_type":"animal_young","labels":{"en":"kitten","pt":"filhote de gato"}}
+{"id":"sound.bark","node_type":"animal_sound","labels":{"en":"bark","pt":"latido"}}
+{"id":"sound.meow","node_type":"animal_sound","labels":{"en":"meow","pt":"miado"}}

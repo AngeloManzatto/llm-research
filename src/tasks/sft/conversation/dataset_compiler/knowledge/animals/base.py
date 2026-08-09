@@ -14,13 +14,25 @@ semantic type validation, and structural graph validation are applied
 before knowledge reaches the underlying FactGraph.
 """
 
+from pathlib import Path
+
 from src.tasks.sft.conversation.dataset_compiler.knowledge.base import (
     KnowledgeBase,
 )
 
-from src.tasks.sft.conversation.dataset_compiler.knowledge.animals.entities  import ANIMAL_NODES
-from src.tasks.sft.conversation.dataset_compiler.knowledge.animals.facts     import ANIMAL_FACTS
+
 from src.tasks.sft.conversation.dataset_compiler.knowledge.animals.relations import ANIMAL_RELATIONS
+
+from src.tasks.sft.conversation.dataset_compiler.knowledge.io import (
+    load_facts_jsonl,
+    load_nodes_jsonl,
+)
+
+###############################################################################
+# Files and Folders
+###############################################################################
+
+DATA_DIR = Path(__file__).resolve().parent
 
 ###############################################################################
 # Build Knowledge Base
@@ -29,8 +41,18 @@ from src.tasks.sft.conversation.dataset_compiler.knowledge.animals.relations imp
 def build_animal_knowledge_base() -> KnowledgeBase:
     kb = KnowledgeBase()
 
-    kb.add_nodes(ANIMAL_NODES)
     kb.add_relations(ANIMAL_RELATIONS)
-    kb.add_facts(ANIMAL_FACTS)
+
+    kb.add_nodes(
+        load_nodes_jsonl(
+            DATA_DIR / "nodes.jsonl"
+        )
+    )
+
+    kb.add_facts(
+        load_facts_jsonl(
+            DATA_DIR / "facts.jsonl"
+        )
+    )
 
     return kb

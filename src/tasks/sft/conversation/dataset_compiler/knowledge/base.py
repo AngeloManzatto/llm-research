@@ -118,6 +118,22 @@ class KnowledgeBase:
             relation_id,
             object_id,
         )
+    
+    ###########################################################################
+    # Fact iterator
+    ###########################################################################
+    def iter_facts(
+        self,
+        *,
+        subject_id: str | None = None,
+        relation_id: str | None = None,
+        object_id: str | None = None,
+    ):
+        return self._graph.iter_facts(
+            subject_id=subject_id,
+            relation_id=relation_id,
+            object_id=object_id,
+        )
 
     ###########################################################################
     # Diagnostics

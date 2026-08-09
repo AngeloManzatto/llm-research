@@ -1,7 +1,7 @@
 """
 Created on Sun Aug  9 16:34:24 2026
 
-@author: root
+@author: Angelo Antonio Manzatto
 """
 
 ###############################################################################
@@ -22,13 +22,11 @@ ANIMAL_BABY = RelationDefinition(
     object_type="animal_young",
 )
 
-
 ANIMAL_SOUND = RelationDefinition(
     id="animal_sound",
     subject_type="animal",
     object_type="animal_sound",
 )
-
 
 ANIMAL_RELATIONS = (
     ANIMAL_BABY,

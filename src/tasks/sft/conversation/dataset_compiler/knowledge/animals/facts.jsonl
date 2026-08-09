@@ -1,0 +1,4 @@
+{"subject_id":"animal.dog","relation_id":"animal_baby","object_id":"animal.puppy"}
+{"subject_id":"animal.cat","relation_id":"animal_baby","object_id":"animal.kitten"}
+{"subject_id":"animal.dog","relation_id":"animal_sound","object_id":"sound.bark"}
+{"subject_id":"animal.cat","relation_id":"animal_sound","object_id":"sound.meow"}
