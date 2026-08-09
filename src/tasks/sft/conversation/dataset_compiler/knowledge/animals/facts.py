@@ -1,5 +1,18 @@
-from dataset_compiler.core.models import Fact
+"""
+Created on Sun Aug  9 11:25:17 2026
 
+@author: Angelo Antonio Manzatto
+"""
+
+###############################################################################
+# Libraries
+###############################################################################
+
+from src.tasks.sft.conversation.dataset_compiler.core.models import Fact
+
+###############################################################################
+# Facts
+###############################################################################
 
 ANIMAL_FACTS = (
     Fact(

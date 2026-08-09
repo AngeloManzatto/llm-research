@@ -77,6 +77,48 @@ class Node:
             ) from exc
 
 ###############################################################################
+# Relation Definition
+###############################################################################
+
+@dataclass(frozen=True)
+class RelationDefinition:
+    """
+    Defines the semantic contract of a relation.
+
+    Example:
+
+        RelationDefinition(
+            id="animal_baby",
+            subject_type="animal",
+            object_type="animal_young",
+        )
+
+    means that a valid fact must have the form:
+
+        animal --animal_baby--> animal_young
+    """
+
+    id: str
+    subject_type: str
+    object_type: str
+
+    def __post_init__(self) -> None:
+        if not self.id.strip():
+            raise ValueError(
+                "Relation ID cannot be empty."
+            )
+
+        if not self.subject_type.strip():
+            raise ValueError(
+                f"Relation {self.id!r} must define a subject type."
+            )
+
+        if not self.object_type.strip():
+            raise ValueError(
+                f"Relation {self.id!r} must define an object type."
+            )
+
+###############################################################################
 # Fact
 ###############################################################################
 
