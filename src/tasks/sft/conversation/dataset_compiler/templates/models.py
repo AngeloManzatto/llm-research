@@ -76,7 +76,7 @@ class TemplateDefinition:
     language: str
     relation_id: str
     messages: tuple[MessageTemplate, ...]
-
+    relation_id: str | None = None
     def __post_init__(self) -> None:
         if not self.id.strip():
             raise ValueError(
@@ -93,24 +93,33 @@ class TemplateDefinition:
                 f"Template {self.id!r} must define a language."
             )
 
-        if not self.relation_id.strip():
+        # relation_id is optional.
+        # None means this template is not knowledge/relation based.
+        if (
+            self.relation_id is not None
+            and not self.relation_id.strip()
+        ):
             raise ValueError(
-                f"Template {self.id!r} must define a relation ID."
+                f"Template {self.id!r} relation ID "
+                "cannot be empty."
             )
 
         if not self.messages:
             raise ValueError(
-                f"Template {self.id!r} must contain at least one message."
+                f"Template {self.id!r} must contain "
+                "at least one message."
             )
 
         if self.messages[0].role != "user":
             raise ValueError(
-                f"Template {self.id!r} must start with a user message."
+                f"Template {self.id!r} must start "
+                "with a user message."
             )
 
         if self.messages[-1].role != "assistant":
             raise ValueError(
-                f"Template {self.id!r} must end with an assistant message."
+                f"Template {self.id!r} must end "
+                "with an assistant message."
             )
 
         for index in range(1, len(self.messages)):
@@ -119,7 +128,8 @@ class TemplateDefinition:
 
             if previous.role == current.role:
                 raise ValueError(
-                    f"Template {self.id!r} messages must alternate roles; "
-                    f"messages {index - 1} and {index} are both "
-                    f"{current.role!r}."
+                    f"Template {self.id!r} messages must "
+                    f"alternate roles; messages {index - 1} "
+                    f"and {index} are both {current.role!r}."
                 )
+

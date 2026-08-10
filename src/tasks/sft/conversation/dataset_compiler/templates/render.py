@@ -117,3 +117,28 @@ def render_fact_templates(
         )
         for template in compatible_templates
     ]
+
+###############################################################################
+# Render static template
+###############################################################################
+
+def render_static_template(
+    template: TemplateDefinition,
+) -> list[dict[str, str]]:
+    """
+    Render a template that contains no semantic placeholders.
+    """
+
+    if template.relation_id is not None:
+        raise ValueError(
+            f"Static template {template.id!r} must not define "
+            "a relation ID."
+        )
+
+    return [
+        {
+            "role": message.role,
+            "content": message.content,
+        }
+        for message in template.messages
+    ]

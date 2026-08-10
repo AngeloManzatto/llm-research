@@ -57,7 +57,7 @@ def load_templates_jsonl(
                     id=data["id"],
                     category=data["category"],
                     language=data["language"],
-                    relation_id=data["relation_id"],
+                    relation_id=data.get("relation_id"),
                     messages=messages,
                 )
 

@@ -12,7 +12,7 @@ from collections.abc import Callable
 
 from src.tasks.sft.conversation.dataset_compiler.core.models import Fact
 from src.tasks.sft.conversation.dataset_compiler.generation.row_builder import (
-    build_fact_row,
+    build_fact_row, build_training_row
 )
 from src.tasks.sft.conversation.dataset_compiler.knowledge.base import (
     KnowledgeBase,
@@ -20,6 +20,8 @@ from src.tasks.sft.conversation.dataset_compiler.knowledge.base import (
 from src.tasks.sft.conversation.dataset_compiler.templates.models import (
     TemplateDefinition,
 )
+
+from src.tasks.sft.conversation.dataset_compiler.templates.render import render_static_template
 
 ###############################################################################
 # Type
@@ -29,8 +31,8 @@ RenderValuesProvider = Callable[
     [KnowledgeBase, Fact, TemplateDefinition],
     dict[str, str],
 ]
-################
-# ###############################################################
+
+###############################################################################
 # Compile Relation Rows
 ###############################################################################
 
@@ -93,5 +95,44 @@ def compile_relation_rows(
                     values=render_values,
                 )
             )
+
+    return rows
+
+###############################################################################
+# Compile static templates
+###############################################################################
+
+def compile_static_templates(
+    *,
+    templates: tuple[TemplateDefinition, ...],
+) -> list[dict]:
+    """
+    Compile relation-free static templates into Stage 0 rows.
+    """
+
+    rows = []
+
+    for index, template in enumerate(templates, start=1):
+        if template.relation_id is not None:
+            raise ValueError(
+                f"Static template {template.id!r} must not define "
+                "a relation ID."
+            )
+
+        messages = render_static_template(template)
+
+        row_id = (
+            f"{template.category}_"
+            f"{template.language}_"
+            f"{index:05d}"
+        )
+
+        rows.append(
+            build_training_row(
+                row_id=row_id,
+                template=template,
+                messages=messages,
+            )
+        )
 
     return rows

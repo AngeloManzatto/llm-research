@@ -1,0 +1,4 @@
+{"id":"turn_taking.basic.en.greeting_01","category":"turn_taking","language":"en","relation_id":null,"messages":[{"role":"user","content":"Good morning!"},{"role":"assistant","content":"Good morning!"}]}
+{"id":"turn_taking.basic.en.thanks_01","category":"turn_taking","language":"en","relation_id":null,"messages":[{"role":"user","content":"Thanks for your help."},{"role":"assistant","content":"You're welcome."}]}
+{"id":"turn_taking.basic.pt.greeting_01","category":"turn_taking","language":"pt","relation_id":null,"messages":[{"role":"user","content":"Bom dia!"},{"role":"assistant","content":"Bom dia!"}]}
+{"id":"turn_taking.basic.pt.thanks_01","category":"turn_taking","language":"pt","relation_id":null,"messages":[{"role":"user","content":"Obrigado pela ajuda."},{"role":"assistant","content":"De nada."}]}
