@@ -11,16 +11,46 @@ Created on Sun Aug  9 17:06:39 2026
 from dataclasses import dataclass
 
 ###############################################################################
+# Messagem Template
+###############################################################################
+
+@dataclass(frozen=True)
+class MessageTemplate:
+    """
+    One message inside a conversational template.
+
+    Example:
+        MessageTemplate(
+            role="user",
+            content="What is a baby {subject} called?",
+        )
+    """
+
+    role: str
+    content: str
+
+    def __post_init__(self) -> None:
+        if self.role not in {"user", "assistant"}:
+            raise ValueError(
+                f"Invalid message role: {self.role!r}."
+            )
+
+        if not self.content.strip():
+            raise ValueError(
+                "Message template content cannot be empty."
+            )
+
+###############################################################################
 # Template Definition
 ###############################################################################
 
 @dataclass(frozen=True)
 class TemplateDefinition:
     """
-    Natural-language rendering template for one dataset capability.
+    Natural-language conversational template for one dataset capability.
 
-    The template does not contain facts. It only defines how semantic
-    values are expressed in a given language.
+    Templates contain language and conversational structure, but no
+    semantic facts.
 
     Example:
         TemplateDefinition(
@@ -28,8 +58,16 @@ class TemplateDefinition:
             category="knowledge_completion",
             language="en",
             relation_id="animal_baby",
-            user_template="What is a baby {subject} called?",
-            assistant_template="{object}.",
+            messages=(
+                MessageTemplate(
+                    role="user",
+                    content="What is a baby {subject} called?",
+                ),
+                MessageTemplate(
+                    role="assistant",
+                    content="{object}.",
+                ),
+            ),
         )
     """
 
@@ -37,12 +75,13 @@ class TemplateDefinition:
     category: str
     language: str
     relation_id: str
-    user_template: str
-    assistant_template: str
+    messages: tuple[MessageTemplate, ...]
 
     def __post_init__(self) -> None:
         if not self.id.strip():
-            raise ValueError("Template ID cannot be empty.")
+            raise ValueError(
+                "Template ID cannot be empty."
+            )
 
         if not self.category.strip():
             raise ValueError(
@@ -59,24 +98,28 @@ class TemplateDefinition:
                 f"Template {self.id!r} must define a relation ID."
             )
 
-        if not self.user_template.strip():
+        if not self.messages:
             raise ValueError(
-                f"Template {self.id!r} must define a user template."
+                f"Template {self.id!r} must contain at least one message."
             )
 
-        if not self.assistant_template.strip():
+        if self.messages[0].role != "user":
             raise ValueError(
-                f"Template {self.id!r} must define an assistant template."
+                f"Template {self.id!r} must start with a user message."
             )
 
-        if "{subject}" not in self.user_template:
+        if self.messages[-1].role != "assistant":
             raise ValueError(
-                f"Template {self.id!r} user template must contain "
-                "{subject}."
+                f"Template {self.id!r} must end with an assistant message."
             )
 
-        if "{object}" not in self.assistant_template:
-            raise ValueError(
-                f"Template {self.id!r} assistant template must contain "
-                "{object}."
-            )
+        for index in range(1, len(self.messages)):
+            previous = self.messages[index - 1]
+            current = self.messages[index]
+
+            if previous.role == current.role:
+                raise ValueError(
+                    f"Template {self.id!r} messages must alternate roles; "
+                    f"messages {index - 1} and {index} are both "
+                    f"{current.role!r}."
+                )

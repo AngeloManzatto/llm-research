@@ -23,11 +23,12 @@ def render_template(
     knowledge_base: KnowledgeBase,
     fact: Fact,
     template: TemplateDefinition,
+    render_values: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     """
-    Render one validated fact through one language template.
+    Render one validated fact through one conversational template.
 
-    Returns Stage-0-style user/assistant messages only.
+    Additional semantic values can be supplied through ``values``.
     """
 
     if fact.relation_id != template.relation_id:
@@ -39,28 +40,20 @@ def render_template(
     subject = knowledge_base.get_node(fact.subject_id)
     object_ = knowledge_base.get_node(fact.object_id)
 
-    subject_label = subject.label(template.language)
-    object_label = object_.label(template.language)
+    resolved_values = {
+        "subject": subject.label(template.language),
+        "object": object_.label(template.language),
+    }
 
-    user_content = template.user_template.format(
-        subject=subject_label,
-        object=object_label,
-    )
-
-    assistant_content = template.assistant_template.format(
-        subject=subject_label,
-        object=object_label,
-    )
+    if render_values:
+        resolved_values.update(render_values)
 
     return [
         {
-            "role": "user",
-            "content": user_content,
-        },
-        {
-            "role": "assistant",
-            "content": assistant_content,
-        },
+            "role": message.role,
+            "content": message.content.format(**resolved_values),
+        }
+        for message in template.messages
     ]
 
 ###############################################################################

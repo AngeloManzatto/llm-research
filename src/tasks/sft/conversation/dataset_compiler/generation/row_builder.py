@@ -52,6 +52,7 @@ def build_fact_row(
     knowledge_base: KnowledgeBase,
     fact: Fact,
     template: TemplateDefinition,
+    values: dict[str, str] | None = None,
 ) -> dict:
     """
     Render one fact through one template and build a Stage 0 row.
@@ -61,6 +62,7 @@ def build_fact_row(
         knowledge_base=knowledge_base,
         fact=fact,
         template=template,
+        render_values=values,
     )
 
     return build_training_row(
