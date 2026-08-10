@@ -163,3 +163,44 @@ class Fact:
             self.relation_id,
             self.object_id,
         )
+
+###############################################################################
+# Missing Fact
+###############################################################################
+
+@dataclass(frozen=True)
+class MissingFact:
+    """
+    Represents a requested relation whose object is unknown
+    or absent from the current knowledge state.
+
+    Example:
+        MissingFact(
+            subject_id="pet.cat",
+            relation_id="pet_name",
+        )
+
+    Represents:
+        pet.cat --pet_name--> ?
+    """
+
+    subject_id: str
+    relation_id: str
+
+    def __post_init__(self) -> None:
+        if not self.subject_id.strip():
+            raise ValueError(
+                "MissingFact subject ID cannot be empty."
+            )
+
+        if not self.relation_id.strip():
+            raise ValueError(
+                "MissingFact relation ID cannot be empty."
+            )
+
+    @property
+    def key(self) -> tuple[str, str]:
+        return (
+            self.subject_id,
+            self.relation_id,
+        )

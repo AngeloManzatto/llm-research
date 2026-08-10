@@ -1,0 +1,3 @@
+{"id":"pet.dog","node_type":"pet","labels":{"en":"dog","pt":"cachorro"}}
+{"id":"pet.cat","node_type":"pet","labels":{"en":"cat","pt":"gato"}}
+{"id":"name.rex","node_type":"name","labels":{"en":"Rex","pt":"Rex"}}

@@ -70,3 +70,23 @@ def build_fact_row(
         template=template,
         messages=messages,
     )
+
+###############################################################################
+# Build scenario row
+###############################################################################
+
+def build_scenario_row(
+    *,
+    row_id: str,
+    template: TemplateDefinition,
+    messages: list[dict[str, str]],
+) -> dict:
+    """
+    Build one Stage 0 row from already-rendered scenario messages.
+    """
+
+    return build_training_row(
+        row_id=row_id,
+        template=template,
+        messages=messages,
+    )
