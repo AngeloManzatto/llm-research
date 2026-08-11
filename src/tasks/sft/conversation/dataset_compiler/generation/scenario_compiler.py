@@ -47,6 +47,16 @@ def compile_uncertainty_scenario(
         and template.relation_id == scenario.target.relation_id
     ]
 
+    # A scenario is uniquely identified by ITS OWN context + target
+    # subjects, not by a call-local counter -- an incrementing index
+    # reset per call collides the moment two different scenarios share
+    # a category/language/relation_id (e.g. two different uncertainty
+    # scenarios both about "pet_name"), since the index alone can't
+    # tell them apart. Embedding both subject IDs makes collisions only
+    # possible for a genuinely identical scenario, which is correct.
+    context_key = scenario.context_fact.subject_id.replace(".", "_")
+    target_key = scenario.target.subject_id.replace(".", "_")
+
     for index, template in enumerate(
         compatible_templates,
         start=1,
@@ -61,7 +71,9 @@ def compile_uncertainty_scenario(
             f"{template.category}_"
             f"{template.language}_"
             f"{template.relation_id}_"
-            f"{index:05d}"
+            f"{context_key}_"
+            f"{target_key}_"
+            f"{index:03d}"
         )
 
         rows.append(

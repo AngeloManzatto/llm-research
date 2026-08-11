@@ -8,6 +8,8 @@ Created on Sun Aug  9 18:51:15 2026
 # Libraries
 ###############################################################################
 
+import random
+
 from src.tasks.sft.conversation.dataset_compiler.core.models import Fact
 from src.tasks.sft.conversation.dataset_compiler.knowledge.base import (
     KnowledgeBase,
@@ -27,7 +29,8 @@ def get_wrong_object(
     fact: Fact,
 ) -> str:
     """
-    Return the ID of another object used by the same relation.
+    Return the ID of a RANDOMLY chosen alternative object from the same
+    semantic relation.
 
     The returned object:
     - belongs to the same semantic relation;
@@ -37,16 +40,21 @@ def get_wrong_object(
     Raises ValueError when no alternative object exists.
     """
 
-    for candidate in knowledge_base.iter_facts(
-        relation_id=fact.relation_id,
-    ):
-        if candidate.object_id != fact.object_id:
-            return candidate.object_id
+    alternatives = [
+        candidate.object_id
+        for candidate in knowledge_base.iter_facts(
+            relation_id=fact.relation_id,
+        )
+        if candidate.object_id != fact.object_id
+    ]
 
-    raise ValueError(
-        f"No alternative object available for relation "
-        f"{fact.relation_id!r}."
-    )
+    if not alternatives:
+        raise ValueError(
+            f"No alternative object available for relation "
+            f"{fact.relation_id!r}."
+        )
+
+    return random.choice(alternatives)
 
 ###############################################################################
 # Correction Values
@@ -75,4 +83,3 @@ def correction_values(
             template.language
         ),
     }
-

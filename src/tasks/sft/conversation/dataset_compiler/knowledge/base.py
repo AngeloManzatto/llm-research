@@ -9,12 +9,18 @@ Created on Sun Aug  9 14:07:46 2026
 ###############################################################################
 
 from collections.abc import Iterable
+from pathlib import Path
 
 from src.tasks.sft.conversation.dataset_compiler.core.graph import FactGraph
 from src.tasks.sft.conversation.dataset_compiler.core.models import (
     Fact,
     Node,
     RelationDefinition,
+)
+from src.tasks.sft.conversation.dataset_compiler.knowledge.io import (
+    load_facts_jsonl,
+    load_nodes_jsonl,
+    load_relations_jsonl,
 )
 from src.tasks.sft.conversation.dataset_compiler.validation.knowledge import (
     validate_fact_types,
@@ -118,7 +124,7 @@ class KnowledgeBase:
             relation_id,
             object_id,
         )
-    
+
     ###########################################################################
     # Fact iterator
     ###########################################################################
@@ -159,3 +165,22 @@ class KnowledgeBase:
             f"facts={self.fact_count}"
             ")"
         )
+
+###############################################################################
+# Generic knowledge base builder
+###############################################################################
+
+def build_knowledge_base(data_dir: Path) -> KnowledgeBase:
+    """
+    Build a fully-loaded KnowledgeBase from one domain's relations.jsonl,
+    nodes.jsonl, and facts.jsonl -- all three now load by convention from
+    the same directory, so a domain's base.py needs nothing beyond its
+    own DATA_DIR. No relations.py file or import required per domain
+    anymore; relations.jsonl replaces it the same way nodes.jsonl/
+    facts.jsonl already replaced hand-written node/fact modules.
+    """
+    kb = KnowledgeBase()
+    kb.add_relations(load_relations_jsonl(data_dir / "relations.jsonl"))
+    kb.add_nodes(load_nodes_jsonl(data_dir / "nodes.jsonl"))
+    kb.add_facts(load_facts_jsonl(data_dir / "facts.jsonl"))
+    return kb

@@ -21,7 +21,9 @@ from src.tasks.sft.conversation.dataset_compiler.templates.models import (
     TemplateDefinition,
 )
 
-from src.tasks.sft.conversation.dataset_compiler.templates.render import render_static_template
+from src.tasks.sft.conversation.dataset_compiler.templates.render import (
+    render_static_template, templates_for,
+)
 
 ###############################################################################
 # Type
@@ -54,15 +56,9 @@ def compile_relation_rows(
     rows = []
     index = 0
 
-    compatible_templates = [
-        template
-        for template in templates
-        if template.relation_id == relation_id
-        and (
-            language is None
-            or template.language == language
-        )
-    ]
+    compatible_templates = templates_for(
+        templates, relation_id=relation_id, language=language,
+    )
 
     for fact in knowledge_base.iter_facts(
         relation_id=relation_id,

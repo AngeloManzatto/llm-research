@@ -15,6 +15,31 @@ from src.tasks.sft.conversation.dataset_compiler.templates.models import (
 )
 
 ###############################################################################
+# Select compatible templates
+###############################################################################
+
+def templates_for(
+    templates: tuple[TemplateDefinition, ...],
+    *,
+    relation_id: str,
+    language: str | None = None,
+) -> list[TemplateDefinition]:
+    """
+    Filter a template collection down to those matching a relation
+    (and optionally a language).
+
+    """
+    return [
+        template
+        for template in templates
+        if template.relation_id == relation_id
+        and (
+            language is None
+            or template.language == language
+        )
+    ]
+
+###############################################################################
 # Render Template
 ###############################################################################
 
@@ -99,15 +124,9 @@ def render_fact_templates(
     language: str | None = None,
 ) -> list[list[dict[str, str]]]:
 
-    compatible_templates = [
-        template
-        for template in templates
-        if template.relation_id == fact.relation_id
-        and (
-            language is None
-            or template.language == language
-        )
-    ]
+    compatible_templates = templates_for(
+        templates, relation_id=fact.relation_id, language=language,
+    )
 
     return [
         render_template(

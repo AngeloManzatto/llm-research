@@ -1,5 +1,5 @@
 """
-Created on Sun Aug  9 17:06:39 2026
+Created on Sun Aug  9 21:37:20 2026
 
 @author: Angelo Antonio Manzatto
 """
@@ -74,9 +74,9 @@ class TemplateDefinition:
     id: str
     category: str
     language: str
-    relation_id: str
     messages: tuple[MessageTemplate, ...]
-    relation_id: str | None = None
+    relation_id: str | None = None  # optional -- None means not knowledge/relation based
+
     def __post_init__(self) -> None:
         if not self.id.strip():
             raise ValueError(
@@ -132,4 +132,3 @@ class TemplateDefinition:
                     f"alternate roles; messages {index - 1} "
                     f"and {index} are both {current.role!r}."
                 )
-
