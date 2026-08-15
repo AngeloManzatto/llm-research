@@ -1,0 +1,15 @@
+{"id":"object.blood","node_type":"object","labels":{"en":"blood","pt":"sangue"},"metadata":{"pt_gender":"Masc"}}
+{"id":"object.banana","node_type":"object","labels":{"en":"banana","pt":"banana"},"metadata":{"pt_gender":"Fem"}}
+{"id":"object.sky","node_type":"object","labels":{"en":"sky","pt":"céu"},"metadata":{"pt_gender":"Masc"}}
+{"id":"object.sun","node_type":"object","labels":{"en":"sun","pt":"sol"},"metadata":{"pt_gender":"Masc"}}
+{"id":"object.sea","node_type":"object","labels":{"en":"sea","pt":"mar"},"metadata":{"pt_gender":"Masc"}}
+{"id":"object.grass","node_type":"object","labels":{"en":"grass","pt":"grama"},"metadata":{"pt_gender":"Fem"}}
+{"id":"color.green","node_type":"color","labels":{"en":"green","pt":"verde"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.blue","node_type":"color","labels":{"en":"blue","pt":"azul"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.white","node_type":"color","labels":{"en":"white","pt":"branco"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.black","node_type":"color","labels":{"en":"black","pt":"preto"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.red","node_type":"color","labels":{"en":"red","pt":"vermelho"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.pink","node_type":"color","labels":{"en":"pink","pt":"rosa"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.orange","node_type":"color","labels":{"en":"orange","pt":"laranja"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.violet","node_type":"color","labels":{"en":"violet","pt":"violeta"},"metadata":{"pt_gender":"Masc"}}
+{"id":"color.yellow","node_type":"color","labels":{"en":"yellow","pt":"amarelo"},"metadata":{"pt_gender":"Masc"}}

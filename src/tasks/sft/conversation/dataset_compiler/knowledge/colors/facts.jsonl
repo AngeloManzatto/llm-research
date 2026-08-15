@@ -1,0 +1,6 @@
+{"subject_id": "object.blood", "relation_id": "object_color", "object_id": "color.red"}
+{"subject_id": "object.banana", "relation_id": "object_color", "object_id": "color.yellow"}
+{"subject_id": "object.sky", "relation_id": "object_color", "object_id": "color.blue"}
+{"subject_id": "object.sun", "relation_id": "object_color", "object_id": "color.yellow"}
+{"subject_id": "object.sea", "relation_id": "object_color", "object_id": "color.blue"}
+{"subject_id": "object.grass", "relation_id": "object_color", "object_id": "color.green"}

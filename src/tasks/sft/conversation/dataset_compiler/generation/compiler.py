@@ -25,14 +25,9 @@ from src.tasks.sft.conversation.dataset_compiler.templates.render import (
     render_static_template, templates_for,
 )
 
-###############################################################################
-# Type
-###############################################################################
-
-RenderValuesProvider = Callable[
-    [KnowledgeBase, Fact, TemplateDefinition],
-    dict[str, str],
-]
+from src.tasks.sft.conversation.dataset_compiler.generation.render_values import (
+    RenderValuesProvider,
+)
 
 ###############################################################################
 # Compile Relation Rows

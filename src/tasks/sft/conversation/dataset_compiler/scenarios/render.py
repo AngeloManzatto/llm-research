@@ -30,16 +30,8 @@ def render_uncertainty_scenario(
     knowledge_base: KnowledgeBase,
     scenario: UncertaintyScenario,
     template: TemplateDefinition,
+    render_values: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
-    """
-    Render one validated uncertainty scenario.
-
-    Expected semantic values:
-
-        context_subject
-        context_object
-        target_subject
-    """
 
     validate_uncertainty_scenario(
         knowledge_base=knowledge_base,
@@ -67,16 +59,23 @@ def render_uncertainty_scenario(
         target.subject_id
     ).label(template.language)
 
-    render_values = {
+    # Canonical scenario values
+    resolved_values = {
         "context_subject": context_subject,
         "context_object": context_object,
         "target_subject": target_subject,
     }
 
+    # Additional values: grammar, transforms, etc.
+    if render_values:
+        resolved_values.update(render_values)
+
     return [
         {
             "role": message.role,
-            "content": message.content.format(**render_values),
+            "content": message.content.format(
+                **resolved_values
+            ),
         }
         for message in template.messages
     ]

@@ -23,6 +23,9 @@ from src.tasks.sft.conversation.dataset_compiler.scenarios.render import (
 from src.tasks.sft.conversation.dataset_compiler.templates.models import (
     TemplateDefinition,
 )
+from src.tasks.sft.conversation.dataset_compiler.build.models import (
+    ScenarioRenderValuesProvider,
+)
 
 ###############################################################################
 # Compile uncertainty scenario
@@ -33,6 +36,7 @@ def compile_uncertainty_scenario(
     knowledge_base: KnowledgeBase,
     scenario: UncertaintyScenario,
     templates: tuple[TemplateDefinition, ...],
+    render_values_provider: ScenarioRenderValuesProvider | None = None,
 ) -> list[dict]:
     """
     Compile one uncertainty scenario through all compatible templates.
@@ -47,13 +51,6 @@ def compile_uncertainty_scenario(
         and template.relation_id == scenario.target.relation_id
     ]
 
-    # A scenario is uniquely identified by ITS OWN context + target
-    # subjects, not by a call-local counter -- an incrementing index
-    # reset per call collides the moment two different scenarios share
-    # a category/language/relation_id (e.g. two different uncertainty
-    # scenarios both about "pet_name"), since the index alone can't
-    # tell them apart. Embedding both subject IDs makes collisions only
-    # possible for a genuinely identical scenario, which is correct.
     context_key = scenario.context_fact.subject_id.replace(".", "_")
     target_key = scenario.target.subject_id.replace(".", "_")
 
@@ -61,10 +58,20 @@ def compile_uncertainty_scenario(
         compatible_templates,
         start=1,
     ):
+        render_values = {}
+
+        if render_values_provider is not None:
+            render_values = render_values_provider(
+                knowledge_base,
+                scenario,
+                template,
+            )
+
         messages = render_uncertainty_scenario(
             knowledge_base=knowledge_base,
             scenario=scenario,
             template=template,
+            render_values=render_values,
         )
 
         row_id = (

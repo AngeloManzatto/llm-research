@@ -1,3 +1,3 @@
-{"id":"pet.dog","node_type":"pet","labels":{"en":"dog","pt":"cachorro"}}
-{"id":"pet.cat","node_type":"pet","labels":{"en":"cat","pt":"gato"}}
+{"id":"pet.dog","node_type":"pet","labels":{"en":"dog","pt":"cachorro"},"metadata":{"pt_gender":"Masc"}}
+{"id":"pet.cat","node_type":"pet","labels":{"en":"cat","pt":"gato"},"metadata":{"pt_gender":"Masc"}}
 {"id":"name.rex","node_type":"name","labels":{"en":"Rex","pt":"Rex"}}
