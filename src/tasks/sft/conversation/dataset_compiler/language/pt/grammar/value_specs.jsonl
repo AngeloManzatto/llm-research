@@ -1,0 +1,8 @@
+{"key":"def_article","form":"article.definite"}
+{"key":"indef_article","form":"article.indefinite"}
+{"key":"de_def_article","form":"article.de_definite"}
+{"key":"em_def_article","form":"article.em_definite"}
+{"key":"a_def_article","form":"article.a_definite"}
+{"key":"possessive","form":"possessive.first_person"}
+{"key":"de_possessive","form":"possessive.de_first_person"}
+{"key":"em_possessive","form":"possessive.em_first_person"}

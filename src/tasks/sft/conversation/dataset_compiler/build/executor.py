@@ -8,8 +8,8 @@ Created on Sat Aug 15 12:32:22 2026
 # Libraries
 ###############################################################################
 
-from src.tasks.sft.conversation.dataset_compiler.generation.compiler import (
-    compile_relation_rows,
+from src.tasks.sft.conversation.dataset_compiler.compiler.compile import (
+    compile_fact_rows,
 )
 
 from src.tasks.sft.conversation.dataset_compiler.templates.io import (
@@ -51,11 +51,11 @@ def execute_relation_build(
         spec.template_path
     )
 
-    rows = compile_relation_rows(
+    rows = compile_fact_rows(
         knowledge_base=knowledge_base,
         relation_id=spec.relation_id,
         templates=templates,
-        render_values_provider=spec.render_values_provider,
+        transform=spec.transform,
     )
 
     return rows

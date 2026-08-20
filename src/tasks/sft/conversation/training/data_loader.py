@@ -11,10 +11,6 @@ Created on Sat Jul 11 09:19:49 2026
 import json
 from pathlib import Path
 
-import json
-import re
-from collections import Counter
-from pathlib import Path
 from typing import Any
 
 ###############################################################################
@@ -80,11 +76,17 @@ def validate_example(example: dict[str, Any], line_no: int) -> list[str]:
     if stage != "stage0":
         errors.append(f"stage must be 'stage0'; got {stage!r}")
 
-    # ── ID format ─────────────────────────────────────────────────────────────
-    expected_id_pattern = rf"^{re.escape(category)}_{re.escape(language)}_sft_\d{{5}}$"
-    if not re.match(expected_id_pattern, str(example["id"])):
+    # ── ID validation ─────────────────────────────────────────────────────────
+    example_id = example["id"]
+    
+    if not isinstance(example_id, str):
         errors.append(
-            f"id must match '{category}_{language}_sft_NNNNN'; got {example['id']!r}"
+            f"id must be a string; got {type(example_id).__name__}"
+        )
+    
+    elif not example_id.strip():
+        errors.append(
+            "id must be a non-empty string"
         )
 
     # ── Messages list structure ───────────────────────────────────────────────

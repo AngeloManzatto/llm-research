@@ -1,0 +1,39 @@
+{"form":"article.definite","features":{"Gender":"Masc","Number":"Sing"},"value":"o"}
+{"form":"article.definite","features":{"Gender":"Fem","Number":"Sing"},"value":"a"}
+{"form":"article.definite","features":{"Gender":"Masc","Number":"Plur"},"value":"os"}
+{"form":"article.definite","features":{"Gender":"Fem","Number":"Plur"},"value":"as"}
+
+{"form":"article.indefinite","features":{"Gender":"Masc","Number":"Sing"},"value":"um"}
+{"form":"article.indefinite","features":{"Gender":"Fem","Number":"Sing"},"value":"uma"}
+{"form":"article.indefinite","features":{"Gender":"Masc","Number":"Plur"},"value":"uns"}
+{"form":"article.indefinite","features":{"Gender":"Fem","Number":"Plur"},"value":"umas"}
+
+{"form":"article.de_definite","features":{"Gender":"Masc","Number":"Sing"},"value":"do"}
+{"form":"article.de_definite","features":{"Gender":"Fem","Number":"Sing"},"value":"da"}
+{"form":"article.de_definite","features":{"Gender":"Masc","Number":"Plur"},"value":"dos"}
+{"form":"article.de_definite","features":{"Gender":"Fem","Number":"Plur"},"value":"das"}
+
+{"form":"article.em_definite","features":{"Gender":"Masc","Number":"Sing"},"value":"no"}
+{"form":"article.em_definite","features":{"Gender":"Fem","Number":"Sing"},"value":"na"}
+{"form":"article.em_definite","features":{"Gender":"Masc","Number":"Plur"},"value":"nos"}
+{"form":"article.em_definite","features":{"Gender":"Fem","Number":"Plur"},"value":"nas"}
+
+{"form":"article.a_definite","features":{"Gender":"Masc","Number":"Sing"},"value":"ao"}
+{"form":"article.a_definite","features":{"Gender":"Fem","Number":"Sing"},"value":"à"}
+{"form":"article.a_definite","features":{"Gender":"Masc","Number":"Plur"},"value":"aos"}
+{"form":"article.a_definite","features":{"Gender":"Fem","Number":"Plur"},"value":"às"}
+
+{"form":"possessive.first_person","features":{"Gender":"Masc","Number":"Sing"},"value":"meu"}
+{"form":"possessive.first_person","features":{"Gender":"Fem","Number":"Sing"},"value":"minha"}
+{"form":"possessive.first_person","features":{"Gender":"Masc","Number":"Plur"},"value":"meus"}
+{"form":"possessive.first_person","features":{"Gender":"Fem","Number":"Plur"},"value":"minhas"}
+
+{"form":"possessive.de_first_person","features":{"Gender":"Masc","Number":"Sing"},"value":"do meu"}
+{"form":"possessive.de_first_person","features":{"Gender":"Fem","Number":"Sing"},"value":"da minha"}
+{"form":"possessive.de_first_person","features":{"Gender":"Masc","Number":"Plur"},"value":"dos meus"}
+{"form":"possessive.de_first_person","features":{"Gender":"Fem","Number":"Plur"},"value":"das minhas"}
+
+{"form":"possessive.em_first_person","features":{"Gender":"Masc","Number":"Sing"},"value":"no meu"}
+{"form":"possessive.em_first_person","features":{"Gender":"Fem","Number":"Sing"},"value":"na minha"}
+{"form":"possessive.em_first_person","features":{"Gender":"Masc","Number":"Plur"},"value":"nos meus"}
+{"form":"possessive.em_first_person","features":{"Gender":"Fem","Number":"Plur"},"value":"nas minhas"}

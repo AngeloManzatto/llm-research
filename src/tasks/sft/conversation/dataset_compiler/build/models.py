@@ -12,8 +12,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from collections.abc import Callable
 
-from src.tasks.sft.conversation.dataset_compiler.generation.render_values import (
-    RenderValuesProvider,
+from src.tasks.sft.conversation.dataset_compiler.compiler.transform import (
+    Transforms,
 )
 from src.tasks.sft.conversation.dataset_compiler.knowledge.base import (
     KnowledgeBase,
@@ -60,7 +60,7 @@ class RelationBuildSpec:
     knowledge_base_builder: KnowledgeBaseBuilder
     relation_id: str
     template_path: Path
-    render_values_provider: RenderValuesProvider | None = None
+    transform: Transforms | None = None
 
     def __post_init__(self) -> None:
         if not self.id.strip():
